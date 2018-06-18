@@ -3,6 +3,7 @@
 ## classes
 * user ( user details )
 * land ( land details )
+* transaction ( land deal details )
 
 ### user
 * class
@@ -21,3 +22,15 @@
     + array of its latitude and longitude of its corners
 * owner
     + present owner of the land
+
+### transaction
+* class
+    + confirms the model is of transaction class
+* timestamp
+    + time of transaction
+* from
+    + id of user seller
+* to
+    + id of user buyer
+* amount
+    + price for the land has been exchanged
