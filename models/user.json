@@ -1,5 +1,6 @@
 {
     "class": "user",
     "id": "",
-    "assets": [ "" ]
+    "currentAssets": [ "" ],
+    "previousAssets" : [ "" ]
 }
