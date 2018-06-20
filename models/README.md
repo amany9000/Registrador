@@ -19,7 +19,7 @@
 * class
     + confirms the model is of land class
 * id
-    + id of the land ( hash of latLong )
+    + id of the land (  function of latLong containing hash function )
 * latLong
     + array of its latitude and longitude of its corners
 * owner
