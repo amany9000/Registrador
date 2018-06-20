@@ -1,0 +1,17 @@
+{
+  "name": "network",
+  "version": "1.0.0",
+  "description": "## classes * user ( user details ) * land ( land details ) * transaction ( land deal details )",
+  "main": "test_network.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dat-swarm-defaults": "^1.0.1",
+    "discovery-swarm": "^5.1.1",
+    "get-port": "^3.2.0",
+    "portfinder": "^1.0.13"
+  }
+}
