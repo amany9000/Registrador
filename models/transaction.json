@@ -1,6 +1,7 @@
 {
     "class": "transaction",
     "timestamp": "",
+    "landID" : "",
     "from": "",
     "to": "",
     "amount": ""
