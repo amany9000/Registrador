@@ -71,7 +71,7 @@ const sw = Swarm(config)
    * The channel we are connecting to.
    * Peers should discover other peers in this channel
    */
-  sw.join('registrador')
+sw.join('rohandhoot')
 
   sw.on('connection', (conn, info) => {
     // Connection id
