@@ -1,0 +1,11 @@
+{
+    "class": "block",
+    "blockHeader" : {
+    	"hashPrevBlock" : "",
+    	"hashMerkleRoot" : "",
+    	"blockTimeStamp" : ""   
+    },
+    "blockSize" : "",
+    "transactionCount" : "",
+    "transactionList" : [""]
+}
