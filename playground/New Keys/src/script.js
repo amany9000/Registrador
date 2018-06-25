@@ -6,7 +6,7 @@ var crypto = require('crypto')
 crypto.DEFAULT_ENCODING = 'hex'
 
 var user;
-var userDh = crypto.getDiffieHellman('modp2');
+var userDh = crypto.createDiffieHellman(2048);
 var userKey = userDh.generateKeys();
 var userKeySet = {
     userPubKey: userDh.getPublicKey(),
