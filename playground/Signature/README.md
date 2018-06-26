@@ -11,3 +11,20 @@ openssl genrsa -out private.pem 2048
 ```bash
 openssl rsa -in private.pem -outform PEM -pubout -out public.pem
 ```
+
+## Understand Code [signatureCheck.js]()
+
+* Import statements
+
+* Take example JSON data and turn it into string
+
+* Sign Data
+    + Convert data in string to base64url form
+    + Read private key from [private.pem]()
+    + Sign data with private key
+    + Get generated signature
+
+* Verify signature
+    + Get the data recieved
+    + Read public key from [public.pem]()
+    + Verify if signature matches or not
