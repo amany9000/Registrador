@@ -3,6 +3,10 @@ const privateKey = document.getElementById('privateKey');
 const getKeys = document.getElementById('getKeys');
 
 var crypto = require('crypto')
+// If need keys in base64
+// crypto.DEFAULT_ENCODING = 'base64'
+
+// If need keys in hex
 crypto.DEFAULT_ENCODING = 'hex'
 
 var user;
