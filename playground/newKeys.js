@@ -1,8 +1,5 @@
-const publicKey = document.getElementById('publicKey');
-const privateKey = document.getElementById('privateKey');
-const getKeys = document.getElementById('getKeys');
-
 var crypto = require('crypto')
+
 // If need keys in base64
 // crypto.DEFAULT_ENCODING = 'base64'
 
@@ -17,7 +14,7 @@ var userKeySet = {
     userPrivKey: userDh.getPrivateKey()
 };
 
-getKeys.onclick = function() {
-    publicKey.textContent = userKeySet.userPubKey;
-    privateKey.textContent = userKeySet.userPrivKey;
-}
+console.log("Public key:")
+console.log(userKeySet.userPubKey)
+console.log("Private key:")
+console.log(userKeySet.userPrivKey)
