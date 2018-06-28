@@ -1,13 +1,12 @@
 
 var params = require('webcoin-bitcoin').blockchain;
+console.log(params.genesisHeader)
+
 var levelup = require('level');
 var db = levelup('bitcoin.chain', { db: require('memdown') });
 var Blockchain = require('blockchain-spv');
-var chain = new Blockchain(params , db);
+var chain = new Blockchain(params.genesisHeader , db);
 var u = require('bitcoin-util');
-
-
-
 var newheader = [{
       version: 2,
       prevHash: u.toHash('4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b'),
@@ -32,8 +31,8 @@ var newheader = [{
     ]
 
 
-for(let i=0;i<newheader.length;i++){
-chain.addHeaders(newheader[i],(err, newheader[i])=>{
+for(var head in newheader){
+chain.addHeaders(head,(err, head)=>{
 	if(err){
 		return cb(err)
 	}
@@ -42,8 +41,8 @@ chain.addHeaders(newheader[i],(err, newheader[i])=>{
 
 
 
-for(let j=0;j<newheader.length;j++){
-	db.get('newHeader[j]',function(err,value){
+for(var head in newheader){
+	db.get(head,function(err,value){
 		if(err){
 			return cb(err)
 		}
