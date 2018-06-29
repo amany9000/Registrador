@@ -1,11 +1,13 @@
 {
     "class": "block",
     "blockHeader" : {
+    	"blockHeight"   : "",
     	"hashPrevBlock" : "",
     	"hashMerkleRoot" : "",
     	"blockTimeStamp" : ""   
     },
     "blockSize" : "",
     "transactionCount" : "",
-    "transactionList" : [""]
+    "transactionList" : [""],
+    "blockGenerator"  : ""
 }
