@@ -1,8 +1,10 @@
 {
     "class": "transaction",
+    "type" : "",
     "timestamp": "",
     "landID" : "",
-    "from": "",
-    "to": "",
-    "amount": ""
+    "from": [""],
+    "to": [""],
+    "amount": "",
+    "lockTime": ""
 }
