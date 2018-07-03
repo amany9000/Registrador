@@ -30,13 +30,18 @@ var Land = new mongoose.Schema({
         required :true,
         minlength : 1,
     },
-    prevOwners  : {
-        type: [String],
+    previousOwners  : {
+        type: [[String]],
         required :true,
         minlength : 1,
     },
     lastSellingPrice  : {
         type: mongoose.Schema.Types.Decimal128,
+        required :true,
+        minlength : 1,
+    },
+    previousLandID : {
+        type: String,
         required :true,
         minlength : 1,
     }   

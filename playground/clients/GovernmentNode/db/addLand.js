@@ -18,8 +18,9 @@ var testLand = {
     ],
     address : "IIIT LKO", 
     owner : ["User69"],
-    prevOwners : [ "User6","User9" ],
-    lastSellingPrice : 1234567.8  
+    previousOwners : [ ["User6"],["User9"] ],
+    lastSellingPrice : 1234567.8,
+    previousLandID : "landID2"  
 }
 
 var testLandString = JSON.stringify(testLand);
@@ -32,9 +33,10 @@ var land64 =  b64u.encode(testLandString);
 	var newland = new land(receivedLand);
 	
 	newland.save().then((doc) => {
-		console.log(doc);
+		return doc;
 	}, (e) => {
-		console.log(e);
+		return e;
 	});
+//}
 
-//}	
+//module.exports = {addLand};	

@@ -29,8 +29,10 @@ var block64 =  b64u.encode(testBlockString);
 	var newBlock = new block(receivedBlock);
 	
 	newBlock.save().then((doc) => {
-		console.log(doc);
+		return doc;
 	}, (e) => {
-		console.log(e);
+		return e;
 	});
 //}
+
+//module.exports = {addBlock};	

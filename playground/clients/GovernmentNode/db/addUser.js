@@ -22,8 +22,10 @@ var user64 =  b64u.encode(testUserString);
     var newUser = new user(receivedUser);
     
     newUser.save().then((doc) => {
-    	console.log(doc);
+    	return doc;
     }, (e) => {
-    	console.log(e);
+    	return e;
     });
 //}    
+
+//module.exports = {addUser}; 
