@@ -1,16 +1,29 @@
 
+var b64u = require("b64u");
+
 var {user}  = require("./dbModels/user.js");
 var {mongoose} = require("./mongoose.js");
 
-var newUser = new user({
-	publicKey : "User1",
+var testUser = {
+    class : "user",
+    publicKey : "User2",
     type  : "GovNode",
-    currentAssets : ["landID1","landID2","landID3"],
-    previousAssets : ["landID4", "landID5"]
-});
+    currentAssets : ["landID6","landID7","landID8"],
+    previousAssets : ["landID9", "landID10"]
+}
 
-newUser.save().then((doc) => {
-	console.log(doc);
-}, (e) => {
-	console.log(e);
-});
+var testUserString = JSON.stringify(testUser);
+var user64 =  b64u.encode(testUserString);
+
+//var addUser = (user64) => {
+    var receivedUserString = b64u.decode(user64);
+    var receivedUser = JSON.parse(receivedUserString);
+    delete receivedUser["class"];
+    var newUser = new user(receivedUser);
+    
+    newUser.save().then((doc) => {
+    	console.log(doc);
+    }, (e) => {
+    	console.log(e);
+    });
+//}    

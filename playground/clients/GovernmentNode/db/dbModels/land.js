@@ -14,7 +14,7 @@ var latLong = new mongoose.Schema({
 });
 
 var Land = new mongoose.Schema({
-    latLong : latLong,
+    latLong : [latLong],
     id : {
         type: String,
         required :true,

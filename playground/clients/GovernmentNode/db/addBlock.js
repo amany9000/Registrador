@@ -1,22 +1,36 @@
 
+var b64u =  require("b64u");
+
 var {block}  = require("./dbModels/block.js");
 var {mongoose} = require("./mongoose.js");
 
-var newBlock = new block({
+var testBlock = {
+	class : "block", 
 	header : {
-        blockHeight   : 123,
-        hashPrevBlock : "dipu",
-        hashMerkleRoot : "SomehASH",
-        blockTimeStamp : 98765     
+        blockHeight   : 567,
+        hashPrevBlock : "dips",
+        hashMerkleRoot : "hASH",
+        blockTimeStamp : 7890765     
 	},
-	blockSize : 56,
+	blockSize : 52,
     transactionCount : 3,
-    transactionList : ["trans1","trans2","trans3"],
+    transactionList : ["trans4","trans4","trans6"],
     blockGenerator  : "GovGuy's_Public_Key"
-});
+}
+var testBlockString = JSON.stringify(testBlock);
+var block64 =  b64u.encode(testBlockString);
 
-newBlock.save().then((doc) => {
-	console.log(doc);
-}, (e) => {
-	console.log(e);
-});
+//var addBlock = (block64) => {
+	var receivedBlockString = b64u.decode(block64);
+	var receivedBlock = JSON.parse(receivedBlockString);
+	
+	delete receivedBlock["class"];
+	
+	var newBlock = new block(receivedBlock);
+	
+	newBlock.save().then((doc) => {
+		console.log(doc);
+	}, (e) => {
+		console.log(e);
+	});
+//}
