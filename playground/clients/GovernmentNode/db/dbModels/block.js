@@ -44,6 +44,11 @@ var Block = new mongoose.Schema({
         type: String,
         required :true,
         minlength : 1,
+    },
+    signature : {
+        type: String,
+        required :true,
+        minlength : 1,    
     }   
 }); 
 

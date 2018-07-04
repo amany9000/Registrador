@@ -37,11 +37,10 @@ var Land = new mongoose.Schema({
     },
     lastSellingPrice  : {
         type: mongoose.Schema.Types.Decimal128,
-        required :true,
         minlength : 1,
     },
     previousLandID : {
-        type: String,
+        type: [String],
         required :true,
         minlength : 1,
     }   

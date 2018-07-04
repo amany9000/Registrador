@@ -15,7 +15,8 @@ var testBlock = {
 	blockSize : 52,
     transactionCount : 3,
     transactionList : ["trans4","trans4","trans6"],
-    blockGenerator  : "GovGuy's_Public_Key"
+    blockGenerator  : "GovGuy's_Public_Key",
+    signature    :  "blockGenerator's_SIgnature"
 }
 var testBlockString = JSON.stringify(testBlock);
 var block64 =  b64u.encode(testBlockString);

@@ -20,7 +20,7 @@ var testLand = {
     owner : ["User69"],
     previousOwners : [ ["User6"],["User9"] ],
     lastSellingPrice : 1234567.8,
-    previousLandID : "landID2"  
+    previousLandID : ["landID2"]  
 }
 
 var testLandString = JSON.stringify(testLand);
