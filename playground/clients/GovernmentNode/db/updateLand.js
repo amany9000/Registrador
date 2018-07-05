@@ -12,7 +12,7 @@ saleAmount = 1.23;
 			return null;
 		}
 		if((landFind == undefined) || (landFind == null)){
-			return landFind;
+			return null;
 		}
 		var sellerPublicKey = landFind.owner;
 		var prevOwners = landFind.previousOwners;
@@ -39,7 +39,7 @@ var  amount2 = null;
 var landID2  = "land45";
 var  originalLandID = "land2345";
 
-//var divideLand = (lantLong1, newOwner1, amount1,landID1, latLong2, newOwner2, amount2,landID2, originalLandID) => {
+/*var divideLand = (lantLong1, newOwner1, amount1,landID1, latLong2, newOwner2, amount2,landID2, originalLandID) => {
 	land.findOne({id : originalLandID}).exec( async function (err, landFind)  {
 		if(err){
 			return null;
@@ -47,9 +47,11 @@ var  originalLandID = "land2345";
 		if((landFind == undefined) || (landFind == null)){
 			return landFind;
 		}
+		
 		var sellerPublicKey = landFind.owner;
 		var prevOwners = landFind.previousOwners;
 		prevOwners.push(sellerPublicKey);
+		
 		var land1 = {
 			id : landID1,
 			lastSellingPrice : amount1,
@@ -93,6 +95,63 @@ var  originalLandID = "land2345";
 			 return landUpdate;		
 		});
 	});	
-//} 
+} */ 
 
-//joining 
+var originalLandID1 = "land23";
+var originalLandID2 = "land45";
+var newLatLong = [{latitude : "7647.47", longitude : "89.98"},{latitude : "7665.76", longitude : "4523.32"}]
+var newLandID = "land67";
+var saleAmount1 = 23.432;
+var saleAmount2 = 6578567.4;
+
+//var joinLand = (originalLandID1, saleAmount1, originalLandID2, saleAmount2, newLatLong, newLandID, buyerPublicKey) => {
+	land.findOne({id : originalLandID1}).exec( async function (err, landFind)  {
+		if(err){
+			return null;
+		}
+		if((landFind == undefined) || (landFind == null)){
+			return null;
+		}
+		var sellerPublicKey = landFind.owner;
+		var prevOwners = landFind.previousOwners;
+		prevOwners.push(sellerPublicKey);
+		
+		var newLand = new land ({
+			latLong : newLatLong,
+			id : newLandID,
+			address : landFind.address.slice(0),
+			owner : buyerPublicKey,
+			lastSellingPrice : null,
+			previousOwners : null,
+			previousLandID : [originalLandID1 , originalLandID2]  
+		});
+
+		newLand.save();
+
+		land.findOneAndUpdate({id: originalLandID1 },
+		{ $set : {owner : null ,previousOwners : prevOwners, lastSellingPrice : saleAmount1}},
+		{new : true}).exec( function (err,landUpdate) {		
+		});
+	});
+
+	land.findOne({id : originalLandID2}).exec( async function (err, landFind)  {
+		if(err){
+			return null;
+		}
+		if((landFind == undefined) || (landFind == null)){
+			return null;
+		}
+		var sellerPublicKey = landFind.owner;
+		var prevOwners = landFind.previousOwners;
+		prevOwners.push(sellerPublicKey);
+		
+		land.findOneAndUpdate({id: originalLandID2 },
+		{ $set : {owner : null, previousOwners : prevOwners, lastSellingPrice: saleAmount2}},
+		{new : true}).exec( function (err,landUpdate) {
+			if(err){
+				return null;
+			}
+			return landUpdate;		
+		});
+	});
+//}

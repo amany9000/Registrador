@@ -27,12 +27,10 @@ var Land = new mongoose.Schema({
     },
     owner : {
         type: [String],
-        required :true,
         minlength : 1,
     },
     previousOwners  : {
         type: [[String]],
-        required :true,
         minlength : 1,
     },
     lastSellingPrice  : {
