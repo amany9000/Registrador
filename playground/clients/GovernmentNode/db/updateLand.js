@@ -155,3 +155,5 @@ var saleAmount2 = 6578567.4;
 		});
 	});
 //}
+
+//module.exports = {sold, divideLand, joinLand};
