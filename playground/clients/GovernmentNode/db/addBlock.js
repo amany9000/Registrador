@@ -7,16 +7,15 @@ var {mongoose} = require("./mongoose.js");
 var testBlock = {
 	class : "block", 
 	header : {
-        blockHeight   : 567,
-        hashPrevBlock : "dips",
-        hashMerkleRoot : "hASH",
-        blockTimeStamp : 7890765     
+        blockHeight   : 565,
+        hashPrevBlock : "bips",
+        hashMerkleRoot : "hash2",
+        blockTimeStamp : 3234342432     
 	},
-	blockSize : 52,
-    transactionCount : 3,
-    transactionList : ["trans4","trans4","trans6"],
-    blockGenerator  : "GovGuy's_Public_Key",
-    signature    :  "blockGenerator's_SIgnature"
+    transactionCount : 2,
+    transactionList : ["Trans99","Trans100"],
+    blockGenerator  : "GovGuy's_Public_Key2",
+    signature    :  "blockGenerator's_SIgnature2"
 }
 var testBlockString = JSON.stringify(testBlock);
 var block64 =  b64u.encode(testBlockString);
@@ -30,9 +29,9 @@ var block64 =  b64u.encode(testBlockString);
 	var newBlock = new block(receivedBlock);
 	
 	newBlock.save().then((doc) => {
-		return doc;
+		console.log(doc);
 	}, (e) => {
-		return e;
+		console.log(e);
 	});
 //}
 

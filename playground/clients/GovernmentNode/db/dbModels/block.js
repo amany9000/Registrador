@@ -25,11 +25,6 @@ var blockHeader = new mongoose.Schema({
 
 var Block = new mongoose.Schema({
     header : blockHeader,
-    blockSize : {
-        type: Number,
-        required :true,
-        minlength : 1,
-    },
     transactionCount : {
         type: Number,
         required :true,
