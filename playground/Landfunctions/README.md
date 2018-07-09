@@ -11,5 +11,5 @@ This function helps in telling a given land is a subset of another land or not .
 
 For this you need to run :npm install robust-point-in-polygon.
 
-##Landmerge
+## Landmerge
 This function helps in telling whether two given land can be merged or not on the basis of the coordinates provided.
