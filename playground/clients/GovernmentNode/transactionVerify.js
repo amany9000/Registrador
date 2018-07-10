@@ -7,6 +7,7 @@ var transactionVerify = async (transactionList, callback) => {
 	var trans = [];
 	var owners = [];
 	var buyers = [];
+
 	var returnBool = Array(transactionList.length).fill(true);
 	if(!Array.isArray(transactionList) || transactionList.length == 0){
 		console.log("Transaction not present");
@@ -44,6 +45,7 @@ var transactionVerify = async (transactionList, callback) => {
 			returnBool[i] = false;			
 			console.log("Signature Not Valid");
 			}*/
+
 		
 		landIDs.push(transaction.landID);
 		
@@ -57,6 +59,7 @@ var transactionVerify = async (transactionList, callback) => {
 				buyers.push(transaction.to[j]);
 		}		
 	}
+
 		// land exits in the db and is owned by the "from" users
 	await getLand(landIDs, (landList) => {
 		
@@ -86,6 +89,7 @@ var transactionVerify = async (transactionList, callback) => {
 	// "from" users exist and (jointly) own the land
 	await getUser(owners, (userList) => {
 		
+
 		if(!userList || userList.length == 0){
 			return callback(returnBool.fill(false,0));
 			console.log("Seller(s) not found");				
@@ -118,6 +122,7 @@ var transactionVerify = async (transactionList, callback) => {
 
 	// "to" users exist
 	await getUser(buyers, (userList) => {
+
 
 		if(!userList || userList.length == 0){
 			return callback(returnBool.fill(false,0));
