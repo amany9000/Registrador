@@ -6,10 +6,10 @@ var {mongoose} = require("./mongoose.js");
 
 var testUser = {
     class : "user",
-    publicKey : "User2",
+    publicKey : "User4",
     type  : "GovNode",
-    currentAssets : ["landID6","landID7","landID8"],
-    previousAssets : ["landID9", "landID10"]
+    currentAssets : ["land23"],
+    previousAssets : ["landID9123", "landID1401"]
 }
 
 var testUserString = JSON.stringify(testUser);

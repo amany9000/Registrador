@@ -1,28 +1,51 @@
 
 var {getLand, getUser} = require("./db/getDoc");
 
-transactionList = [ '{\n  "class": "transaction",\n  "timeStamp": 1234,\n  "landID": "land2345",\n  "from": [\n    "User1"\n  ],\n  "to": [\n    "User1"\n  ],\n  "amount": "1342"\n}',
-  '{\n  "class": "transaction",\n  "timeStamp": "1234512",\n  "landID": "land67",\n  "from": [\n    "User2"\n  ],\n  "to": [\n    "User2"\n  ],\n  "amount": "134"\n}' ];
-
 var transactionVerify = async (transactionList, callback) => {
 	
 	var landIDs  = [];
 	var trans = [];
 	var owners = [];
 	var buyers = [];
+
+	var returnBool = Array(transactionList.length).fill(true);
+	if(!Array.isArray(transactionList) || transactionList.length == 0){
+		console.log("Transaction not present");
+		return callback(returnBool.fill(false,0));
+	}	
 	
 	for (var i in transactionList){
-		var transaction = JSON.parse(transactionList[i]);
-		trans.push(transaction);
+		
+		if(!returnBool){
+			continue;
+		}
+		var transaction = transactionList[i];
 		// timeStamp is less than the current time
 		var currentTime = new Date().getTime();	
-		if(currentTime < transaction.timeStamp){
-			return callback("Timestamp isn't correct");
-		}
+		if(transaction.timeStamp == undefined || transaction.timeStamp === null || currentTime < transaction.timeStamp ){
+			returnBool[i] = false;
+			console.log("Timestamp isn't correct");
+        }
 		
+		if(transaction.landID== undefined || transaction.landID == null){
+			returnBool[i] = false;			
+		}
+		if(transaction.from== undefined || transaction.from == null || transaction.from.length == 0){
+			returnBool[i] = false;
+		}
+		if(transaction.to== undefined || transaction.to == null || transaction.to.length == 0){
+			returnBool[i] = false;			
+		}
+		if(transaction.class != "transaction" || transaction.amount == undefined || transaction.amount == null){
+			returnBool[i] = false;
+		}
+		trans.push(transaction);
 		//Signature is correct
-		if(!blockSigVerify(receivedBlock))
-			return callback("Signature Not Valid");
+		/*if(!blockSigVerify(receivedBlock)){
+			returnBool[i] = false;			
+			console.log("Signature Not Valid");
+			}*/
+
 		
 		landIDs.push(transaction.landID);
 		
@@ -37,54 +60,120 @@ var transactionVerify = async (transactionList, callback) => {
 		}		
 	}
 
-			// land exits in the db and is owned by the "from" users
+		// land exits in the db and is owned by the "from" users
 	await getLand(landIDs, (landList) => {
-		var validOwner = false;
-		if(!landList || landList.length == 0)
-			return callback("Land not found");				
-		for(var i in landList){	
-			validOwner = false;
-			for(var j in trans){
-				if(trans[j].landID == landList[i].id && (trans[j].from.every((u,k) => {return u == landList[i].owner[k]}))){
-					validOwner = true;
+		
+		var validTrans = false;
+		if(!landList || landList.length == 0){
+			return callback(returnBool.fill(false,0))
+			console.log("Land not found");				
+		}
+		
+		for(var i in trans){		
+			if(!returnBool[i])
+				continue;
+			validTrans = false;
+			for(var j in landList){
+				if(trans[i].landID == landList[j].id && (trans[i].from.every((u,k) => {return u == landList[j].owner[k]}))){
+					validTrans = true;
 					break;
 				}
 			}
-			if(!validOwner)
-				return callback("Owner Not Correct")	
+			if(!validTrans){
+				returnBool[i] = false;
+				console.log("Land and Owner Don't match. Trancation No. ",i)	
+			}
 		}
 	});
 	
 	// "from" users exist and (jointly) own the land
 	await getUser(owners, (userList) => {
 		
-		var validOwner = false;
-		if(!userList || userList.length == 0)
-			return callback("Seller(s) not found");				
+
+		if(!userList || userList.length == 0){
+			return callback(returnBool.fill(false,0));
+			console.log("Seller(s) not found");				
+		}
 		
 		for(var i in trans){	
-			validOwner = false;
-			for(var j in userList){
-				for(var k in trans[i].from){
-					if(trans[i].from[k] == userList[j].publicKey && (userList[j].currentAssets.includes(trans[i].landID))){
-						validOwner = true;
+			if(!returnBool[i])
+				continue;
+			var validTrans = true;
+			
+			for(var j in trans[i].from){
+				var validseller = false;
+				for(var k in userList){
+					if(trans[i].from[j] == userList[k].publicKey && (userList[k].currentAssets.includes(trans[i].landID))){
+						validseller = true;
 						break;
 					}
 				}
+				if(!validseller){
+					validTrans = false;
+					break;
+				}
 			}
-			if(!validOwner)
-				return callback("Land isn't owned by the Seller(s)");	
+			if(!validTrans){
+				returnBool[i] = false;
+				console.log("Land and Owner Don't match. Trancation No. ",i);	
+			}
 		}		
 	});
 
 	// "to" users exist
 	await getUser(buyers, (userList) => {
 
-		var validOwner = false;
-		if(!userList || userList.length == 0 || (userList.length != buyers.length)){
-			return callback("Buyer(s) not found");						 	
-		}
-	});	
-}
 
-module.exports = {transactionVerify}
+		if(!userList || userList.length == 0){
+			return callback(returnBool.fill(false,0));
+			console.log("Buyer(s) not found");						 	
+		}
+		
+		else if(userList.length != buyers.length){
+		
+			for(var i in trans){	
+				if(!returnBool[i])
+					continue;
+				var validTrans = true;
+				for(var j in trans[i].to){
+					var validBuyer = false;
+					for(var k in userList){
+						if(trans[i].to[j] === userList[k].publicKey){
+							validBuyer = true;
+							break;
+						}
+					}
+					if(!validBuyer){
+						validTrans = false;
+						break;
+					}
+				}
+				if(!validTrans){
+					returnBool[i] = false;
+					console.log("Buyer(s) doesn't exist. Transaction No. ",i);	
+				}
+			}
+		}
+	});
+	return callback(returnBool);
+}
+/*
+transactionVerify([{
+			class: "transaction",
+			timeStamp: 31456,
+			landID: "land2345",
+			from: ["User1"],
+			to: ["User2"],
+			amount: 90123213 
+		},{
+			class: "transaction",
+			timeStamp: 12345,
+			landID: "land67",
+			from: ["User2"],
+			to: ["User1"],
+			amount: 345 
+		}],(reply) => {
+	console.log("rep",reply);
+});
+*/
+module.exports = {transactionVerify};

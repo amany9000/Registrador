@@ -30,11 +30,11 @@ var getBlock = async (blockHeight, callback)=>{
 
 var getLand = async (landID, callback)=>{
 	await land.find({id : landID}).then((doc) =>{
+		
 		if(doc.length == 0){
-			callback(null);
+		return callback(null);
 		}	
-		else
-			callback(doc);
+		return callback(doc);
 	}, (e) => {callback(e)});
 }; 
 
