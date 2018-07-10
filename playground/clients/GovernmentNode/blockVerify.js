@@ -2,9 +2,10 @@
 var b64u =  require("b64u");
 var crypto = require("crypto")
 
-var {getBlock, getUser} = require("./db/getDoc");
+var {getUser} = require("./db/getDoc");
 var {block} = require("./db/dbModels/block");
 var {getMerkleTree} = require("./../merkle");
+var	{transactionVerify} = require("./transactionVerify")
 
 var hash = crypto.createHash('sha256');
 
@@ -26,19 +27,19 @@ var testBlock = {
 var testBlockString = JSON.stringify(testBlock,undefined,2);
 var block64 =  b64u.encode(testBlockString);
 
-var blockVerify = async (block64,callback) => {
+var blockVerify = async (block64, callback) => {
 	
 	var receivedBlockString = b64u.decode(block64);
 	var receivedBlock = JSON.parse(receivedBlockString);
 	
 	// timestamp shouldn't be greater than the current value  	
 	var currentTime = new Date().getTime();	
-	if(currentTime < receivedBlock.header.blockTimeStamp)
-		callback("Timestamp isn't correct");
+	if(receivedBlock == null || receivedBlock.header == null || receivedBlock.header.blockTimeStamp == null || currentTime < receivedBlock.header.blockTimeStamp )
+		return callback("Timestamp isn't correct");
 
 	// verify transactionCount is equal to length of transactionlist 
 	else if(receivedBlock.transactionList.length != receivedBlock.transactionCount)
-		callback("transactionCount isn't correct");
+		return callback("transactionCount isn't correct");
 	
 	else {
 		
@@ -47,48 +48,55 @@ var blockVerify = async (block64,callback) => {
 		// verify if blockGenerator is a gov node 
 		await getUser(receivedBlock.blockGenerator, (User)=> {
 			if(!User)
-				callback("BlockGenerator Not Found");
+				return callback("BlockGenerator Not Found");
 			else if(User[0].type != 'GovNode'){
-				callback("BlockGenerator is Not a Government Node");
+				return callback("BlockGenerator is Not a Government Node");
 			}
 		});
 		
 		// verify signature
-		
+		/*
 		if(!blockSigVerify(receivedBlock))
-			callback("Signature Not Valid");
-		
-		else {
+			return callback("Signature Not Valid");
+		*/
+		//else {
 
 			// current block's height shouldn't be in the db or higher
 			await block.find().sort("-header.blockHeight").exec( (err,Block) => {
 
 				if(!Block){
-					callback("No blocks found");
+					return callback("No blocks found");
 				}
 				else if( (Block.length>0)  && ((receivedBlock.header.blockHeight) != (Block[0].header.blockHeight + 1))){
-					callback("Block Height is incorrect");
+					return callback("Block Height is incorrect");
 				}
 				else if((Block.Length == 0) && (receivedBlock.header.height != 0))
-					callback("Genesis Block Must have a height of 0");
+					return callback("Genesis Block Must have a height of 0");
 				
 				else{
 		            // previous block's hash should be equal to prevhash 
 					hash.update(JSON.stringify(Block[0],undefined,2));
 					var calculatedHash = hash.digest('hex');
 					if(calculatedHash != receivedBlock.header.hashPrevBlock)
-						callback("Hash of Prevoious Block Didn't Match");				
+						return callback("Hash of Prevoious Block Didn't Match");				
 				}
 			});
 			// hash of merkle root of transactions should be verified
 			await getMerkleTree(receivedBlock.transactionList,(tree) => {
 				if(receivedBlock.header.hashMerkleRoot != tree.root())
-					callback("Hash of merkel root of transactions, didn't match");
+					return callback("Hash of merkel root of transactions, didn't match");
 			});
 
 			// Verify each transaction
-			// await transactionVerify(receivedBlock.transactionlist, ()=>{});
+			await transactionVerify(receivedBlock.transactionlist, (reply)=>{
+
+				if(reply == "verified"){
+					return callback("verified");
+				}
+			});
 		}
-	}	
+	//}	
 }
+
+module.exports = {blockVerify};
  

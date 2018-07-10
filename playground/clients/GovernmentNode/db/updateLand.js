@@ -5,7 +5,7 @@ var {mongoose} = require("./mongoose.js");
 landID = "land2345";
 buyerPublicKey = ["User2"];
 saleAmount = 1.23;
-/*var sold = (buyerPublicKey, landID, saleAmount) =>{
+var sold = (buyerPublicKey, landID, saleAmount) =>{
 	
 	land.findOne({id : landID}).exec( async function (err, landFind)  {
 		if(err){
@@ -27,7 +27,7 @@ saleAmount = 1.23;
 			return landUpdate;		
 		});
 	});
-}*/
+}
 
 var latLong1 = [{latitude : "47.47", longitude : "89.98"},{latitude : "65.76", longitude : "23.32"}];
 var newOwner1 = ["User47"];
@@ -39,7 +39,7 @@ var  amount2 = null;
 var landID2  = "land45";
 var  originalLandID = "land2345";
 
-/*var divideLand = (lantLong1, newOwner1, amount1,landID1, latLong2, newOwner2, amount2,landID2, originalLandID) => {
+var divideLand = (lantLong1, newOwner1, amount1,landID1, latLong2, newOwner2, amount2,landID2, originalLandID) => {
 	land.findOne({id : originalLandID}).exec( async function (err, landFind)  {
 		if(err){
 			return null;
@@ -95,7 +95,7 @@ var  originalLandID = "land2345";
 			 return landUpdate;		
 		});
 	});	
-} */ 
+}  
 
 var originalLandID1 = "land23";
 var originalLandID2 = "land45";
@@ -104,7 +104,7 @@ var newLandID = "land67";
 var saleAmount1 = 23.432;
 var saleAmount2 = 6578567.4;
 
-//var joinLand = (originalLandID1, saleAmount1, originalLandID2, saleAmount2, newLatLong, newLandID, buyerPublicKey) => {
+var joinLand = (originalLandID1, saleAmount1, originalLandID2, saleAmount2, newLatLong, newLandID, buyerPublicKey) => {
 	land.findOne({id : originalLandID1}).exec( async function (err, landFind)  {
 		if(err){
 			return null;
@@ -154,6 +154,6 @@ var saleAmount2 = 6578567.4;
 			return landUpdate;		
 		});
 	});
-//}
+}
 
 //module.exports = {sold, divideLand, joinLand};
