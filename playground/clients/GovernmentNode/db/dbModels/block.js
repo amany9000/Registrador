@@ -8,7 +8,6 @@ var blockHeader = new mongoose.Schema({
     },
         hashPrevBlock : {
         type: String,
-        required :true,
         minlength : 1,
     },
         hashMerkleRoot : {
