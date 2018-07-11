@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import Blockchain from './Blockchain/Blockchain.js';
 import registerServiceWorker from './registerServiceWorker';
+import Land from './LandDetails/Land.js'
 
-ReactDOM.render(<Blockchain />, document.getElementById('root'));
+ReactDOM.render(<Land />, document.getElementById('root'));
 registerServiceWorker();
