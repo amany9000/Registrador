@@ -1,0 +1,42 @@
+
+.Head{
+  
+
+  text-align:center;
+  background-color:Maroon;
+  height:80px;
+  padding :30px;
+  font-size :25px;
+ font-style:Bold;
+ font-family: "Times New Roman";
+  color: white;
+
+}
+
+
+
+.det{
+
+	margin-top:50px;
+
+
+}
+
+
+
+.User{
+
+
+left-margin:60px;
+border: 1px solid #ccc;
+
+
+}
+.Design{
+
+
+	background-image: url("User.jpg");
+	background-size:contain;
+}
+
+
