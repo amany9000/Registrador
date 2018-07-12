@@ -31,5 +31,19 @@ console.log("match "+match);
 return match;
 }
 
+var transSigVerify = (trans) => {
+// Verify the signature
 
-module.exports = {blockSigCreate, blockSigVerify}
+var signatureRecieved = trans.signature;
+var cloneTrans = JSON.parse(JSON.stringify(trans));
+delete cloneTrans["signature"];
+var data = b64u.encode(JSON.stringify(cloneTrans));
+const verifySeller = crypto.createVerify('SHA256');
+verifySeller.update(data);
+
+const match = verifySeller.verify(myPublicKey, signatureRecieved, 'base64');
+console.log("match "+match);
+return match;
+}
+
+module.exports = {blockSigCreate, blockSigVerify,transSigVerify}
