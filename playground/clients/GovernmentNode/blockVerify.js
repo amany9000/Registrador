@@ -6,32 +6,12 @@ var {getUser} = require("./db/getDoc");
 var {block} = require("./db/dbModels/block");
 var {getMerkleTree} = require("./../merkle");
 var	{transactionVerify} = require("./transactionVerify")
+var {blockSigVerify} = require("./governmentNodeSig")
 
 var hash = crypto.createHash('sha256');
 
-var testBlock = {
-	class : "block", 
-	header : {
-        blockHeight   : 568,
-        hashPrevBlock : "90117f54b4c9337d93495a39af0e70c687eb74dcf33b77134802f399e5fc8c98",
-        hashMerkleRoot : "867DCF7B85EF7F732DF9B91094D864D35FD6AC0513BD7E56EB0D01D08B28A3FE",
-        blockTimeStamp : 255443     
-	},
-    transactionCount : 2,
-    transactionList : [ '{\n  "class": "transaction",\n  "timestamp": 1234,\n  "landID": "land2345",\n  "from": [\n    "User1"\n  ],\n  "to": [\n    "User2"\n  ],\n  "amount": "1342"\n}',
-  '{\n  "class": "transaction",\n  "timestamp": "12345",\n  "landID": "land67",\n  "from": [\n    "User2"\n  ],\n  "to": [\n    "User1"\n  ],\n  "amount": "134"\n}' ],
-    blockGenerator  : "User2",
-    signature    :  "blockGenerator's_Signature"
-}
-
-var testBlockString = JSON.stringify(testBlock,undefined,2);
-var block64 =  b64u.encode(testBlockString);
-
-var blockVerify = async (block64, callback) => {
-	
-	var receivedBlockString = b64u.decode(block64);
-	var receivedBlock = JSON.parse(receivedBlockString);
-	
+var blockVerify = async (receivedBlock, callback) => {
+		
 	// timestamp shouldn't be greater than the current value  	
 	var currentTime = new Date().getTime();	
 	if(receivedBlock == null || receivedBlock.header == null || receivedBlock.header.blockTimeStamp == null || currentTime < receivedBlock.header.blockTimeStamp )
@@ -43,7 +23,6 @@ var blockVerify = async (block64, callback) => {
 	
 	else {
 		
-		delete receivedBlock["class"];
 		
 		// verify if blockGenerator is a gov node 
 		await getUser(receivedBlock.blockGenerator, (User)=> {
@@ -55,11 +34,10 @@ var blockVerify = async (block64, callback) => {
 		});
 		
 		// verify signature
-		/*
 		if(!blockSigVerify(receivedBlock))
 			return callback("Signature Not Valid");
-		*/
-		//else {
+		
+		else {
 
 			// current block's height shouldn't be in the db or higher
 			await block.find().sort("-header.blockHeight").exec( (err,Block) => {
@@ -88,15 +66,33 @@ var blockVerify = async (block64, callback) => {
 			});
 
 			// Verify each transaction
-			await transactionVerify(receivedBlock.transactionlist, (reply)=>{
+			await transactionVerify(receivedBlock.transactionList, (reply)=>{
 
 				if(reply == "verified"){
 					return callback("verified");
 				}
 			});
 		}
-	//}	
+	}	
 }
 
+blockVerify({ class: 'block',
+  header:
+   { blockHeight: 568,
+     hashPrevBlock:
+      'fea8529a5e893b0bc507a2aba9c201d33885b0665d8017ee1c9f18d1dc33b16b',
+     hashMerkleRoot:
+      '6CBC1924435767BE98FF9B66B824FE5CED17B9B3C627C089A3CE92CDF529CBBF',
+     blockTimeStamp: 1531399180434 },
+  transactionCount: 2,
+  transactionList:
+   [ '{\n  "class": "transaction",\n  "timeStamp": 123456,\n  "landID": "land67",\n  "from": [\n    "User2"\n  ],\n  "to": [\n    "User1"\n  ],\n  "amount": 23211213\n}',
+     '{\n  "class": "transaction",\n  "timeStamp": 1456,\n  "landID": "land2345",\n  "from": [\n    "User1"\n  ],\n  "to": [\n    "User2"\n  ],\n  "amount": 9012321113\n}' ],
+  blockGenerator:
+   '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0gv4+6ExB1KFh6AjTv5N\nVjUirfA39/bikodnmWQdsrBcCclLS2avt262M4DoWPiSgjB78be2AH4qwk2Lz7xe\ny3A+smCPfLaA5hUbwYfW1pfmrgMqXUEmpQ95vTPG21lZ246xk7Ozej4pABKlQeJw\nmZszKF5H5rI7S4XGAfpYK56163hefIQuhXmAz/ncUaLBCzxL0rS8yYyudC5z1OYd\n9Jl/KVWKJn+KvzO/jJ3FWrGA759jhdf+c8j9PJHI7uq5kVbOvCxXAgw7VzrcGOao\nWN3+Yn7ZComWS2NdDG5iTp/sZhPKxuJGc9GhIh7AA5iRQvNOuFYtmnEdQFJey2ds\nQwIDAQAB\n-----END PUBLIC KEY-----\n',
+  signature:
+   'WTqMyQuvgVNTztrG/FGod/P/C/or7IOklw55yNelBT8GRv0U+1kugsDDJ36/UeZbKsOT2vCpK7D2C/S6DUQlT8GfHh5z1z+3kCkaQyjh/fyDV82/LwciEb3imegMTT0hPSsIG6mWR4joHGUvMMuZj+/QF0APtR97tUOiQwyvMlzcnm7Qa+ZwV+Jl34QLzL3PWsGCfj3vhofzJw06BnyFhYLjX3ybXpscbwskJtHUHIYh8r7kO03K6VfOvrnFZJZJkJk/hcV/E4PnkppcPEpwe1zzkUzhSDxFFfsm7NM0uCcSxyF9u579Ij6I8WwW2iykneto1W81Rgza4W1UkMdqEQ==' }, (reply)=>{
+	console.log(reply);
+});
 module.exports = {blockVerify};
  

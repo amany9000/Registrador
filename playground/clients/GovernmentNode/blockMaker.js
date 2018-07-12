@@ -6,13 +6,13 @@ const fs = require('fs')
 var	{transactionVerify} = require("./transactionVerify")
 var {getMerkleTree} = require("./../merkle");
 var {block} = require("./db/dbModels/block");
+var {blockSigCreate} = require("./governmentNodeSig")
 
-var myPublicKey = "User2";
+const myPublicKey = fs.readFileSync('publicSeller.pem').toString();
 var signature   = "blockGenerator's_Signature"; 
 
 var blockMaker = async (transactionList, callback) => {
  	var transElementList = JSON.parse(fs.readFileSync("./transactionElement.json").toString());
- 	console.log("traaa",transElementList)
  	var blockElementList = [];    //list of transactions going in the block
  	for(var i=0;i<transElementList.length;i++){
  		transElementList[i].priority++;
@@ -44,47 +44,46 @@ var blockMaker = async (transactionList, callback) => {
 			}
 		}
 		getMerkleTree(blockElementList,(tree) => {
-				block.find().sort("-header.blockHeight").exec((err,recievedBlock) => {
-					if(err || block == undefined || block == null){
-						return callback("error in previous block retrieval");
+			block.find().sort("-header.blockHeight").exec((err,recievedBlock) => {
+				if(err || block == undefined || block == null){
+					return callback("error in previous block retrieval");
+				}
+				else{
+					var blockCreated = {};
+					var blockHeight = -1;
+					var hashPrevBlock = "";
+					//console.log("r",recievedBlock)
+					if( recievedBlock.length == 0){ // genesisBlock
+						blockHeight = 0;
+						hashPrevBlock = null;
 					}
-					else{
-						var blockCreated = {};
-						var blockHeight = -1;
-						var hashPrevBlock = "";
-						//console.log("r",recievedBlock)
-						if( recievedBlock.length == 0){ // genesisBlock
-							blockHeight = 0;
-							hashPrevBlock = null;
-						}
-						else if(recievedBlock[0].header.blockHeight >=0){
-							blockHeight = recievedBlock[0].header.blockHeight + 1;
-							var hash = crypto.createHash('sha256');
-							hash.update(JSON.stringify(recievedBlock[0],undefined,2));
-							hashPrevBlock =  hash.digest('hex');						
-						}
-						
-						blockCreated = {
-							class : "block", 
-							header : {
-						        blockHeight   : blockHeight,
-						        hashPrevBlock : hashPrevBlock,
-						        hashMerkleRoot : tree.root(),
-						        blockTimeStamp : new Date().getTime() 
-							},
-						    transactionCount : blockElementList.length,
-						    transactionList : blockElementList,
-						    blockGenerator  : "User2",
-						}
-						// create signature
-						// var signature  = blockSigCreate(blockCreated);
-						
-						blockCreated["signature"] = signature; 
-						fs.writeFileSync("./transactionElement.json", JSON.stringify(transElementList));
-						return callback(blockCreated);
+					else if(recievedBlock[0].header.blockHeight >=0){
+						blockHeight = recievedBlock[0].header.blockHeight + 1;
+						var hash = crypto.createHash('sha256');
+						hash.update(JSON.stringify(recievedBlock[0],undefined,2));
+						hashPrevBlock =  hash.digest('hex');						
 					}
-				});
+					
+					blockCreated = {
+						class : "block", 
+						header : {
+					        blockHeight   : blockHeight,
+					        hashPrevBlock : hashPrevBlock,
+					        hashMerkleRoot : tree.root(),
+					        blockTimeStamp : new Date().getTime() 
+						},
+					    transactionCount : blockElementList.length,
+					    transactionList : blockElementList,
+					    blockGenerator  : myPublicKey,
+					}
+					//create signature
+					var signature  = blockSigCreate(blockCreated);
+					blockCreated["signature"] = signature; 
+					fs.writeFileSync("./transactionElement.json", JSON.stringify(transElementList));
+					return callback(blockCreated);
+				}
 			});
+		});
 	});
 }
 
@@ -103,7 +102,8 @@ blockMaker([{
 			to: ["User1"],
 			amount: 123211213 
 		}],(reply) =>{
-		console.log("rep",reply);
+		console.log(reply,blockSigVerify(reply));
 });
 
 module.exports = {blockMaker};
+

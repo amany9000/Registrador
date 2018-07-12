@@ -7,7 +7,9 @@ var transactionVerify = async (transactionList, callback) => {
 	var trans = [];
 	var owners = [];
 	var buyers = [];
-
+	for(var i in transactionList){
+		transactionList[i] = JSON.parse(transactionList[i]); 
+	}
 	var returnBool = Array(transactionList.length).fill(true);
 	if(!Array.isArray(transactionList) || transactionList.length == 0){
 		console.log("Transaction not present");
