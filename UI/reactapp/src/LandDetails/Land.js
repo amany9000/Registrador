@@ -2,7 +2,8 @@ import React ,{Component} from 'react';
 
 import {Form , FormControl,Button} from 'react-bootstrap';
 import LandInfo from './LandInfo';
-import LandImage from './Land.jpg';
+import {Link } from 'react-router-dom';
+import './Land.css';
 
 class Land extends Component{
 
@@ -33,10 +34,12 @@ class Land extends Component{
 			
 
 			<div>
-                  
-             	<h2 className ="Head" >Land queries information page</h2>
-			    
-               <div className="Design">
+                  <div className="both">
+                  <h3 className="link"><Link to ='/'> < h3 style={{color:'white'}}><u>Home</u></h3></Link> </h3>
+             	<h2  className ="Head">Land queries information page</h2>
+             	</div>
+			   
+               <div className="Des">
 			<Form inline>
 				<h4>Enter the Land Id</h4>
 			<FormControl type ="text" onChange={event => this.setState({newId:event.target.value})}>

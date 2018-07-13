@@ -17,7 +17,7 @@ return(
 	<h4> Land details of the given land id are :</h4>
 
 
-	<div>
+	
 	<List divided relaxed>
     <List.Item>
       <List.Icon name='address book' size='large' verticalAlign='middle' />
@@ -48,7 +48,7 @@ return(
       </List.Content>
     </List.Item>
   </List>
-	</div>
+	
 
 
 	</div>
