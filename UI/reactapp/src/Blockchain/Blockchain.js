@@ -8,7 +8,7 @@ class Blockchain extends Component {
         <div id="main">
             <nav class="nav-extended center">
                 <div class="nav-wrapper" style={{background: "#5d6dfc"}}>
-                    <a href="#" className="brand-logo">Registrador</a>
+                    <a href="#" className="brand-logo">Block List</a>
                     <ul id="nav-mobile" className="right hide-on-med-and-down"></ul>
             </div>
             </nav>

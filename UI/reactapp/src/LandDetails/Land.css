@@ -1,7 +1,7 @@
 .det{
 
 	margin-top:50px;
-
+  background-color: saddleBrown;
 
 }
 
@@ -10,17 +10,18 @@
   
 
   text-align:center;
-  background-color:Maroon;
-  height:80px;
-  padding :30px;
+  
+  height:50px;
+  padding :10px;
   font-size :25px;
  font-style:Bold;
  font-family: "Times New Roman";
   color: white;
+  text-decoration: underline;
 
 }
 
-.Design {
+.Des {
 
 	 height:600px;
 	 background-image: url("Land.jpg");
@@ -29,4 +30,19 @@
 
 .White{
 	color:white;
+}
+
+.link{
+  
+  font-family: "Times New Roman";
+  color:white;
+  
+  text-align:left;
+  padding:5px;
+  height:30px;
+}
+
+.both{
+
+  background-color:Maroon;
 }

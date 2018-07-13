@@ -11,7 +11,7 @@ class UserInfo extends Component{
 
 	render(){
 		return(
-		<div className ="det">
+		<div className ="deta">
 		<Message>
     <Message.Header>Land Id of current Land owned by the user</Message.Header>
     <Message.List>
