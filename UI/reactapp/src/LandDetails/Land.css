@@ -1,0 +1,32 @@
+.det{
+
+	margin-top:50px;
+
+
+}
+
+
+.Head{
+  
+
+  text-align:center;
+  background-color:Maroon;
+  height:80px;
+  padding :30px;
+  font-size :25px;
+ font-style:Bold;
+ font-family: "Times New Roman";
+  color: white;
+
+}
+
+.Design {
+
+	 height:600px;
+	 background-image: url("Land.jpg");
+}
+
+
+.White{
+	color:white;
+}
