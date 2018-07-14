@@ -44,7 +44,15 @@ var updateDB = async (recievedBlock, callback) =>{
 				callback("Seller's info updated");
 			}
 	});
-					 
+		
+		await buyLand(buyerData[i], (err, doc) =>{
+			if(err){
+				return callback("Can't update user collection");
+			}
+			else{
+				callback("buyer's info updated");
+			}	
+		});				 
 	}		
 }
 
