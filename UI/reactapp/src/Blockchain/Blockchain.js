@@ -3,7 +3,11 @@ import './Blockchain.css';
 import Block from './Block.js'
 
 class Blockchain extends Component {
+
   render() {
+
+    const blockList=[1,2,3,4] 
+
     return (
         <div id="main">
             <nav class="nav-extended center">
@@ -14,96 +18,22 @@ class Blockchain extends Component {
             </nav>
             <div id="chain">
                 <section className="card">
-                    <div className="card--content">
-                        <h4 style={{background: 'salmo'}}>
-                            Hash
-                        </h4>
-                        <h6>
-                            TimeStamp
-                        </h6>
-                        <h6>
-                            Some other information
-                        </h6>
-                        <h6>
-                            Other information again 
-                        </h6>
-                    </div>
-                    <div className="card--content2"></div>
-                    <div className="card--content">
-                        <h4 className="background: salmon;">
-                            Hash
-                        </h4>
-                        <h6>
-                            TimeStamp
-                        </h6>
-                        <h6>
-                            Some other information
-                        </h6>
-                        <h6>
-                            Other information again 
-                        </h6>
-                    </div>
-                    <div className="card--content2"></div>
-                    <div className="card--content">
-                        <h4 className="background: salmon;">
-                            Hash
-                        </h4>
-                        <h6>
-                            TimeStamp
-                        </h6>
-                        <h6>
-                            Some other information
-                        </h6>
-                        <h6>
-                            Other information again 
-                        </h6>
-                    </div>
-                    <div className="card--content2"></div>
-                    <div className="card--content">
-                        <h4 className="background: salmon;">
-                            Hash
-                        </h4>
-                        <h6>
-                            TimeStamp
-                        </h6>
-                        <h6>
-                            Some other information
-                        </h6>
-                        <h6>
-                            Other information again 
-                        </h6>
-                    </div>
-                    <div className="card--content2"></div>
-                    <div className="card--content">
-                        <h4 className="background: salmon;">
-                            Hash
-                        </h4>
-                        <h6>
-                            TimeStamp
-                        </h6>
-                        <h6>
-                            Some other information
-                        </h6>
-                        <h6>
-                            Other information again 
-                        </h6>
-                    </div>
-                    <div className="card--content2"></div>
-                    <div className="card--content">
-                        <h4 className="background: salmon;">
-                            Hash
-                        </h4>
-                        <h6>
-                            TimeStamp
-                        </h6>
-                        <h6>
-                            Some other information
-                        </h6>
-                        <h6>
-                            Other information again 
-                        </h6>
-                    </div>
+                { 
+                    blockList.map((item, index) => { 
+                        return( 
+                            <Block 
+                                block={item} 
+                            /> 
+                        ); 
+                    }) 
+ 
+                } 
                 </section>
+            </div>
+            <div> 
+                <h5> 
+                Some details if required                     
+                </h5> 
             </div>
         </div>
     );

@@ -4,9 +4,11 @@ import './Blockchain.css';
 export default class Block extends Component {
     render() {
         return (
-            <div>
+            <div style={{
+                display: 'flex'
+            }}>
             <div className="card--content">
-                <h4 style={{background: 'salmo'}}>
+                <h4>
                     Hash
                 </h4>
                 <h6>
@@ -19,6 +21,7 @@ export default class Block extends Component {
                     Other information again 
                 </h6>
             </div>
+            <div class="card--content2"></div>
             </div>
         );
     }
