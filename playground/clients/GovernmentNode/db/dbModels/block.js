@@ -23,6 +23,11 @@ var blockHeader = new mongoose.Schema({
 });
 
 var Block = new mongoose.Schema({
+    class : {
+        type: String,
+        required :true,
+        minlength : 1,
+    },    
     header : blockHeader,
     transactionCount : {
         type: Number,

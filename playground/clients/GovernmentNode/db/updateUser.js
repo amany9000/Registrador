@@ -1,27 +1,25 @@
-
+ 
 var {user}  = require("./dbModels/user.js");
 var {mongoose} = require("./mongoose.js");
 
-landID = "landID1998"
-userPublicKey = "User2"
-//var buyLand = (userPublicKey, landID) =>{
-	user.findOneAndUpdate({publicKey : userPublicKey },
-		{$push : {currentAssets : landID}},
-		{new : true}).then((user) => { 
-		return user;
-	}).catch((e) =>{
-		return e;
-	});
-//}
-
-//var sellLand = (userPublicKey, landID) =>{
-	user.findOneAndUpdate({publicKey : userPublicKey },
-		{$pull : {currentAssets : landID} , $push : {previousAssets : landID}},
+var buyLand = async (buyerData, callback) =>{
+	await user.findOneAndUpdate({publicKey : buyerData.buyer},
+		{$push : {currentAssets : buyerData.landID}},
 		{new : true}).then((user) => {
-		return user;
+		return callback (err,undefined);
 	}).catch((e) => {
-		return e;
+		return callback (undefined,user);
 	});
-//} 
+} 
 
-//module.exports = {buyLand, sellLand};
+var sellLand = async (sellerData, callback) => {
+	await user.findOneAndUpdate({publicKey : sellerData.seller},
+		{$pull : {currentAssets : sellerData.landID} , $push : {previousAssets : sellerData.landID}},
+		{new : true}).then((user) => {
+		return callback (err,undefined);
+	}).catch((e) => {
+		return callback (undefined,user);
+	});
+} 
+
+module.exports = {buyLand, sellLand};

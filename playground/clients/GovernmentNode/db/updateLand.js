@@ -1,30 +1,33 @@
 
 var {land}  = require("./dbModels/land.js");
 var {mongoose} = require("./mongoose.js");
-
+/*
 landID = "land2345";
 buyerPublicKey = ["User2"];
 saleAmount = 1.23;
-var sold = (buyerPublicKey, landID, saleAmount) =>{
-	
-	land.findOne({id : landID}).exec( async function (err, landFind)  {
+*/
+var sold = async (landData, callback) =>{
+
+	await land.findOne({id : landData.landID}).exec( async function (err, landFind)  {
 		if(err){
-			return null;
+			return callback(null);
 		}
 		if((landFind == undefined) || (landFind == null)){
-			return null;
+			return callback(null);
 		}
 		var sellerPublicKey = landFind.owner;
 		var prevOwners = landFind.previousOwners;
+		if(!prevOwners)
+			prevOwners = [];
 		prevOwners.push(sellerPublicKey);
 		
-		land.findOneAndUpdate({id: landID },
-		{ $set : {owner : buyerPublicKey ,previousOwners : prevOwners ,lastSellingPrice : saleAmount }},
+		await land.findOneAndUpdate({id: landData.landID },
+		{ $set : {owner : landData.buyer, previousOwners : prevOwners ,lastSellingPrice : landData.amount}},
 		{new : true}).exec( function (err,landUpdate) {
 			if(err){
-				return null;
+		return callback (err,undefined);
 			}
-			return landUpdate;		
+			return callback(undefined,landUpdate);		
 		});
 	});
 }
@@ -39,13 +42,13 @@ var  amount2 = null;
 var landID2  = "land45";
 var  originalLandID = "land2345";
 
-var divideLand = (lantLong1, newOwner1, amount1,landID1, latLong2, newOwner2, amount2,landID2, originalLandID) => {
-	land.findOne({id : originalLandID}).exec( async function (err, landFind)  {
+var divideLand = async (lantLong1, newOwner1, amount1,landID1, latLong2, newOwner2, amount2,landID2, originalLandID) => {
+	land.findOne({id : originalLandID}).exec( function (err, landFind)  {
 		if(err){
-			return null;
+			return callback(null);
 		}
 		if((landFind == undefined) || (landFind == null)){
-			return landFind;
+			return callback(landFind);
 		}
 		
 		var sellerPublicKey = landFind.owner;
@@ -72,11 +75,11 @@ var divideLand = (lantLong1, newOwner1, amount1,landID1, latLong2, newOwner2, am
 		}
 
 		if((amount2 == null) && ((newOwner2.length == sellerPublicKey.length) && 
-			(newOwner2.every((u,i) => {return u = sellerPublicKey[i];})))){
+			(newOwner2.every((u,i) => {return callback(u = sellerPublicKey[i]);})))){
 			land2.previousOwners.pop();
 		}
 		else if((amount1 == null) && ((newOwner1.length == sellerPublicKey.length) && 
-			(newOwner1.every((u,i) => {return u = sellerPublicKey[i];})))){
+			(newOwner1.every((u,i) => {return callback(u = sellerPublicKey[i]);})))){
 			land1.previousOwners.pop();
 		}
 		
@@ -90,9 +93,9 @@ var divideLand = (lantLong1, newOwner1, amount1,landID1, latLong2, newOwner2, am
 		{ $set : {owner : null, previousOwners : prevOwners}},
 		{new : true}).exec( function (err, landUpdate) {
 			if(err){
-				return null;
+				return callback(null);
 			}
-			 return landUpdate;		
+			 return callback(landUpdate);		
 		});
 	});	
 }  
@@ -104,13 +107,13 @@ var newLandID = "land67";
 var saleAmount1 = 23.432;
 var saleAmount2 = 6578567.4;
 
-var joinLand = (originalLandID1, saleAmount1, originalLandID2, saleAmount2, newLatLong, newLandID, buyerPublicKey) => {
-	land.findOne({id : originalLandID1}).exec( async function (err, landFind)  {
+var joinLand = async (originalLandID1, saleAmount1, originalLandID2, saleAmount2, newLatLong, newLandID, buyerPublicKey) => {
+	await land.findOne({id : originalLandID1}).exec( async function (err, landFind)  {
 		if(err){
-			return null;
+			return callback(null);
 		}
 		if((landFind == undefined) || (landFind == null)){
-			return null;
+			return callback(null);
 		}
 		var sellerPublicKey = landFind.owner;
 		var prevOwners = landFind.previousOwners;
@@ -128,32 +131,32 @@ var joinLand = (originalLandID1, saleAmount1, originalLandID2, saleAmount2, newL
 
 		newLand.save();
 
-		land.findOneAndUpdate({id: originalLandID1 },
+		await land.findOneAndUpdate({id: originalLandID1 },
 		{ $set : {owner : null ,previousOwners : prevOwners, lastSellingPrice : saleAmount1}},
 		{new : true}).exec( function (err,landUpdate) {		
 		});
 	});
 
-	land.findOne({id : originalLandID2}).exec( async function (err, landFind)  {
+	await land.findOne({id : originalLandID2}).exec( async function (err, landFind)  {
 		if(err){
-			return null;
+			return callback(null);
 		}
 		if((landFind == undefined) || (landFind == null)){
-			return null;
+			return callback(null);
 		}
 		var sellerPublicKey = landFind.owner;
 		var prevOwners = landFind.previousOwners;
 		prevOwners.push(sellerPublicKey);
 		
-		land.findOneAndUpdate({id: originalLandID2 },
+		await land.findOneAndUpdate({id: originalLandID2 },
 		{ $set : {owner : null, previousOwners : prevOwners, lastSellingPrice: saleAmount2}},
 		{new : true}).exec( function (err,landUpdate) {
 			if(err){
-				return null;
+				return callback(null);
 			}
-			return landUpdate;		
+			return callback(landUpdate);		
 		});
 	});
 }
 
-//module.exports = {sold, divideLand, joinLand};
+module.exports = {sold, divideLand, joinLand};
