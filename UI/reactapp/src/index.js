@@ -6,7 +6,7 @@ import Blockchain from './Blockchain/Blockchain.js';
 import registerServiceWorker from './registerServiceWorker';
 import Land from './LandDetails/Land.js'
 import User from './UserDetails/User.js'
-import Transaction from './TransactionList/TransactionList.js'
+import TransactionList from './TransactionList/TransactionList.js'
 import Main from'./Main/Main.js';
 import {BrowserRouter,Switch,Route} from 'react-router-dom';
 
@@ -17,7 +17,7 @@ import {BrowserRouter,Switch,Route} from 'react-router-dom';
         <Route path ='/LandDet' component ={Land} />
         <Route  path ='/UserDet' component={User}/>
         <Route path ='/Blockchain' component={Blockchain}/>
-        <Route path ='/TransactionList' component ={Transaction} />
+        <Route path ='/TransactionList' component ={TransactionList} />
         
  		</Switch>
 	</BrowserRouter>, document.getElementById('root'));

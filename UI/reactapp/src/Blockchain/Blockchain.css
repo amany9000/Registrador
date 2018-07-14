@@ -36,11 +36,14 @@
     justify-content: center;
 }
 .card--content2 {
-    background-color: #c4d9f5;
+    background-color: #5a5a5a;
     min-width: 30px;
+    width: 50px; 
+    height: 20px; 
     margin-top: 105px;
-    margin-bottom: 105px;
+    margin-bottom: 20px;
     z-index: 5;
+    justify-content: center
 }
 .card::-webkit-scrollbar {
   display: none;
