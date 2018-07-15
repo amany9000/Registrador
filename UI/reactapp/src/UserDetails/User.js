@@ -4,8 +4,7 @@ import {Form , FormControl,Button} from 'react-bootstrap';
 import UserInfo from './UserInfo';
 import './User.css';
 import {Link} from 'react-router-dom';
-
-
+import Main from '../Main/Main'
 
 class User extends Component{
 
@@ -41,8 +40,8 @@ class User extends Component{
 			
 
 			    <div>
+				 <Main/>
 			    <div className="bot">
-                <h3 className="lin"><Link to ='/'> < h3 style={{color:'white'}}><u>Home</u></h3></Link> </h3>
              	<h2 className ="Hea" >User queries information page</h2>
              	</div>
 			    

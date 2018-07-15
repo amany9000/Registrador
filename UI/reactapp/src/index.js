@@ -8,12 +8,13 @@ import Land from './LandDetails/Land.js'
 import User from './UserDetails/User.js'
 import TransactionList from './TransactionList/TransactionList.js'
 import Main from'./Main/Main.js';
+import Home from'./Main/Home.js';
 import {BrowserRouter,Switch,Route} from 'react-router-dom';
 
  ReactDOM.render(
 	<BrowserRouter>
  		<Switch>
-        <Route  exact path='/' component ={Main}/>
+        <Route  exact path='/' component ={Home}/>
         <Route path ='/LandDet' component ={Land} />
         <Route  path ='/UserDet' component={User}/>
         <Route path ='/Blockchain' component={Blockchain}/>
