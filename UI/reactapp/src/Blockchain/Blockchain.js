@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Blockchain.css';
 import Block from './Block.js'
+import Main from '../Main/Main'
 
 class Blockchain extends Component {
 
@@ -9,6 +10,8 @@ class Blockchain extends Component {
     const blockList=[1,2,3,4] 
 
     return (
+        <div>
+            <Main/>
         <div id="main">
             <nav class="nav-extended center">
                 <div class="nav-wrapper" style={{background: "#5d6dfc"}}>
@@ -35,6 +38,7 @@ class Blockchain extends Component {
                 Some details if required                     
                 </h5> 
             </div>
+        </div>
         </div>
     );
   }

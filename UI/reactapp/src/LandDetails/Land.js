@@ -4,6 +4,7 @@ import {Form , FormControl,Button} from 'react-bootstrap';
 import LandInfo from './LandInfo';
 import {Link } from 'react-router-dom';
 import './Land.css';
+import Main from '../Main/Main'
 
 class Land extends Component{
 
@@ -34,11 +35,12 @@ class Land extends Component{
 			
 
 			<div>
-                  <div className="both">
-                  <h3 className="link"><Link to ='/'> < h3 style={{color:'white'}}><u>Home</u></h3></Link> </h3>
+
+				 <Main/>
+				 <div className="both">
              	<h2  className ="Head">Land queries information page</h2>
              	</div>
-			   
+
                <div className="Des">
 			<Form inline>
 				<h4>Enter the Land Id</h4>
