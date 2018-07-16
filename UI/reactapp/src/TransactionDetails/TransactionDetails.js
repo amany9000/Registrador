@@ -1,13 +1,14 @@
 import React,{Component} from 'react';
 import { List, Segment ,Icon} from 'semantic-ui-react';
-import './TransactionDetails.css';
-import yes from '.images/yes.jpg'
+import './TransactionInfo.css';
+
 
  class TransactionDetails extends Component {
 
   render(){
     return (
       <div >
+        
         <h2 className ="Tran">Transaction Info</h2>
         <Segment stacked className="center"> 35UPGVBX99ekzXF3xDoKJGwCA9UJ2PXuDg </Segment>
          

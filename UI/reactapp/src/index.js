@@ -9,6 +9,7 @@ import User from './UserDetails/User.js'
 import Transaction from './TransactionList/TransactionList.js'
 import Main from'./Main/Main.js';
 import {BrowserRouter,Switch,Route} from 'react-router-dom';
+import TransactionInfo from './TransactionDetails/TransactionDetails.js'
 
  ReactDOM.render(
 	<BrowserRouter>
@@ -18,7 +19,7 @@ import {BrowserRouter,Switch,Route} from 'react-router-dom';
         <Route  path ='/UserDet' component={User}/>
         <Route path ='/Blockchain' component={Blockchain}/>
         <Route path ='/TransactionList' component ={Transaction} />
-        
+        <Route path ='/TransactionInfo' component ={TransactionInfo}/>
  		</Switch>
 	</BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();
