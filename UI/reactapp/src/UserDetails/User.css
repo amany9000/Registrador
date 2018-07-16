@@ -1,35 +1,24 @@
 
 .Hea{
-  
-
   text-align:center;
- 
   height:50px;
   padding :10px;
   font-size :25px;
  font-style:Bold;
  font-family: "Times New Roman";
   color: white;
-  text-decoration:  underline;
-
 }
 
 
 
 .deta{
-
 	margin-top:50px;
-
-
 }
 
 
 
 
 .Desi{
-
-
-	background-image: url("User.jpg");
 	height: 600px;
 }
 

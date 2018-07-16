@@ -15,10 +15,9 @@ return(
 	<div className ="det">
 
 	<h4> Land details of the given land id are :</h4>
-
-
 	
 	<List divided relaxed>
+    <List.Item></List.Item>
     <List.Item>
       <List.Icon name='address book' size='large' verticalAlign='middle' />
       <List.Content>
@@ -47,6 +46,7 @@ return(
         <List.Description as='b' >[[1,0],[-2,1],[1,1]]</List.Description>
       </List.Content>
     </List.Item>
+    <List.Item></List.Item>
   </List>
 	
 
