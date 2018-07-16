@@ -33,6 +33,7 @@ class Main extends Component {
             <Link to ='/UserDet'><a class="item"> User Queries </a></Link>
             <Link to ='/Blockchain'><a class="item"> Blockchain </a></Link>
             <Link to ='/TransactionList'><a class="item"> Transaction List </a></Link>
+            
           </div>
         </div>
    </div>
