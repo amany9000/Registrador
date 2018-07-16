@@ -1,7 +1,7 @@
 import React,{Component} from 'react'; 
 import { List, Segment ,Icon} from 'semantic-ui-react'; 
 import './TransactionDetails.css'; 
-import yes from '../images/yes.jpg' 
+import yes from '../images/yes.jpg' ;
  
  class TransactionDetails extends Component { 
  

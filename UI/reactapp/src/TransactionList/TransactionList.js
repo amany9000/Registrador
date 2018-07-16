@@ -23,6 +23,9 @@ import Main from '../Main/Main'
         allTransactions={this.state.transactions} 
         />
       </div>
+      <div align = "center" className ="Note">
+      <h3> Note : <u>Please click on the transaction hash to see the full transaction info</u></h3>
+      </div>
       </div>
   )
 }
