@@ -37,7 +37,9 @@ class Land extends Component{
 			<div>
 
 				 <Main/>
-				 <div className="both">
+				 <div className="both" style={{
+					 background: '#5d6dfc'
+				 }}>
              	<h2  className ="Head">Land queries information page</h2>
              	</div>
 

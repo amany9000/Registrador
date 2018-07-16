@@ -7,18 +7,17 @@ class Blockchain extends Component {
 
   render() {
 
-    const blockList=[1,2,3,4] 
+    const blockList=[1,2,3,4,5,6,7,8,9,10] 
 
     return (
         <div>
             <Main/>
         <div id="main">
-            <nav class="nav-extended center">
-                <div class="nav-wrapper" style={{background: "#5d6dfc"}}>
-                    <a href="#" className="brand-logo">Block List</a>
-                    <ul id="nav-mobile" className="right hide-on-med-and-down"></ul>
+            <div className="both" style={{
+					 background: '#5d6dfc'
+				 }}>
+             	<h2  className ="Head">Blockchain</h2>
             </div>
-            </nav>
             <div id="chain">
                 <section className="card">
                 { 

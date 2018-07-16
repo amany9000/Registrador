@@ -22,7 +22,7 @@ export default class Trans extends Component {
         this.props.allTransactions.map((item, index)=>{ 
             return( 
               <Table.Row> 
-              <Table.Cell><Link to='/TransactionInfo'><u>sdfoenvbn12345648974</u></Link></Table.Cell> 
+              <Table.Cell><Link to='/TransactionDetails'><u>sdfoenvbn12345648974</u></Link></Table.Cell> 
                 <Table.Cell>wqfsegngnb987</Table.Cell> 
                 <Table.Cell>edfgjffg03u4</Table.Cell> 
                 <Table.Cell>70</Table.Cell> 

@@ -7,11 +7,10 @@ import registerServiceWorker from './registerServiceWorker';
 import Land from './LandDetails/Land.js'
 import User from './UserDetails/User.js'
 import TransactionList from './TransactionList/TransactionList.js'
+import TransactionDetails from './TransactionDetails/TransactionDetails.js'
 import Main from'./Main/Main.js';
 import Home from'./Main/Home.js';
-import TransactionDetails from './TransactionDetails/TransactionDetails.js';
 import {BrowserRouter,Switch,Route} from 'react-router-dom';
-
 
  ReactDOM.render(
 	<BrowserRouter>
@@ -21,8 +20,7 @@ import {BrowserRouter,Switch,Route} from 'react-router-dom';
         <Route  path ='/UserDet' component={User}/>
         <Route path ='/Blockchain' component={Blockchain}/>
         <Route path ='/TransactionList' component ={TransactionList} />
-        <Route path ='/TransactionInfo' component ={TransactionDetails} />
-        
+        <Route path ='/TransactionDetails' component ={TransactionDetails} />
  		</Switch>
 	</BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();

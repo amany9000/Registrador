@@ -1,25 +1,22 @@
 import React,{Component} from 'react'; 
 import { List, Segment ,Icon} from 'semantic-ui-react'; 
 import './TransactionDetails.css'; 
-import yes from '../images/yes.jpg' ;
- 
+import yes from '../images/yes.jpg' 
+import Main from '../Main/Main' 
+
  class TransactionDetails extends Component { 
  
   render(){ 
     return ( 
-      <div style={{ 
-        padding: 20, 
-      }}> 
-        <h2 className ="Tran">Transaction Info</h2> 
+      <div>
+        <Main/>
+      <div className="both" style={{
+					 background: '#5d6dfc'
+				 }}>
+             	<h2  className ="Head">Transaction Details</h2>
+             	</div>
         <Segment stacked className="center"> 35UPGVBX99ekzXF3xDoKJGwCA9UJ2PXuDg </Segment> 
           
-         <div className="Icon"><Icon.Group size='large' > 
-      <Icon color="teal"name='arrow down'  /> 
-        </Icon.Group> 
-        </div> 
- 
-        <Segment stacked className="center"> 3Lauk5Z4AvXCFPU9SpUo76Ybee55FQAKPp </Segment> 
- 
        
   <Segment inverted> 
     <List divided inverted relaxed> 

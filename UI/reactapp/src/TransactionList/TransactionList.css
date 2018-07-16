@@ -1,19 +1,14 @@
 .Table{
-
-
   margin-top:40px;
   border:solid 1px black;
 }
 
 .lis{
-
-
  color: white;
  height:50px;
  text-align:center;
  padding:10px;
  font-family: "Times New Roman";
- text-decoration: underline;
 }
 
 .li{
@@ -28,7 +23,7 @@ font-family: "Times New Roman";
 }
 
 .eve{
-	background-color: saddleBrown;
+	background-color: #5d6dfc;
 }
 
 .Note{

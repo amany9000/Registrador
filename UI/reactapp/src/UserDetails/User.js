@@ -8,40 +8,29 @@ import Main from '../Main/Main'
 
 class User extends Component{
 
-	
-
 	constructor(){
-
 		super();
-
 		this.state={
 			newKey:'',
 			loading:false,
 			PublicKey:'sdgf8543',
-			
-
 		}
-
-
 	}
 
  		handleSub(){
  			this.setState({
  				PublicKey:this.state.newKey,
  				loading:true
- 				
  			})
  		}
 
 	render(){
-
-
 		return(
-			
-
-			    <div>
+			<div>
 				 <Main/>
-			    <div className="bot">
+			    <div className="bot" style={{
+					background: '#5d6dfc'
+				}}>
              	<h2 className ="Hea" >User queries information page</h2>
              	</div>
 			    
@@ -53,7 +42,9 @@ class User extends Component{
 			<FormControl type ="text" onChange={event => this.setState({newKey:event.target.value})}>
 			</FormControl>
 			{' '}
-			<Button onClick ={()=> this.handleSub()}>
+			<Button onClick ={()=> this.handleSub()} style={{ 
+				backgroundColor: '#5d6dfc'
+			}}>
 			submit
 			</ Button> 
 			{
