@@ -5,12 +5,9 @@ import './Land.css'
 
 class LandInfo extends Component{
 
-
-
 render(){
 
 return(
-
 
 	<div className ="det">
 

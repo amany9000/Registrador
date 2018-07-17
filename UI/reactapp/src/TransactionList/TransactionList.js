@@ -13,7 +13,7 @@ import Main from '../Main/Main'
 
   render(){
     return(
-      <div>
+      <div id="hello">
       <Main/>
       <div className="eve">
       <h2 className ="lis"> Land Transactions List</h2>
@@ -24,7 +24,9 @@ import Main from '../Main/Main'
         />
       </div>
       <div align = "center" className ="Note">
-      <h3> Note : <u>Please click on the transaction hash to see the full transaction info</u></h3>
+      <h3 style={{
+        color: 'white'
+      }}> Note : <u>Please click on the transaction hash to see the full transaction info</u></h3>
       </div>
       </div>
   )

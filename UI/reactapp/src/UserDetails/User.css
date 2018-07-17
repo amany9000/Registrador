@@ -1,4 +1,3 @@
-
 .Hea{
   text-align:center;
   height:50px;
@@ -9,17 +8,14 @@
   color: white;
 }
 
-
-
 .deta{
-	margin-top:50px;
+  margin-top:50px;
+  opacity: 0.8;
 }
 
-
-
-
 .Desi{
-	height: 600px;
+  height: 600px;
+  background-image: url("../images/light.jpg");
 }
 
 .lin{
@@ -30,7 +26,6 @@
   padding:5px;
   height:20px;
 }
-
 
 .bot{
   background-color: Maroon;

@@ -10,10 +10,32 @@ class Home extends Component {
   render() {
 
     return (
-        <div>
+        <div id="back">
             <Main/>
-            <div>
-                <h2>This is home page</h2>
+            <div style={{
+                height: '630px',
+            }}>
+                <h1 style={{
+                    color: '#cefffa',
+                    textAlign: 'center',
+                    fontSize: 100,
+                    marginTop: 100,
+                    fontFamily: 'bold'
+                }}>Registrador</h1>
+                <h4 style={{
+                    color: '#98cec9',
+                    textAlign: 'center',
+                    fontSize: 30,
+                    marginTop: 20,
+                    fontFamily: 'bold'
+                }}>Your land matters !!</h4>
+                <h4 style={{
+                    color: '#98cec9',
+                    textAlign: 'center',
+                    fontSize: 60,
+                    marginTop: 80,
+                    fontFamily: 'bold'
+                }}>Land registry blockchain solution</h4>
             </div>
         </div>
     )
