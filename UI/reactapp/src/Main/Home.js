@@ -13,13 +13,13 @@ class Home extends Component {
         <div id="back">
             <Main/>
             <div style={{
-                height: '630px',
+                height: '490px',
             }}>
                 <h1 style={{
                     color: '#cefffa',
                     textAlign: 'center',
                     fontSize: 100,
-                    marginTop: 100,
+                    marginTop: 60,
                     fontFamily: 'bold'
                 }}>Registrador</h1>
                 <h4 style={{
