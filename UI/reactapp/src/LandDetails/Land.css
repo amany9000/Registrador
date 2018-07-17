@@ -1,5 +1,8 @@
 .det{
-  margin:50px;
+  padding:30px;
+  margin: 30px;
+  background: white;
+  opacity: 0.8;
 }
 
 .Head{
@@ -13,19 +16,19 @@
 }
 
 .Des {
+  background-image: url("../images/light.jpg");
 	 height:600px;
 }
 
 
 .White{
-	color:white;
+	color:white;  padding:5px;
+
 }
 
 .link{
-  
   font-family: "Times New Roman";
   color:white;
-  
   text-align:left;
   padding:5px;
   height:30px;

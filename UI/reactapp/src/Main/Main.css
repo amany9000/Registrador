@@ -1,5 +1,4 @@
 .xy{
-
 background-color:black;
 padding :10px;
 height:auto;
@@ -8,11 +7,10 @@ padding:50px;
 }
 
 .xz{
-
   color:white;
   text-decoration: underline;
-
 }
 
-
-
+#back {
+  background-image: url("../images/back.jpg");
+}

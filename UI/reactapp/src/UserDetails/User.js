@@ -31,23 +31,23 @@ class User extends Component{
 			<div>
 				 <Main/>
 			    <div className="bot" style={{
-					background: '#5d6dfc'
+					background: '#2bbbad'
 				}}>
              	<h2 className ="Hea" >User queries information page</h2>
              	</div>
 			    
                <div className ="Desi" >
-               <h3>Enter the Public key of the user</h3>
+               <h3 style={{ color: 'white' }} >Enter the Public key of the user</h3>
 
 			<Form inline>
 				
-			<FormControl type ="text" onChange={event => this.setState({newKey:event.target.value})}>
+			<FormControl style={{ color: 'white' }} type ="text" onChange={event => this.setState({newKey:event.target.value})}>
 			</FormControl>
 			{' '}
 			<Button onClick ={()=> this.handleSub()} style={{ 
 				backgroundColor: '#5d6dfc'
 			}}>
-			submit
+			SUBMIT
 			</ Button> 
 			{
 				this.state.loading ?

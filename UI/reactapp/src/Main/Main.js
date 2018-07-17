@@ -13,10 +13,12 @@ class Main extends Component {
         <div class="ui inverted secondary pointing menu">
           <div class="header item">
             <div style={{
-              color: 'grey',
-              fontSize: 20
+              fontSize: 20,
+              
             }}>
-            <Link to ='/'>Registrador</Link>
+            <Link to ='/' style={{
+              color: '#2bbbad'
+            }}>Registrador</Link>
             </div>
           </div>
             <Link to ='/LandDet'><a class="item"> Land Queries </a></Link>

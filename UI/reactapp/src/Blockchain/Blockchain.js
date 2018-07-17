@@ -14,7 +14,7 @@ class Blockchain extends Component {
             <Main/>
         <div id="main">
             <div className="both" style={{
-					 background: '#5d6dfc'
+					 background: '#2bbbad'
 				 }}>
              	<h2  className ="Head">Blockchain</h2>
             </div>
@@ -31,11 +31,6 @@ class Blockchain extends Component {
  
                 } 
                 </section>
-            </div>
-            <div> 
-                <h5> 
-                Some details if required                     
-                </h5> 
             </div>
         </div>
         </div>

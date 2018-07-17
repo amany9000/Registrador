@@ -11,7 +11,7 @@ import Main from '../Main/Main'
       <div>
         <Main/>
       <div className="both" style={{
-					 background: '#5d6dfc'
+					 background: '#2bbbad'
 				 }}>
              	<h2  className ="Head">Transaction Details</h2>
              	</div>
@@ -25,7 +25,9 @@ import Main from '../Main/Main'
         <Segment stacked className="center"> sdpgsog123445346soifgndf345454977 </Segment> 
           
        
-  <Segment inverted> 
+  <Segment inverted style={{
+    opacity: 0.8
+  }}> 
     <List divided inverted relaxed> 
       <List.Item> 
         <List.Content> 

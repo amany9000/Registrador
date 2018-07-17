@@ -38,19 +38,19 @@ class Land extends Component{
 
 				 <Main/>
 				 <div className="both" style={{
-					 background: '#5d6dfc'
+					 background: '#2bbbad'
 				 }}>
              	<h2  className ="Head">Land queries information page</h2>
              	</div>
 
                <div className="Des">
 			<Form inline>
-				<h4>Enter the Land Id</h4>
-			<FormControl type ="text" onChange={event => this.setState({newId:event.target.value})}>
+				<h3 style={{ color: 'white' }}> Enter the Land Id</h3>
+			<FormControl style={{ color: 'white' }} type ="text" onChange={event => this.setState({newId:event.target.value})}>
 			</FormControl>
 			{' '}
 			<Button onClick ={()=> this.handleSub()}>
-			submit
+			SUBMIT
 			</ Button>
 			{
 				this.state.loading ?
