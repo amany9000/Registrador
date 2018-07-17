@@ -16,6 +16,13 @@ import Main from '../Main/Main'
              	<h2  className ="Head">Transaction Details</h2>
              	</div>
         <Segment stacked className="center"> 35UPGVBX99ekzXF3xDoKJGwCA9UJ2PXuDg </Segment> 
+        <div align ="center"><Icon.Group size='large' >
+      <Icon color="teal"name='arrow down'  />
+        </Icon.Group>
+        </div>
+
+
+        <Segment stacked className="center"> sdpgsog123445346soifgndf345454977 </Segment> 
           
        
   <Segment inverted> 

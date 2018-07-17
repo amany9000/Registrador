@@ -13,14 +13,16 @@ class User extends Component{
 		this.state={
 			newKey:'',
 			loading:false,
-			PublicKey:'sdgf8543',
+			PublicKey:'sdgf8543'
+		
 		}
 	}
 
  		handleSub(){
  			this.setState({
  				PublicKey:this.state.newKey,
- 				loading:true
+ 				loading:true,
+ 				
  			})
  		}
 
@@ -48,7 +50,7 @@ class User extends Component{
 			submit
 			</ Button> 
 			{
-				this.state.loading  ?
+				this.state.loading ?
 				<div>
 				<UserInfo />
 				</div>
