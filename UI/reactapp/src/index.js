@@ -11,6 +11,8 @@ import TransactionDetails from './TransactionDetails/TransactionDetails.js'
 import Main from'./Main/Main.js';
 import Home from'./Main/Home.js';
 import {BrowserRouter,Switch,Route} from 'react-router-dom';
+import BlockDetails from './BlockDetails/BlockDetails';
+
 
  ReactDOM.render(
 	<BrowserRouter>
@@ -21,6 +23,7 @@ import {BrowserRouter,Switch,Route} from 'react-router-dom';
         <Route path ='/Blockchain' component={Blockchain}/>
         <Route path ='/TransactionList' component ={TransactionList} />
         <Route path ='/TransactionDetails' component ={TransactionDetails} />
+        <Route path ='/BlockDetails' component ={BlockDetails} />
  		</Switch>
 	</BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();
