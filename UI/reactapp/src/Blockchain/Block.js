@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Blockchain.css';
+import {Link}  from 'react-router-dom';
 
 export default class Block extends Component {
     render() {
@@ -9,7 +10,7 @@ export default class Block extends Component {
             }}>
             <div className="card--content">
                 <h4>
-                    Hash
+                    <Link to ='/BlockDetails'><u>Hash</u></Link>
                 </h4>
                 <h6>
                     TimeStamp

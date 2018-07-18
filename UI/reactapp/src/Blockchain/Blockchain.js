@@ -31,8 +31,12 @@ class Blockchain extends Component {
  
                 } 
                 </section>
-            </div>
+                </div>
+        <div align ="center">
+        < h2> Note:<u>Click on the block hash to see the block details</u> </h2>
         </div>
+            </div>
+
         </div>
     );
   }
