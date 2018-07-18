@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Blockchain.css';
 import Block from './Block.js'
 import Main from '../Main/Main'
+import { Table } from 'semantic-ui-react'; 
 
 class Blockchain extends Component {
 
@@ -31,12 +32,37 @@ class Blockchain extends Component {
  
                 } 
                 </section>
+                <div style={{
+                    opacity: 0.8,
+                    marginRight: 50,
+                    marginLeft: 50
+                }}>
+                <Table celled> 
+                    <Table.Header> 
+                        <Table.Row> 
+                        <Table.HeaderCell> Block Hash </Table.HeaderCell> 
+                        <Table.HeaderCell> Percentage </Table.HeaderCell> 
+                        </Table.Row> 
+                    </Table.Header> 
+   
+                    <Table.Body>   
+                        <Table.Row> 
+                            <Table.Cell>nvbsdfoen12345648974</Table.Cell> 
+                            <Table.Cell>70</Table.Cell> 
+                        </Table.Row> 
+                        <Table.Row> 
+                            <Table.Cell>sdfoeidhodd345648974</Table.Cell> 
+                            <Table.Cell>17</Table.Cell> 
+                        </Table.Row> 
+                        <Table.Row> 
+                            <Table.Cell>dfoe8974nvbn123456s4</Table.Cell> 
+                            <Table.Cell>13</Table.Cell> 
+                        </Table.Row> 
+                    </Table.Body>
+                </Table>
                 </div>
-        <div align ="center">
-        < h2> Note:<u>Click on the block hash to see the block details</u> </h2>
-        </div>
+                </div>
             </div>
-
         </div>
     );
   }
