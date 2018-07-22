@@ -12,6 +12,8 @@ import Main from'./Main/Main.js';
 import Home from'./Main/Home.js';
 import {BrowserRouter,Switch,Route} from 'react-router-dom';
 import BlockDetails from './BlockDetails/BlockDetails';
+import SPVCreateTransaction from './SPV/SPVCreateTransaction';
+import SPVHandleTransaction from './SPV/SPVHandleTransaction';
 
 
  ReactDOM.render(
@@ -24,6 +26,8 @@ import BlockDetails from './BlockDetails/BlockDetails';
         <Route path ='/TransactionList' component ={TransactionList} />
         <Route path ='/TransactionDetails' component ={TransactionDetails} />
         <Route path ='/BlockDetails' component ={BlockDetails} />
+        <Route path ='/SPVHandleTransaction' component ={SPVHandleTransaction} />
+        <Route path ='/SPVCreateTransaction' component ={SPVCreateTransaction} />
  		</Switch>
 	</BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();
