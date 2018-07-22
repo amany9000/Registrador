@@ -59,10 +59,6 @@ class SPVCreateTransaction extends Component {
                             <Table.Cell>amount</Table.Cell> 
                             <Table.Cell>2,34,88,000</Table.Cell>
                         </Table.Row> 
-                        <Table.Row> 
-                            <Table.Cell>locktime</Table.Cell> 
-                            <Table.Cell>N/A</Table.Cell>
-                        </Table.Row> 
                     </Table.Body>
                 </Table>
                 <div className="buttons">
