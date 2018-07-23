@@ -11,8 +11,10 @@ var {blockSigCreate} = require("./governmentNodeSig")
 const myPublicKey = fs.readFileSync('publicSeller.pem').toString();
 var signature   = "blockGenerator's_Signature"; 
 
-var blockMaker = async (transactionList, callback) => {
- 	var transElementList = JSON.parse(fs.readFileSync("./transactionElement.json").toString());
+var blockMaker = async (callback) => {
+ 		 	console.log("suup");
+ 	var transElementList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionElement.json").toString());
+ 	var transactionList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionList.json").toString()); 	
  	var blockElementList = [];    //list of transactions going in the block
  	for(var i=0;i<transElementList.length;i++){
  		transElementList[i].priority++;
@@ -22,7 +24,6 @@ var blockMaker = async (transactionList, callback) => {
  			i--
  		}
  	}
-	
 	await transactionVerify(transactionList,(reply)=>{
 		console.log(reply);
 		var sortedTrans = [];     // sorted list of recieved(valid) transactions 
@@ -87,23 +88,9 @@ var blockMaker = async (transactionList, callback) => {
 	});
 }
 
-blockMaker([{
-			class: "transaction",
-			timeStamp: 1456,
-			landID: "land2345",
-			from: ["User1"],
-			to: ["User2"],
-			amount: 9012321113 
-		},{
-			class: "transaction",
-			timeStamp: 123456,
-			landID: "land67",
-			from: ["User2"],
-			to: ["User1"],
-			amount: 123211213 
-		}],(reply) =>{
+/*blockMaker((reply) =>{
 		console.log(reply,blockSigVerify(reply));
 });
-
+*/
 module.exports = {blockMaker};
 

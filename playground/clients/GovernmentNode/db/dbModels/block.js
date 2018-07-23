@@ -5,20 +5,24 @@ var blockHeader = new mongoose.Schema({
         type: Number,
         required :true,
         minlength : 1,
+        unique : true,
     },
         hashPrevBlock : {
         type: String,
         minlength : 1,
+        unique : true
     },
         hashMerkleRoot : {
         type: String,
         required :true,
         minlength : 1,
+        unique : true
     },
         blockTimeStamp : {
         type: Number,
         required :true,
         minlength : 1,
+        unique : true
     }    
 });
 
@@ -38,6 +42,7 @@ var Block = new mongoose.Schema({
         type: [String],
         required :true,
         minlength : 1,
+        unique : true
     },
     blockGenerator  : {
         type: String,
