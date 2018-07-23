@@ -9,18 +9,22 @@ export default class Block extends Component {
                 display: 'flex'
             }}>
             <div className="card--content">
-                <h4>
-                    <Link to ='/BlockDetails'><u>Hash</u></Link>
-                </h4>
-                <h6>
-                    TimeStamp
-                </h6>
-                <h6>
-                    Some other information
-                </h6>
-                <h6>
-                    Other information again 
-                </h6>
+                <p>
+                    <b>Merlkle Root Hash</b>
+                    <br></br>
+                    <Link to ='/BlockDetails'><u>{this.props.block.hashMerkleRoot}</u></Link>
+                </p>
+                <p>
+                    <b>Previous Block Hash</b>
+                    <br></br>
+                    {this.props.block.hashPrevBlock}
+                </p>
+                <p>
+                    <b>Block Time Stamp</b> {this.props.block.blockTimeStamp}
+                </p>
+                <p>
+                    <b>Block Height</b> {this.props.block.blockHeight}
+                </p>
             </div>
             <div class="card--content2"></div>
             </div>
