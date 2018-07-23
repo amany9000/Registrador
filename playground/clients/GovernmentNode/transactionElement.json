@@ -1,23 +1,23 @@
 
 [{
-		"priority" : 0,
-		"transaction" : {
-			"class": "transaction",
-			"timeStamp": 1234563425,
-			"landID": "land23",
-			"from": ["User2","User4"],
-			"to": ["User2"],
-			"amount": 123213 
-		}
+	"priority" : 0,
+	"transaction" : {
+		"class": "transaction",
+		"timeStamp": 1234563425,
+		"landID": "land23",
+		"from": ["User2","User4"],
+		"to": ["User2"],
+		"amount": 123213 
+	}
 	},{
-		"priority" : 0,
-		"transaction" : {
-			"class": "transaction",
-			"timeStamp": 1232452,
-			"landID": "land45",
-			"from": ["User3"],
-			"to": ["User1"],
-			"amount": 1232
-		}
+	"priority" : 0,
+	"transaction" : {
+		"class": "transaction",
+		"timeStamp": 1232452,
+		"landID": "land45",
+		"from": ["User3"],
+		"to": ["User1"],
+		"amount": 1232
+	}
 }]
 
