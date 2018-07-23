@@ -14,6 +14,7 @@ import {BrowserRouter,Switch,Route} from 'react-router-dom';
 import BlockDetails from './BlockDetails/BlockDetails';
 import SPVCreateTransaction from './SPV/SPVCreateTransaction';
 import SPVHandleTransaction from './SPV/SPVHandleTransaction';
+import LandIdCreate from './LandIdCreate/LandIdCreate';
 
 
  ReactDOM.render(
@@ -28,6 +29,7 @@ import SPVHandleTransaction from './SPV/SPVHandleTransaction';
         <Route path ='/BlockDetails' component ={BlockDetails} />
         <Route path ='/SPVHandleTransaction' component ={SPVHandleTransaction} />
         <Route path ='/SPVCreateTransaction' component ={SPVCreateTransaction} />
+        <Route path ='/LandIdCreate' component ={LandIdCreate} />
  		</Switch>
 	</BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();
