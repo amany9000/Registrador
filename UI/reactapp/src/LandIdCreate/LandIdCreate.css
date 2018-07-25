@@ -61,3 +61,15 @@
   display: flex;
   justify-content: space-between;
 }
+
+.note{
+  height:50px;
+  padding :10px;
+  font-size :25px;
+ font-style:Bold;
+ font-family: "Times New Roman";
+ 
+   background-color: #2bbbad;
+   margin-top: 100px;
+
+}
