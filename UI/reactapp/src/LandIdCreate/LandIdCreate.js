@@ -62,6 +62,9 @@ class LandIdCreate extends Component {
                     <button> Generate Unique Land Id  </button>
                 </div>
             </div>
+            <div className="note"  align="center">
+                <h3> Note :<u>The coordinates must be in clockwise direction starting from north</u> </h3>
+            </div>
         </div>
     );
   }
