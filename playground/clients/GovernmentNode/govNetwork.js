@@ -81,7 +81,7 @@ await sw.join('rohandhoot')
   function (callback){
     
     setTimeout(callback, 1000);
-    var block = JSON.parse(fs.readFileSync("./clients/GovernmentNode/block.json").toString())
+    var block = JSON.parse(fs.readFileSync("./clients/GovernmentNode/block.json").toString(),undefined,2)
     if(!block.header){
       fs.writeFileSync("./clients/GovernmentNode/boolean.log","");
     }
@@ -120,18 +120,41 @@ await sw.join('rohandhoot')
     conn.on('data', data => {
 
       // Here we handle incomming messages
+      var message = JSON.parse(data,undefined,2);
       log(
-        'Received Message from peer ' + peerId,
-        '----> ' + data.toString()
+        'Received Message from peerzzz ' + peerId,
+        '----> ' + message
       )
-
-      blockVerify(data, (reply) => {
-        console.log(reply);
-      });
-      io.emit('getTransaction', data.toString());
-      a++;
+      /*
+      if(message.class ==  "block"){
+        blockVerify(data, (reply) => {
+          console.log(reply);
+          
+          if(!reply.header){
+            console.log("block not verified");
+          }
+          else{
+          var receivedBlocks = JSON.parse(fs.readFileSync("./clients/GovernmentNode/receivedBlocks.json").toString());  
+          receivedBlocks.push(message)
+          fs.appendFileSync("./clients/GovernmentNode/receivedBlocks.json", JSON.stringify(receivedBlocks,undefined,2));
+        }
+        });
+      }
+      else if(message.class == "transaction"){ 
+        if(new Date().getMinutes() >= 59 && new Date.getSeconds >= 30){
+          var haltedList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/haltedList.json").toString());  
+          haltedList.push(message)
+          fs.appendFileSync("./clients/GovernmentNode/halstedList.json", JSON.stringify(haltedList,undefined,2));
+        }
+        else{
+          var transactionList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionList.json").toString());  
+          transactionList.push(message)
+          fs.appendFileSync("./clients/GovernmentNode/transactionList.json", JSON.stringify(transactionList,undefined,2));
+        }
+        io.emit('getTransaction', data.toString());
+      } */
     })
-
+    
     conn.on('close', () => {
       // Here we handle peer disconnection
       log(`Connection ${seq} closed, peer id: ${peerId}`)

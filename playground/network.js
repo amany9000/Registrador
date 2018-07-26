@@ -91,11 +91,12 @@ io.on('connection', (client) => {
    * The channel we are connecting to.
    * Peers should discover other peers in this channel
    */
+  var a =5; 
 await sw.join('rohandhoot')
      
   sw.on('connection', (conn, info) => {
     // Connection id
-    
+    console.log(a++)
 
     const seq = connSeq
 

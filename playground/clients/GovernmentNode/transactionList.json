@@ -13,9 +13,3 @@
 	"to": ["User2"],
 	"amount": 123211213 
 }]
-
-{
-	"bool": "true",
-	"value": 1,
-	"count": 0
-}
