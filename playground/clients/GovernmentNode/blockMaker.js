@@ -25,7 +25,6 @@ var blockMaker = async (callback) => {
  		}
  	}
 	await transactionVerify(transactionList,(reply)=>{
-		console.log(reply);
 		var sortedTrans = [];     // sorted list of recieved(valid) transactions 
 
 		for(i in transactionList){
@@ -87,8 +86,8 @@ var blockMaker = async (callback) => {
 		});
 	});
 }
-
-/*blockMaker((reply) =>{
+/*
+blockMaker((reply) =>{
 		console.log(reply,blockSigVerify(reply));
 });
 */
