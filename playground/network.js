@@ -6,9 +6,8 @@ const getPort = require('get-port');
 const readline = require('readline');
 const io = require('socket.io')();
 const fs  = require("fs");
-const async = require("async");
 
-const {blockVerify} = require("./blockVerify");   
+const {blockVerify} = require("./clients/GovernmentNode/blockVerify");   
 const peers = {}
 // Counter for connections, used to identify connections
 let connSeq = 0
@@ -29,8 +28,27 @@ function log () {
   for (let i = 0, len = arguments.length; i < len; i++) {
     console.log(arguments[i])
   }
-
+  askUser()
 }
+
+const askUser = async () => {
+  rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
+    console.log("saap")
+
+  rl.question('Send message: ', message => {
+    // Broadcast to peers
+
+    for (let id in peers) {
+      peers[id].conn.write(JSON.stringify({"text" :message, "me" : myId.toString("hex")},undefined,2))
+    }    
+    rl.close()
+    rl = undefined
+    askUser()
+  });
+}   
 
 /** 
  * Default DNS and DHT servers
@@ -68,43 +86,19 @@ io.on('connection', (client) => {
  peers[id].conn.write(JSON.stringify({"text" : interval, "me" : myId.toString("hex")},undefined,2))    }  
   });
 });
+
   /**
    * The channel we are connecting to.
    * Peers should discover other peers in this channel
    */
 await sw.join('rohandhoot')
-
+     
   sw.on('connection', (conn, info) => {
     // Connection id
-    async.whilst(
-  function () {return Boolean(fs.readFileSync("./clients/GovernmentNode/boolean.log").toString())},
-  function (callback){
     
-    setTimeout(callback, 1000);
-    var block = JSON.parse(fs.readFileSync("./clients/GovernmentNode/block.json").toString())
-    if(!block.header){
-      fs.writeFileSync("./clients/GovernmentNode/boolean.log","");
-    }
-    else{
-    if(new Date().getMinutes() === 49 && new Date().getSeconds() === 0){
-      if(lastHeight + 1 === block.header.blockHeight){
-        console.log("dhun dhun dhun 143");
-        var count = 0;
-        for (let id in peers) {
-          peers[id].conn.write(JSON.stringify(block,undefined,2))
-        }
-        fs.writeFileSync("./clients/GovernmentNode/block.json",JSON.stringify({},undefined,2));
-        fs.writeFileSync("./clients/GovernmentNode/boolean.log","");
-      }          
-    }}
-  },
-  function (){
-    fs.writeFileSync("./clients/GovernmentNode/boolean.log","true");
-  }
-)
-    //fs.writeFileSync("./clients/GovernmentNode/boolean.log","true");
 
     const seq = connSeq
+
     const peerId = info.id.toString('hex')
     log(`Connected #${seq} to peer: ${peerId}`)
 
@@ -112,11 +106,17 @@ await sw.join('rohandhoot')
     if (info.initiator) {
       try {
         conn.setKeepAlive(true, 600)
+
       } catch (exception) {
         log('exception', exception)
       }
     }
-    console.log("dont")
+        while(new Date().getMinutes() === 24){
+          if(lastHeight + 1 === JSON.parse(fs.readFileSync("./clients/GovernmentNode/block.json").toString()).header.blockHeight){
+            console.log("dhun dhun dhun");
+            break;
+          }          
+    }
     conn.on('data', data => {
 
       // Here we handle incomming messages
@@ -124,7 +124,6 @@ await sw.join('rohandhoot')
         'Received Message from peer ' + peerId,
         '----> ' + data.toString()
       )
-
       blockVerify(data, (reply) => {
         console.log(reply);
       });
@@ -151,9 +150,8 @@ await sw.join('rohandhoot')
 
   })
 
-  //send(a)  
-                for (let id in peers) {
- peers[id].conn.write(JSON.stringify({"text" : "lol", "me" : myId.toString("hex")},undefined,2))    }
+  askUser(a)  
 
 })()
+
 
