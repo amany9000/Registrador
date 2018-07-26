@@ -4,7 +4,7 @@
   "description": "## classes * user ( user details ) * land ( land details ) * transaction ( land deal details )",
   "main": "test_network.js",
   "scripts": {
-    "start": "node clients/GovernmentNode/timer.js & node clients/GovernmentNode/govNetwork.js"
+    "start": "node --expose-gc clients/GovernmentNode/timer.js & node --expose-gc clients/GovernmentNode/govNetwork.js"
   },
   "author": "",
   "license": "ISC",

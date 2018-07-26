@@ -2,6 +2,7 @@
 const crypto = require("crypto")
 const fs = require('fs')
 
+const {updateDB} = require("./updateDB")
 function compare(a,b){
 	if(a.hash > b.hash)
 		return 1;
@@ -43,11 +44,13 @@ var selectBlock = (callback) =>{
 			selectedBlockElement = blockFreqList[i];
 		}
 	}
-	//console.log(selectedBlockElement)
-	return callback(selectedBlockElement.block)	 	
+	console.log(selectedBlockElement)
+	updateDB(selectedBlockElement , (reply) => {
+		return callback(reply)
+	})	
 }
-
-/*selectBlock( ()=>{
-
+/*
+selectBlock( (reply)=>{
+	console.log(reply)
 })*/
 module.exports = {selectBlock}

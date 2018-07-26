@@ -4,7 +4,6 @@ const fs  = require("fs");
 const io = require('socket.io')();
 
 const {blockMaker} = require("./blockMaker");
-const {updateDB} = require("./updateDB")
 const {selectBlock} = require("./selectBlock")
 
 var flag1 = true;
@@ -15,8 +14,11 @@ async.whilst(
 		if(new Date().getMinutes() === 33){
 			flag1 = true
 		}
-
-		if(new Date().getMinutes() === 55 && new Date().getSeconds() === 0 && flag1){
+		if(new Date().getMinutes() === 55 && new Date().getSeconds() === 0){
+			flag2 = true;
+		}
+		
+		if(new Date().getMinutes() === 3 && new Date().getSeconds() === 0 && flag1){
 			setTimeout(callback, 1000);
 			blockMaker((reply)=>{
 				console.log(reply);
@@ -25,28 +27,21 @@ async.whilst(
 			});
     		flag1 = false; 
 		}
+
+		else if(new Date().getMinutes() === 4 && new Date().getSeconds() === 0 && flag2){
+			setTimeout(callback, 1000);
+			console.log("selectBlock");
+			
+			selectBlock((reply)=>{
+				console.log(reply);
+				io.emit('blockSelected', reply);
+			});
+    		flag2 = false;
+		}
 		else{
 			setTimeout(callback, 1000);
 		}
 
-		if(new Date().getMinutes() === 55 && new Date().getSeconds() === 0){
-			flag2 = true;
-		}
-		if(new Date().getMinutes() === 49 && new Date().getSeconds() === 0 && flag2){
-			setTimeout(callback, 1000);
-			console.log("selectBlock");
-			
-			selectBlock((block)=>{
-				console.log(block);
-				updateDB(block, (reply) => {
-					console.log(reply)
-				})
-				io.emit('blockSelected', block);
-			});
-    		flag2 = false; 
-		}
-		else{
-			setTimeout(callback, 1000);
-		}
+
 	}
 )
