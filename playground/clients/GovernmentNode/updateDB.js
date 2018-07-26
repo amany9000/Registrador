@@ -55,7 +55,7 @@ var updateDB = async (recievedBlock, callback) =>{
 		});				 
 	}		
 }
-
+/*
 updateDB({ class: 'block',
   header:
    { blockHeight: 568,
@@ -74,5 +74,5 @@ updateDB({ class: 'block',
    'WTqMyQuvgVNTztrG/FGod/P/C/or7IOklw55yNelBT8GRv0U+1kugsDDJ36/UeZbKsOT2vCpK7D2C/S6DUQlT8GfHh5z1z+3kCkaQyjh/fyDV82/LwciEb3imegMTT0hPSsIG6mWR4joHGUvMMuZj+/QF0APtR97tUOiQwyvMlzcnm7Qa+ZwV+Jl34QLzL3PWsGCfj3vhofzJw06BnyFhYLjX3ybXpscbwskJtHUHIYh8r7kO03K6VfOvrnFZJZJkJk/hcV/E4PnkppcPEpwe1zzkUzhSDxFFfsm7NM0uCcSxyF9u579Ij6I8WwW2iykneto1W81Rgza4W1UkMdqEQ==' }, (reply)=>{
 	console.log(reply);
 }); 
-
+*/
 module.exports = {updateDB};  

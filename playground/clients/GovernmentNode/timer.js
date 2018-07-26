@@ -4,6 +4,8 @@ const fs  = require("fs");
 const io = require('socket.io')();
 
 const {blockMaker} = require("./blockMaker");
+const {updateDB} = require("./updateDB")
+const {selectBlock} = require("./selectBlock")
 
 var flag1 = true;
 var flag2 = true;
@@ -14,12 +16,12 @@ async.whilst(
 			flag1 = true
 		}
 
-		if(new Date().getMinutes() === 2 && new Date().getSeconds() === 0 && flag1){
+		if(new Date().getMinutes() === 55 && new Date().getSeconds() === 0 && flag1){
 			setTimeout(callback, 1000);
 			blockMaker((reply)=>{
-				//console.log(reply);
+				console.log(reply);
 				fs.writeFileSync("./clients/GovernmentNode/block.json",JSON.stringify(reply,undefined,2));
-				io.emit('sendBlock', reply);
+				io.emit('blockCreated', reply);
 			});
     		flag1 = false; 
 		}
@@ -27,17 +29,20 @@ async.whilst(
 			setTimeout(callback, 1000);
 		}
 
-		if(new Date().getMinutes() === 55 && new Date().getSeconds === 0){
+		if(new Date().getMinutes() === 55 && new Date().getSeconds() === 0){
 			flag2 = true;
 		}
-				if(new Date().getMinutes() === 2 && new Date().getSeconds() === 0 && flag2){
+		if(new Date().getMinutes() === 49 && new Date().getSeconds() === 0 && flag2){
 			setTimeout(callback, 1000);
 			console.log("selectBlock");
-			/*blockMaker((reply)=>{
-				//console.log(reply);
-				fs.writeFileSync("./clients/GovernmentNode/block.json",JSON.stringify(reply,undefined,2));
-				io.emit('sendBlock', reply);
-			});*/
+			
+			selectBlock((block)=>{
+				console.log(block);
+				updateDB(block, (reply) => {
+					console.log(reply)
+				})
+				io.emit('blockSelected', block);
+			});
     		flag2 = false; 
 		}
 		else{
