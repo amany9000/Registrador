@@ -79,7 +79,7 @@ var blockMaker = async (callback) => {
 					//create signature
 					var signature  = blockSigCreate(blockCreated);
 					blockCreated["signature"] = signature; 
-					fs.writeFileSync("./transactionElement.json", JSON.stringify(transElementList));
+					fs.writeFileSync("./transactionElement.json", JSON.stringify(transElementList,undefined,2));
 					return callback(blockCreated);
 				}
 			});

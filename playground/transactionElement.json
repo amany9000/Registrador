@@ -1,1 +1,17 @@
-[{"priority":0,"transaction":{"class":"transaction","timeStamp":1456,"landID":"land2345","from":["User2"],"to":["User1"],"amount":9012321113}}]
+[
+  {
+    "priority": 0,
+    "transaction": {
+      "class": "transaction",
+      "timeStamp": 1456,
+      "landID": "land2345",
+      "from": [
+        "User2"
+      ],
+      "to": [
+        "User1"
+      ],
+      "amount": 9012321113
+    }
+  }
+]
