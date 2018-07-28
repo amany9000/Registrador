@@ -40,9 +40,41 @@ const askUser = async () => {
 
   rl.question('Send message: ', message => {
     // Broadcast to peers
-
-    for (let id in peers) {
-      peers[id].conn.write(JSON.stringify({"text" :message, "me" : myId.toString("hex")},undefined,2))
+    if(message == 't'){
+      for (let id in peers) {
+      peers[id].conn.write(JSON.stringify({
+      class: "transaction",
+      data: {
+          class: "transaction",
+          timestamp: "1234345",
+          landID : "land23",
+          from: ["User2"],
+          to: ["User1"],
+          amount: "12345",
+        },
+      buyerSignature: "sig1",
+      selerSignature: "sig2",
+      },undefined,2))}
+    }
+      else{
+      for (let id in peers) {        
+        peers[id].conn.write(JSON.stringify({
+        class: "block",
+        header: {
+          blockHeight: 570,
+          hashPrevBlock: "c9e6d5695a81e3eab3573b5d4454ada5deb1272af7fa2e8af555b8a4876d6ff6",
+          hashMerkleRoot: "8D21EE9C2FB680B63159B3FC53EEEF27A6C214814A92BDDD44F3AC393DCD1FBE",
+          blockTimeStamp: 1532701980760
+        },
+        transactionCount: 3,
+        transactionList: [
+          "{\n  \"class\": \"transaction\",\n  \"timeStamp\": 1234563425,\n  \"landID\": \"land23\",\n  \"from\": [\n    \"User2\",\n    \"User4\"\n  ],\n  \"to\": [\n    \"User2\"\n  ],\n  \"amount\": 123213\n}",
+          "{\n  \"class\": \"transaction\",\n  \"timeStamp\": 1232452,\n  \"landID\": \"land45\",\n  \"from\": [\n    \"User3\"\n  ],\n  \"to\": [\n    \"User1\"\n  ],\n  \"amount\": 1232\n}",
+          "{\n  \"class\": \"transaction\",\n  \"timeStamp\": 123456,\n  \"landID\": \"land67\",\n  \"from\": [\n    \"User1\"\n  ],\n  \"to\": [\n    \"User2\"\n  ],\n  \"amount\": 123211213\n}"
+        ],
+        blockGenerator: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0gv4+6ExB1KFh6AjTv5N\nVjUirfA39/bikodnmWQdsrBcCclLS2avt262M4DoWPiSgjB78be2AH4qwk2Lz7xe\ny3A+smCPfLaA5hUbwYfW1pfmrgMqXUEmpQ95vTPG21lZ246xk7Ozej4pABKlQeJw\nmZszKF5H5rI7S4XGAfpYK56163hefIQuhXmAz/ncUaLBCzxL0rS8yYyudC5z1OYd\n9Jl/KVWKJn+KvzO/jJ3FWrGA759jhdf+c8j9PJHI7uq5kVbOvCxXAgw7VzrcGOao\nWN3+Yn7ZComWS2NdDG5iTp/sZhPKxuJGc9GhIh7AA5iRQvNOuFYtmnEdQFJey2ds\nQwIDAQAB\n-----END PUBLIC KEY-----\n",
+        signature: "p3DZJ/0WNB8+XQrm+q6rU+U5uD0dF4gkWB/YITD+IxYLYuymuCjHpmCds136g3OMYM5h9krgE26zmEdiiVqThQzYuchJ/kLrnZ+2m8GV1bgxdo39KTFKq70AZrYGuPdQHTDSJdSkcIvVrdzMNrxYWXSUkrVTgfT4PoIAWqLrpvZRFQ1uxMN9C6qLEdH/LaYHxxsFzMPejZfIMdXome2LrqQBu29rv7S8AcJ22ojR7VLdG4F74jVkmjzlBNXrQsqUMKzsFBDxZMs7yqqKU4D1m3VsgSkOI6RQCNy+1A2VQcGAQa13NdY1C7BamAptUrHJJlZ5KKb2I8pJLxN4U41GQw=="
+      },undefined,2))}        
     }    
     rl.close()
     rl = undefined

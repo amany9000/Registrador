@@ -15,7 +15,7 @@ var blockVerify = async (receivedBlock, callback) => {
 	// timestamp shouldn't be greater than the current value  	
 	var currentTime = new Date().getTime();	
 	if(receivedBlock == null || receivedBlock.header == null || receivedBlock.header.blockTimeStamp == null || currentTime < receivedBlock.header.blockTimeStamp )
-		return callback("Timestamp isn't correct");
+		return callback("Timestamp isn't correct yo");
 
 	// verify transactionCount is equal to length of transactionlist 
 	else if(receivedBlock.transactionList.length != receivedBlock.transactionCount)

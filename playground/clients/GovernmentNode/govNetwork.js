@@ -9,6 +9,7 @@ const fs  = require("fs");
 const async = require("async");
 
 const {blockVerify} = require("./blockVerify");   
+var {transactionVerify} = require("./transactionVerify")
 const peers = {}
 // Counter for connections, used to identify connections
 let connSeq = 0
@@ -56,7 +57,7 @@ const sw = Swarm(config)
   sw.listen(port)
   console.log('Listening to port: ' + port)
   
-  var lastHeight = 568;
+  var lastHeight = 569;
   const port2 = await getPort();
 io.listen(port2);
 console.log('listening on port ', port2);
@@ -86,9 +87,9 @@ await sw.join('rohandhoot')
       fs.writeFileSync("./clients/GovernmentNode/boolean.log","");
     }
     else{
-    if(new Date().getMinutes() === 49 && new Date().getSeconds() === 0){
+    if(new Date().getMinutes() === 57 && new Date().getSeconds() === 0){
       if(lastHeight + 1 === block.header.blockHeight){
-        console.log("dhun dhun dhun 143");
+        console.log("dhun dhun dhun 143", block);
         var count = 0;
         for (let id in peers) {
           peers[id].conn.write(JSON.stringify(block,undefined,2))
@@ -120,18 +121,17 @@ await sw.join('rohandhoot')
     conn.on('data', data => {
 
       // Here we handle incomming messages
-      var message = JSON.parse(data,undefined,2);
+      var message = JSON.parse(data);
       log(
         'Received Message from peerzzz ' + peerId,
-        '----> ' + message
+        '----> ' + data
       )
-      /*
       if(message.class ==  "block"){
-        blockVerify(data, (reply) => {
+        blockVerify(message, (reply) => {
           console.log(reply);
           
           if(!reply.header){
-            console.log("block not verified");
+            console.log("block not correct");
           }
           else{
           var receivedBlocks = JSON.parse(fs.readFileSync("./clients/GovernmentNode/receivedBlocks.json").toString());  
@@ -141,18 +141,47 @@ await sw.join('rohandhoot')
         });
       }
       else if(message.class == "transaction"){ 
+        if(Boolean(fs.readFileSync("./clients/GovernmentNode/halted.log").toString())){
+          var haltedList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/haltedList.json").toString());          
+          haltedList.every((trans) =>{
+            transactionVerify(trans, (reply) => {
+              for (let id in peers) {
+              peers[id].conn.write(JSON.stringify(tr,undefined,2))
+              }              
+            })
+          });
+          fs.writeFileSync("./clients/GovernmentNode/halted.log","");
+          fs.writeFileSync("./clients/GovernmentNode/haltedList.json","");          
+        }
         if(new Date().getMinutes() >= 59 && new Date.getSeconds >= 30){
-          var haltedList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/haltedList.json").toString());  
-          haltedList.push(message)
-          fs.appendFileSync("./clients/GovernmentNode/halstedList.json", JSON.stringify(haltedList,undefined,2));
+          transactionVerify(message, (reply) => {
+            if(reply.class !== "transaction"){
+              console.log("Transaction not correct");
+            }
+            else{
+              var haltedList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/haltedList.json").toString());  
+              haltedList.push(message)
+              fs.appendFileSync("./clients/GovernmentNode/halstedList.json", JSON.stringify(haltedList,undefined,2));              
+            }
+          })
         }
         else{
-          var transactionList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionList.json").toString());  
-          transactionList.push(message)
-          fs.appendFileSync("./clients/GovernmentNode/transactionList.json", JSON.stringify(transactionList,undefined,2));
+          transactionVerify(message, (reply) => {
+            if(reply.class !== "transaction"){
+              console.log("Transaction not correct");
+            }
+            else{
+              var transactionList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionList.json").toString());  
+              var pedingList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString());                
+              transactionList.push(message)
+              pedingList.push(message.landID);
+              fs.appendFileSync("./clients/GovernmentNode/transactionList.json", pedingList);              
+              fs.appendFileSync("./clients/GovernmentNode/transactionList.json", JSON.stringify(transactionList,undefined,2));
+            }
+          })
         }
         io.emit('getTransaction', data.toString());
-      } */
+      } 
     })
     
     conn.on('close', () => {
@@ -174,9 +203,6 @@ await sw.join('rohandhoot')
 
   })
 
-  //send(a)  
-                for (let id in peers) {
- peers[id].conn.write(JSON.stringify({"text" : "lol", "me" : myId.toString("hex")},undefined,2))    }
-
+  
 })()
 

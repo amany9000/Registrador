@@ -5,6 +5,7 @@ const io = require('socket.io')();
 
 const {blockMaker} = require("./blockMaker");
 const {selectBlock} = require("./selectBlock")
+var {transactionVerify} = require("./transactionVerify")
 
 var flag1 = true;
 var flag2 = true;
@@ -35,6 +36,10 @@ async.whilst(
 			selectBlock((reply)=>{
 				console.log(reply);
 				io.emit('blockSelected', reply);
+				fs.writeFileSync("./clients/GovernmentNode/transactionList.json",[]);					
+				fs.writeFileSync("./clients/GovernmentNode/halted.log","true");
+				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",[]);
+				// transaction element and pending list	
 			});
     		flag2 = false;
 		}
