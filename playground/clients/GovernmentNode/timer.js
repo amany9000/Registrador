@@ -33,13 +33,38 @@ async.whilst(
 			setTimeout(callback, 1000);
 			console.log("selectBlock");
 			
-			selectBlock((reply)=>{
+			selectBlock((block, reply)=>{
 				console.log(reply);
-				io.emit('blockSelected', reply);
+				io.emit('blockSelected', block);
 				fs.writeFileSync("./clients/GovernmentNode/transactionList.json",[]);					
 				fs.writeFileSync("./clients/GovernmentNode/halted.log","true");
 				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",[]);
-				// transaction element and pending list	
+				// transaction element and pending list
+ 				var transElementList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionElement.json").toString());				 
+ 				for(var i in transElementList){
+ 					var flag3 = false;
+ 					for(var j in block.transactionList){
+ 						if(transElementList[i].transaction.data.landID === block.transactionList[j]){
+ 							flag3 = true;
+ 						}
+ 					}
+ 					if(!flag3){
+ 						transElementList.pop(transElementList[i]);
+ 					}
+ 				}
+ 				
+ 				var pendingList = fs.readFileSync("./clients/GovernmentNode/pendingList.json").toString();				 
+				for(var i in pendingList){
+					var flag4 = false;
+					for(var j in transElementList){
+						if(pendingList[i] == transElementList[i].transaction.landID){
+							flag4 = true;
+						}
+					}
+					if(flag3){
+						pendingList.pop(pendingList[i])
+					}
+				}
 			});
     		flag2 = false;
 		}

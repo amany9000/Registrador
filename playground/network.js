@@ -45,9 +45,8 @@ const askUser = async () => {
       peers[id].conn.write(JSON.stringify({
       class: "transaction",
       data: {
-          class: "transaction",
-          timestamp: "1234345",
-          landID : "land23",
+          timeStamp: "1234345",
+          landID : "land2345",
           from: ["User2"],
           to: ["User1"],
           amount: "12345",

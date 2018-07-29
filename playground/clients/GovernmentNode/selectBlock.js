@@ -45,8 +45,8 @@ var selectBlock = (callback) =>{
 		}
 	}
 	console.log(selectedBlockElement)
-	updateDB(selectedBlockElement , (reply) => {
-		return callback(reply)
+	updateDB(selectedBlockElement.block, (reply) => {
+		return callback(selectedBlockElement.block, reply)
 	})	
 }
 /*

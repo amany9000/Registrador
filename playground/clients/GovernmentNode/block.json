@@ -1,17 +1,1 @@
-{
-  "class": "block",
-  "header": {
-    "blockHeight": 570,
-    "hashPrevBlock": "c9e6d5695a81e3eab3573b5d4454ada5deb1272af7fa2e8af555b8a4876d6ff6",
-    "hashMerkleRoot": "8D21EE9C2FB680B63159B3FC53EEEF27A6C214814A92BDDD44F3AC393DCD1FBE",
-    "blockTimeStamp": 1532723580367
-  },
-  "transactionCount": 3,
-  "transactionList": [
-    "{\n  \"class\": \"transaction\",\n  \"timeStamp\": 1234563425,\n  \"landID\": \"land23\",\n  \"from\": [\n    \"User2\",\n    \"User4\"\n  ],\n  \"to\": [\n    \"User2\"\n  ],\n  \"amount\": 123213\n}",
-    "{\n  \"class\": \"transaction\",\n  \"timeStamp\": 1232452,\n  \"landID\": \"land45\",\n  \"from\": [\n    \"User3\"\n  ],\n  \"to\": [\n    \"User1\"\n  ],\n  \"amount\": 1232\n}",
-    "{\n  \"class\": \"transaction\",\n  \"timeStamp\": 123456,\n  \"landID\": \"land67\",\n  \"from\": [\n    \"User1\"\n  ],\n  \"to\": [\n    \"User2\"\n  ],\n  \"amount\": 123211213\n}"
-  ],
-  "blockGenerator": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0gv4+6ExB1KFh6AjTv5N\nVjUirfA39/bikodnmWQdsrBcCclLS2avt262M4DoWPiSgjB78be2AH4qwk2Lz7xe\ny3A+smCPfLaA5hUbwYfW1pfmrgMqXUEmpQ95vTPG21lZ246xk7Ozej4pABKlQeJw\nmZszKF5H5rI7S4XGAfpYK56163hefIQuhXmAz/ncUaLBCzxL0rS8yYyudC5z1OYd\n9Jl/KVWKJn+KvzO/jJ3FWrGA759jhdf+c8j9PJHI7uq5kVbOvCxXAgw7VzrcGOao\nWN3+Yn7ZComWS2NdDG5iTp/sZhPKxuJGc9GhIh7AA5iRQvNOuFYtmnEdQFJey2ds\nQwIDAQAB\n-----END PUBLIC KEY-----\n",
-  "signature": "GrGqoXDsAT492QEdT00JF6glDN8cQHuVuT5Arh1H7RayiiWregLLrr86UKEBytVb19iRgWHH4+B3SjssNzJBaoVowAxWu7s0lh349GyKS6W15llQrKyCfGAQ+8GmtGItPXhJ1D5CIdTmTGie6Ew3g/hd4QMYsSpoXjbj325SXYLwd72jai/fWue/+1ciMWsYg6ZM/aexQd8u2wBPdahNEmyuZcFtAN4Z2UCyeCFA4Wex0X25s65gAOWbNxqgIJTPZJC8QZeUARSwgvRc8qQgkIopu+vH/HiqThDKjCvqmQwsU4WCs2n0mYulkd2MkUrJCQ05Ywt2APrZtgYS3oxILw=="
-}
+{}

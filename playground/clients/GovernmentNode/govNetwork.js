@@ -153,7 +153,7 @@ await sw.join('rohandhoot')
           fs.writeFileSync("./clients/GovernmentNode/halted.log","");
           fs.writeFileSync("./clients/GovernmentNode/haltedList.json","");          
         }
-        if(new Date().getMinutes() >= 59 && new Date.getSeconds >= 30){
+        if(new Date().getMinutes() >= 59 && new Date().getSeconds >= 30){
           transactionVerify(message, (reply) => {
             if(reply.class !== "transaction"){
               console.log("Transaction not correct");
@@ -161,22 +161,24 @@ await sw.join('rohandhoot')
             else{
               var haltedList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/haltedList.json").toString());  
               haltedList.push(message)
-              fs.appendFileSync("./clients/GovernmentNode/halstedList.json", JSON.stringify(haltedList,undefined,2));              
+              fs.appendFileSync("./clients/GovernmentNode/haltedList.json", JSON.stringify(haltedList,undefined,2));              
             }
           })
         }
         else{
-          transactionVerify(message, (reply) => {
-            if(reply.class !== "transaction"){
+          transactionVerify([message], (reply) => {
+            console.log(reply)
+            if(!reply[0]){
               console.log("Transaction not correct");
             }
             else{
               var transactionList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionList.json").toString());  
-              var pedingList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString());                
+              var pendingList = (fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString()).split(",");                
               transactionList.push(message)
-              pedingList.push(message.landID);
-              fs.appendFileSync("./clients/GovernmentNode/transactionList.json", pedingList);              
-              fs.appendFileSync("./clients/GovernmentNode/transactionList.json", JSON.stringify(transactionList,undefined,2));
+              console.log(pendingList, pendingList.length)
+              pendingList.push(message.data.landID);
+              fs.writeFileSync("./clients/GovernmentNode/pendingList.log", pendingList);              
+              fs.writeFileSync("./clients/GovernmentNode/transactionList.json", JSON.stringify(transactionList,undefined,2));
             }
           })
         }

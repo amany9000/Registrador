@@ -7,7 +7,7 @@ var transactionVerify = async (transactionList, callback) => {
 	var trans = [];
 	var owners = [];
 	var buyers = [];
-	console.log("trans",transactionList)
+	//console.log("trans",transactionList)
 	/*for(var i in transactionList){
 		transactionList[i] = JSON.parse(transactionList[i]); 
 	}*/
@@ -25,21 +25,21 @@ var transactionVerify = async (transactionList, callback) => {
 		var transaction = transactionList[i];
 		// timeStamp is less than the current time
 		var currentTime = new Date().getTime();	
-		if(transaction.timeStamp == undefined || transaction.timeStamp === null || currentTime < transaction.timeStamp ){
+		if(transaction.data.timeStamp == undefined || transaction.data.timeStamp === null || currentTime < transaction.data.timeStamp ){
 			returnBool[i] = false;
-			console.log("Timestamp isn't correct");
+			console.log("Timestamp isn't correct",transaction.data);
         }
 		
-		if(transaction.landID== undefined || transaction.landID == null){
+		if(transaction.data.landID== undefined || transaction.data.landID == null){
 			returnBool[i] = false;			
 		}
-		if(transaction.from== undefined || transaction.from == null || transaction.from.length == 0){
+		if(transaction.data.from== undefined || transaction.data.from == null || transaction.data.from.length == 0){
 			returnBool[i] = false;
 		}
-		if(transaction.to== undefined || transaction.to == null || transaction.to.length == 0){
+		if(transaction.data.to== undefined || transaction.data.to == null || transaction.data.to.length == 0){
 			returnBool[i] = false;			
 		}
-		if(transaction.class != "transaction" || transaction.amount == undefined || transaction.amount == null){
+		if(transaction.class != "transaction" || transaction.data.amount == undefined || transaction.data.amount == null){
 			returnBool[i] = false;
 		}
 		trans.push(transaction);
@@ -50,22 +50,22 @@ var transactionVerify = async (transactionList, callback) => {
 			}*/
 
 		
-		landIDs.push(transaction.landID);
+		landIDs.push(transaction.data.landID);
 		
-		for(var j in transaction.from){
-			if(owners.indexOf(transaction.from[j]) == -1)
-				owners.push(transaction.from[j]);
+		for(var j in transaction.data.from){
+			if(owners.indexOf(transaction.data.from[j]) == -1)
+				owners.push(transaction.data.from[j]);
 		}
 		
-		for(var j in transaction.to){
-			if(buyers.indexOf(transaction.to[j]) == -1)
-				buyers.push(transaction.to[j]);
+		for(var j in transaction.data.to){
+			if(buyers.indexOf(transaction.data.to[j]) == -1)
+				buyers.push(transaction.data.to[j]);
 		}		
 	}
 
 		// land exits in the db and is owned by the "from" users
 	await getLand(landIDs, (landList) => {
-		
+							//console.log("HEYYYYYYYY",landList)
 		var validTrans = false;
 		if(!landList || landList.length == 0){
 			return callback(returnBool.fill(false,0))
@@ -77,7 +77,7 @@ var transactionVerify = async (transactionList, callback) => {
 				continue;
 			validTrans = false;
 			for(var j in landList){
-				if(trans[i].landID == landList[j].id && (trans[i].from.every((u,k) => {return u == landList[j].owner[k]}))){
+				if(trans[i].data.landID == landList[j].id && (trans[i].data.from.every((u,k) => {return u == landList[j].owner[k]}))){
 					validTrans = true;
 					break;
 				}
@@ -92,7 +92,6 @@ var transactionVerify = async (transactionList, callback) => {
 	// "from" users exist and (jointly) own the land
 	await getUser(owners, (userList) => {
 		
-
 		if(!userList || userList.length == 0){
 			return callback(returnBool.fill(false,0));
 			console.log("Seller(s) not found");				
@@ -103,10 +102,10 @@ var transactionVerify = async (transactionList, callback) => {
 				continue;
 			var validTrans = true;
 			
-			for(var j in trans[i].from){
+			for(var j in trans[i].data.from){
 				var validseller = false;
 				for(var k in userList){
-					if(trans[i].from[j] == userList[k].publicKey && (userList[k].currentAssets.includes(trans[i].landID))){
+					if(trans[i].data.from[j] == userList[k].publicKey && (userList[k].currentAssets.includes(trans[i].data.landID))){
 						validseller = true;
 						break;
 					}
@@ -138,10 +137,10 @@ var transactionVerify = async (transactionList, callback) => {
 				if(!returnBool[i])
 					continue;
 				var validTrans = true;
-				for(var j in trans[i].to){
+				for(var j in trans[i].data.to){
 					var validBuyer = false;
 					for(var k in userList){
-						if(trans[i].to[j] === userList[k].publicKey){
+						if(trans[i].data.to[j] === userList[k].publicKey){
 							validBuyer = true;
 							break;
 						}
@@ -161,21 +160,34 @@ var transactionVerify = async (transactionList, callback) => {
 	return callback(returnBool);
 }
 /*
-transactionVerify([{
-			class: "transaction",
-			timeStamp: 31456,
-			landID: "land2345",
-			from: ["User1"],
-			to: ["User2"],
-			amount: 90123213 
-		},{
-			class: "transaction",
-			timeStamp: 12345,
-			landID: "land67",
-			from: ["User2"],
-			to: ["User1"],
-			amount: 345 
-		}],(reply) => {
+transactionVerify([{ class: 'transaction',
+    data:
+     { timeStamp: '1234345',
+       landID: 'land2345',
+       from: ["User2"],
+       to: ["User1"],
+       amount: '12345' },
+    buyerSignature: 'sig1',
+    selerSignature: 'sig2' } ,{ class: 'transaction',
+    data:
+     { timeStamp: '1234345',
+       landID: 'land67',
+       from: ["User1"],
+       to: ["User2"],
+       amount: '12345' },
+    buyerSignature: 'sig1',
+    selerSignature: 'sig2' },{
+      class: "transaction",
+      data: {
+          timeStamp: "1234345",
+          landID : "land2345",
+          from: ["User2"],
+          to: ["User1"],
+          amount: "12345",
+        },
+      buyerSignature: "sig1",
+      selerSignature: "sig2",
+      } ],(reply) => {
 	console.log("rep",reply);
 });
 */
