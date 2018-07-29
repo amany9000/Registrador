@@ -8,14 +8,14 @@ var {getMerkleTree} = require("./../merkle");
 var	{transactionVerify} = require("./transactionVerify")
 var {blockSigVerify} = require("./governmentNodeSig")
 
-var hash = crypto.createHash('sha256');
 
 var blockVerify = async (receivedBlock, callback) => {
+var hash = crypto.createHash('sha256');
 		
 	// timestamp shouldn't be greater than the current value  	
 	var currentTime = new Date().getTime();	
 	if(receivedBlock == null || receivedBlock.header == null || receivedBlock.header.blockTimeStamp == null || currentTime < receivedBlock.header.blockTimeStamp )
-		return callback("Timestamp isn't correct yo");
+		return callback("Timestamp isn't correct ");
 
 	// verify transactionCount is equal to length of transactionlist 
 	else if(receivedBlock.transactionList.length != receivedBlock.transactionCount)
@@ -31,8 +31,8 @@ var blockVerify = async (receivedBlock, callback) => {
 			else if(User[0].type != 'GovNode'){
 				return callback("BlockGenerator is Not a Government Node");
 			}
-		});
-		
+			
+			else{
 		// verify signature
 		if(!blockSigVerify(receivedBlock))
 			return callback("Signature Not Valid");
@@ -40,7 +40,7 @@ var blockVerify = async (receivedBlock, callback) => {
 		else {
 
 			// current block's height shouldn't be in the db or higher
-			await block.find().sort("-header.blockHeight").exec( (err,Block) => {
+			block.find().sort("-header.blockHeight").exec( (err,Block) => {
 
 				if(!Block){
 					return callback("No blocks found");
@@ -60,19 +60,39 @@ var blockVerify = async (receivedBlock, callback) => {
 				}
 			});
 			// hash of merkle root of transactions should be verified
-			await getMerkleTree(receivedBlock.transactionList,(tree) => {
-				if(receivedBlock.header.hashMerkleRoot != tree.root())
+			var transList = [];
+			for(var i in receivedBlock.transactionList){
+				transList.push(JSON.parse(receivedBlock.transactionList[i]))
+			}
+			getMerkleTree(transList,(tree) => {
+				if(receivedBlock.header.hashMerkleRoot != tree.root()){
+					console.log(receivedBlock.header.hashMerkleRoot, tree.root())
 					return callback("Hash of merkel root of transactions, didn't match");
+				}	
 			});
 
 			// Verify each transaction
-			await transactionVerify(receivedBlock.transactionList, (reply)=>{
-
-				if(reply == "verified"){
-					return callback("verified");
+			var transList = [];
+			for(var i in receivedBlock.transactionList){
+				transList.push(JSON.parse(receivedBlock.transactionList[i]))
+			}
+			transactionVerify(transList, (reply)=>{
+				console.log("trans",reply)
+				var flag = true;
+				for(var i in reply){
+					if(!reply[i]){
+						flag = false;
+						break;
+					}
+					if(flag)
+						return callback("verified")
+					else
+						return callback("Transaction List not correct")
 				}
 			});
 		}
+		}
+	});
 	}	
 }
 

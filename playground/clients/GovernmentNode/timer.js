@@ -44,16 +44,16 @@ async.whilst(
  				for(var i in transElementList){
  					var flag3 = false;
  					for(var j in block.transactionList){
- 						if(transElementList[i].transaction.data.landID === block.transactionList[j]){
+ 						if(JSON.stringify(transElementList[i].transaction.data.landID, undefined, 2) === block.transactionList[j]){
  							flag3 = true;
  						}
  					}
- 					if(!flag3){
+ 					if(flag3){
  						transElementList.pop(transElementList[i]);
  					}
  				}
- 				
- 				var pendingList = fs.readFileSync("./clients/GovernmentNode/pendingList.json").toString();				 
+			fs.writeFileSync("./transactionElement.json", JSON.stringify(transElementList,undefined,2)); 				
+            var pendingList = (fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString()).split(",");                
 				for(var i in pendingList){
 					var flag4 = false;
 					for(var j in transElementList){
@@ -61,10 +61,11 @@ async.whilst(
 							flag4 = true;
 						}
 					}
-					if(flag3){
+					if(!flag4){
 						pendingList.pop(pendingList[i])
 					}
 				}
+			fs.writeFileSync("./clients/GovernmentNode/pendingList.log", pendingList);              
 			});
     		flag2 = false;
 		}

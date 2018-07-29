@@ -1,4 +1,5 @@
 
+const fs = require("fs");
 var {getLand, getUser} = require("./db/getDoc");
 
 var transactionVerify = async (transactionList, callback) => {
@@ -12,13 +13,20 @@ var transactionVerify = async (transactionList, callback) => {
 		transactionList[i] = JSON.parse(transactionList[i]); 
 	}*/
 	var returnBool = Array(transactionList.length).fill(true);
+    var pendingList = (fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString()).split(",");                
+	for(var i in transactionList){
+		for(j in pendingList){
+			if(transactionList[i].data.landID === pendingList[j]){
+				returnBool[i] = false;
+				break;
+			}
+		}
+	}	
 	if(!Array.isArray(transactionList) || transactionList.length == 0){
 		console.log("Transaction not present");
 		return callback(returnBool.fill(false,0));
 	}	
-	
 	for (var i in transactionList){
-		
 		if(!returnBool){
 			continue;
 		}
@@ -62,7 +70,6 @@ var transactionVerify = async (transactionList, callback) => {
 				buyers.push(transaction.data.to[j]);
 		}		
 	}
-
 		// land exits in the db and is owned by the "from" users
 	await getLand(landIDs, (landList) => {
 							//console.log("HEYYYYYYYY",landList)
