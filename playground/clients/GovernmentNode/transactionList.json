@@ -1,15 +1,98 @@
-[{
-	"class": "transaction",
-	"timeStamp": 1456,
-	"landID": "land2345",
-	"from": ["User2"],
-	"to": ["User1"],
-	"amount": 9012321113 
-},{
-	"class": "transaction",
-	"timeStamp": 123456,
-	"landID": "land67",
-	"from": ["User1"],
-	"to": ["User2"],
-	"amount": 123211213 
-}]
+[
+  {
+    "class": "transaction",
+    "data": {
+      "timeStamp": "1234345",
+      "landID": "land2345",
+      "from": [
+        "User2"
+      ],
+      "to": [
+        "User1"
+      ],
+      "amount": "12345"
+    },
+    "buyerSignature": "sig1",
+    "selerSignature": "sig2"
+  },
+  {
+    "class": "transaction",
+    "data": {
+      "timeStamp": "1234345",
+      "landID": "land2345",
+      "from": [
+        "User2"
+      ],
+      "to": [
+        "User1"
+      ],
+      "amount": "12345"
+    },
+    "buyerSignature": "sig1",
+    "selerSignature": "sig2"
+  },
+  {
+    "class": "transaction",
+    "data": {
+      "timeStamp": "1234345",
+      "landID": "land2345",
+      "from": [
+        "User2"
+      ],
+      "to": [
+        "User1"
+      ],
+      "amount": "12345"
+    },
+    "buyerSignature": "sig1",
+    "selerSignature": "sig2"
+  },
+  {
+    "class": "transaction",
+    "data": {
+      "timeStamp": "1234345",
+      "landID": "land2345",
+      "from": [
+        "User2"
+      ],
+      "to": [
+        "User1"
+      ],
+      "amount": "12345"
+    },
+    "buyerSignature": "sig1",
+    "selerSignature": "sig2"
+  },
+  {
+    "class": "transaction",
+    "data": {
+      "timeStamp": "1234345",
+      "landID": "land2345",
+      "from": [
+        "User2"
+      ],
+      "to": [
+        "User1"
+      ],
+      "amount": "12345"
+    },
+    "buyerSignature": "sig1",
+    "selerSignature": "sig2"
+  },
+  {
+    "class": "transaction",
+    "data": {
+      "timeStamp": "1234345",
+      "landID": "land2345",
+      "from": [
+        "User2"
+      ],
+      "to": [
+        "User1"
+      ],
+      "amount": "12345"
+    },
+    "buyerSignature": "sig1",
+    "selerSignature": "sig2"
+  }
+]

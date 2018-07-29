@@ -5,6 +5,7 @@ const io = require('socket.io')();
 
 const {blockMaker} = require("./blockMaker");
 const {selectBlock} = require("./selectBlock")
+var {transactionVerify} = require("./transactionVerify")
 
 var flag1 = true;
 var flag2 = true;
@@ -32,9 +33,39 @@ async.whilst(
 			setTimeout(callback, 1000);
 			console.log("selectBlock");
 			
-			selectBlock((reply)=>{
+			selectBlock((block, reply)=>{
 				console.log(reply);
-				io.emit('blockSelected', reply);
+				io.emit('blockSelected', block);
+				fs.writeFileSync("./clients/GovernmentNode/transactionList.json",[]);					
+				fs.writeFileSync("./clients/GovernmentNode/halted.log","true");
+				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",[]);
+				// transaction element and pending list
+ 				var transElementList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionElement.json").toString());				 
+ 				for(var i in transElementList){
+ 					var flag3 = false;
+ 					for(var j in block.transactionList){
+ 						if(JSON.stringify(transElementList[i].transaction.data.landID, undefined, 2) === block.transactionList[j]){
+ 							flag3 = true;
+ 						}
+ 					}
+ 					if(flag3){
+ 						transElementList.pop(transElementList[i]);
+ 					}
+ 				}
+			fs.writeFileSync("./transactionElement.json", JSON.stringify(transElementList,undefined,2)); 				
+            var pendingList = (fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString()).split(",");                
+				for(var i in pendingList){
+					var flag4 = false;
+					for(var j in transElementList){
+						if(pendingList[i] == transElementList[i].transaction.landID){
+							flag4 = true;
+						}
+					}
+					if(!flag4){
+						pendingList.pop(pendingList[i])
+					}
+				}
+			fs.writeFileSync("./clients/GovernmentNode/pendingList.log", pendingList);              
 			});
     		flag2 = false;
 		}
