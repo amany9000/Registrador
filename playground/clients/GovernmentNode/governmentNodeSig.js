@@ -26,7 +26,7 @@ var data = b64u.encode(JSON.stringify(cloneBlock));
 const verifySeller = crypto.createVerify('SHA256');
 verifySeller.update(data);
 
-const match = verifySeller.verify(myPublicKey, signatureRecieved, 'base64');
+const match = verifySeller.verify(block.blockGenerator, signatureRecieved, 'base64');
 console.log("match "+match);
 return match;
 }
@@ -34,16 +34,20 @@ return match;
 var transSigVerify = (trans) => {
 // Verify the signature
 
-var signatureRecieved = trans.signature;
-var cloneTrans = JSON.parse(JSON.stringify(trans));
-delete cloneTrans["signature"];
-var data = b64u.encode(JSON.stringify(cloneTrans));
+var buyerSignatureRecieved = trans.buyerSignature;
+var sellerSignatureRecieved = trans.sellerSignature;
+
+var data = b64u.encode(JSON.stringify(trans.data));
+
 const verifySeller = crypto.createVerify('SHA256');
 verifySeller.update(data);
+const sellerMatch = verifySeller.verify(trans.data.from, sellerSignatureRecieved, 'base64');
 
-const match = verifySeller.verify(myPublicKey, signatureRecieved, 'base64');
-console.log("match "+match);
-return match;
+const verifyBuyer = crypto.createVerify('SHA256');
+verifyBuyer.update(data);
+const buyerMatch = verifyBuyer.verify(trans.data.to, buyerSignatureRecieved, 'base64');
+
+return sellerMatch && buyerMatch;
 }
 /*
 console.log(blockSigCreate({
