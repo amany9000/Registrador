@@ -1,7 +1,6 @@
 {
     "class": "escrowTransaction",
     "data": {
-        "class": "escrowTransaction",
         "timestamp": "",
         "landID" : "",
         "from": [""],
