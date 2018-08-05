@@ -72,8 +72,31 @@ var escrowTransSigVerify = (trans) => {
   const escrowMatch = verifyEscrow.verify(trans.data.escrow, escrowSignatureRecieved, 'base64');
 
   return sellerMatch && buyerMatch && escrowMatch;
-  }
+}
 
+var joinTransSigVerify = (trans) => {
+  // Verify the signature
+  
+  var buyerSignatureRecieved = trans.buyerSignature;
+  var seller1SignatureRecieved = trans.sellerSignature1;
+  var seller2SignatureRecieved = trans.sellerSignature2;
+  
+  var data = b64u.encode(JSON.stringify(trans.data));
+  
+  const verifySeller1 = crypto.createVerify('SHA256');
+  verifySeller1.update(data);
+  const sellerMatch1 = verifySeller1.verify(trans.data.from1, seller1SignatureRecieved, 'base64');
+  
+  const verifySeller2 = crypto.createVerify('SHA256');
+  verifySeller2.update(data);
+  const sellerMatch2 = verifySeller2.verify(trans.data.from2, seller2SignatureRecieved, 'base64');
+  
+  const verifyBuyer = crypto.createVerify('SHA256');
+  verifyBuyer.update(data);
+  const buyerMatch = verifyBuyer.verify(trans.data.to, buyerSignatureRecieved, 'base64');
+
+  return sellerMatch1 && sellerMatch2 && buyerMatch;
+}
 
 /*
 console.log(blockSigCreate({
