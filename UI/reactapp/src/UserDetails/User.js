@@ -33,7 +33,7 @@ class User extends Component{
 			    <div className="bot" style={{
 					background: '#2bbbad'
 				}}>
-             	<h2 className ="Hea" >User queries information page</h2>
+             	<h2 className ="Hea" >User Queries Information Page</h2>
              	</div>
 			    
                <div className ="Desi" >
@@ -46,7 +46,7 @@ class User extends Component{
 			{' '}
 			<Button onClick ={()=> this.handleSub()} style={{ 
 				backgroundColor: '#5d6dfc'
-			}}>
+			},{alignItems:'center'},{justifyContent:'center'},{width:'30px'},{height:'50px'}}>
 			SUBMIT
 			</ Button> 
 			{

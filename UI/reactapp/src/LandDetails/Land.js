@@ -40,7 +40,7 @@ class Land extends Component{
 				 <div className="both" style={{
 					 background: '#2bbbad'
 				 }}>
-             	<h2  className ="Head">Land queries information page</h2>
+             	<h2  className ="Head">Land Queries Information Page</h2>
              	</div>
 
                <div className="Des">
@@ -49,7 +49,7 @@ class Land extends Component{
 			<FormControl style={{ color: 'white' }} type ="text" onChange={event => this.setState({newId:event.target.value})}>
 			</FormControl>
 			{' '}
-			<Button onClick ={()=> this.handleSub()}>
+			<Button  style={{{alignItems:'center'},{justifyContent:'center'},{width:'30px'},{height:'50px'}}} onClick ={()=> this.handleSub()}>
 			SUBMIT
 			</ Button>
 			{
