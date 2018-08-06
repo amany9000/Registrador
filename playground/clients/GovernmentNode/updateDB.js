@@ -19,14 +19,15 @@ var updateDB = async (recievedBlock, callback) =>{
 	var buyerData = []; 
 	for (var i in recievedBlock.transactionList){
 		var trans = JSON.parse(recievedBlock.transactionList[i]);
-		landData.push({buyer: trans.to, landID: trans.landID, amount: trans.amount});
-		sellerData.push({seller: trans.from,landID: trans.landID});
-		buyerData.push({buyer: trans.to,landID:trans.landID});
-		//console.log("main", sellerData[i],buyerData[i]);
-				
+		console.log(trans)
+		landData.push({buyer: trans.data.to, landID: trans.data.landID, amount: trans.data.amount});
+		sellerData.push({seller: trans.data.from,landID: trans.data.landID});
+		buyerData.push({buyer: trans.data.to,landID:trans.data.landID});
+		//console.log("main", sellerData[i],buyerData[i]);			
 	}
-	for(const item of landData){
-		await sold(item, (err, doc) =>{
+	console.log("landData", landData)
+	for(var i in landData){
+		await sold(landData[i], (err, doc) =>{
 			if(err){
 				return callback("Can't update land collection");
 			}
@@ -35,7 +36,7 @@ var updateDB = async (recievedBlock, callback) =>{
 			}				
 		});				 
 	}
-	for(const i in sellerData){
+	for(var i in sellerData){
 		await sellLand(sellerData[i], (err, doc) =>{
 			if(err){
 				return callback("Can't update user collection");

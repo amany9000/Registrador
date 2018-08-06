@@ -29,22 +29,29 @@ async.whilst(
     		flag1 = false; 
 		}
 
-		else if(new Date().getMinutes() === 4 && new Date().getSeconds() === 0 && flag2){
+		else if(new Date().getMinutes() === 57	 /*&& new Date().getSeconds() === 0 */&& flag2){
 			setTimeout(callback, 1000);
 			console.log("selectBlock");
+			fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
 			
 			selectBlock((block, reply)=>{
-				console.log(reply);
+				console.log("rep",reply);
 				io.emit('blockSelected', block);
-				fs.writeFileSync("./clients/GovernmentNode/transactionList.json",[]);					
+				fs.writeFileSync("./clients/GovernmentNode/transactionList.json",JSON.stringify([],undefined,2));					
 				fs.writeFileSync("./clients/GovernmentNode/halted.log","true");
-				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",[]);
+				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",JSON.stringify([],undefined,2));
 				// transaction element and pending list
  				var transElementList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionElement.json").toString());				 
+ 				
+ 				var blockTransList = [];
+ 				for(var i in block.transactionList){
+ 					blockTransList.push(JSON.parse(block.transactionList[i]));
+ 				} 				
  				for(var i in transElementList){
  					var flag3 = false;
- 					for(var j in block.transactionList){
- 						if(JSON.stringify(transElementList[i].transaction.data.landID, undefined, 2) === block.transactionList[j]){
+ 					for(var j in blockTransList){
+ 						if(transElementList[i].transaction.data.landID === blockTransList[j].data.landID){
+ 							console.log("transactionElements");
  							flag3 = true;
  						}
  					}
@@ -52,19 +59,12 @@ async.whilst(
  						transElementList.pop(transElementList[i]);
  					}
  				}
-			fs.writeFileSync("./transactionElement.json", JSON.stringify(transElementList,undefined,2)); 				
-            var pendingList = (fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString()).split(",");                
-				for(var i in pendingList){
-					var flag4 = false;
-					for(var j in transElementList){
-						if(pendingList[i] == transElementList[i].transaction.landID){
-							flag4 = true;
-						}
-					}
-					if(!flag4){
-						pendingList.pop(pendingList[i])
-					}
-				}
+ 			console.log("transactionElement - ", transElementList)
+			fs.writeFileSync("./clients/GovernmentNode/transactionElement.json", JSON.stringify(transElementList,undefined,2)); 				
+            var pendingList = [];                
+			for(var i in transElementList){
+				pendingList.push(transElementList[i].transaction.data.landID);
+			}
 			fs.writeFileSync("./clients/GovernmentNode/pendingList.log", pendingList);              
 			});
     		flag2 = false;
@@ -72,7 +72,5 @@ async.whilst(
 		else{
 			setTimeout(callback, 1000);
 		}
-
-
 	}
 )

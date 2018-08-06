@@ -11,7 +11,7 @@ function compare(a,b){
 	return 0;
 }
 
-var selectBlock = (callback) =>{
+var selectBlock = async (callback) =>{
 	var receivedBlocks = JSON.parse(fs.readFileSync("./clients/GovernmentNode/recievedBlocks.json").toString());  
 	//console.log(receivedBlocks);
 	var blockHashList = [];
@@ -44,10 +44,10 @@ var selectBlock = (callback) =>{
 			selectedBlockElement = blockFreqList[i];
 		}
 	}
-	console.log(selectedBlockElement)
-	updateDB(selectedBlockElement.block, (reply) => {
+	return callback(selectedBlockElement.block, "done")
+	/*await updateDB(selectedBlockElement.block, (reply) => {
 		return callback(selectedBlockElement.block, reply)
-	})	
+	})	*/
 }
 /*
 selectBlock( (reply)=>{
