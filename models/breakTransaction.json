@@ -1,0 +1,20 @@
+{
+    "class": "breakTransaction",
+    "data": {
+        "timestamp": "",
+        "landID" : "",
+        "newLandID1" : "",
+        "newLandID2" : "",
+        "newLatLong1": [{}],
+        "newLatLong2": [{}],
+        "from": [""],
+        "to1": [""],
+        "to2": [""],
+        "amount1": "",
+        "amount2": "",
+        "lockTime": ""
+    },
+    "buyerSignature1": [""],
+    "buyerSignature2": [""],
+    "sellerSignature": [""]
+}

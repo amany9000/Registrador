@@ -1,5 +1,6 @@
 import React, {Component} from 'react' 
 import { Icon, Label, Menu, Table } from 'semantic-ui-react'; 
+import {Link } from 'react-router-dom';
  
 export default class Trans extends Component { 
  
@@ -9,7 +10,7 @@ export default class Trans extends Component {
       <Table celled> 
       <Table.Header> 
         <Table.Row> 
-          <Table.HeaderCell> Transaction no.</Table.HeaderCell> 
+          <Table.HeaderCell> Transaction Hash</Table.HeaderCell> 
           <Table.HeaderCell> Seller Address</Table.HeaderCell> 
           <Table.HeaderCell> Buyer Address</Table.HeaderCell> 
           <Table.HeaderCell>Transaction size(in bytes)</Table.HeaderCell> 
@@ -21,7 +22,7 @@ export default class Trans extends Component {
         this.props.allTransactions.map((item, index)=>{ 
             return( 
               <Table.Row> 
-              <Table.Cell>{index+1}</Table.Cell> 
+              <Table.Cell><Link to='/TransactionDetails'><u>sdfoenvbn12345648974</u></Link></Table.Cell> 
                 <Table.Cell>wqfsegngnb987</Table.Cell> 
                 <Table.Cell>edfgjffg03u4</Table.Cell> 
                 <Table.Cell>70</Table.Cell> 

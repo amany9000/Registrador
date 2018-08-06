@@ -1,32 +1,16 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-
-  height: 80px;
-  align-items: 'left';
-}
-
-.App-header {
-  background-color: #222;
-  height: 200px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-
 .Flag{
-
 text-align : left;
+}
+
+
+.Hea{
+  text-align:center;
+  height:50px;
+  padding :10px;
+  font-size :25px;
+ font-style:Bold;
+ font-family: "Times New Roman";
+  color: white;
 }
 
 
@@ -37,12 +21,10 @@ text-align : left;
 .Tran{
    text-align:center;
    font-size: 30px;
-   background-color:lightblue;
+   color: 'white';
+   background-color: #5d6dfc;
    font-style:normal;
    font-family: "Times New Roman";
-   height :100px;
-   padding :50px;
-
 }
 .Transaction{
   display:block;
@@ -54,11 +36,5 @@ text-align : left;
 
 .center{
   text-align:center;
-}
-
-.Icon{
-   margin-left:auto;
-   margin-right:auto;
-   display:block;
-   width:5%;
+  opacity: 0.8;
 }

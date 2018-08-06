@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
 import './Blockchain.css';
 import Block from './Block.js'
+import Main from '../Main/Main'
+import { Table } from 'semantic-ui-react'; 
 
 class Blockchain extends Component {
 
   render() {
 
-    const blockList=[1,2,3,4] 
+    // var some = require('./abc.json');
+    var blockList = require('./recievedBlocks.json');
 
     return (
+        <div>
+            <Main/>
         <div id="main">
-            <nav class="nav-extended center">
-                <div class="nav-wrapper" style={{background: "#5d6dfc"}}>
-                    <a href="#" className="brand-logo">Block List</a>
-                    <ul id="nav-mobile" className="right hide-on-med-and-down"></ul>
+            <div className="both" style={{
+					 background: '#2bbbad'
+				 }}>
+             	<h2  className ="Head">Blockchain</h2>
             </div>
-            </nav>
             <div id="chain">
                 <section className="card">
-                { 
+                {
                     blockList.map((item, index) => { 
                         return( 
                             <Block 
@@ -29,11 +33,36 @@ class Blockchain extends Component {
  
                 } 
                 </section>
-            </div>
-            <div> 
-                <h5> 
-                Some details if required                     
-                </h5> 
+                <div style={{
+                    opacity: 0.8,
+                    marginRight: 50,
+                    marginLeft: 50
+                }}>
+                <Table celled> 
+                    <Table.Header> 
+                        <Table.Row> 
+                        <Table.HeaderCell> Block Hash </Table.HeaderCell> 
+                        <Table.HeaderCell> Percentage </Table.HeaderCell> 
+                        </Table.Row> 
+                    </Table.Header> 
+   
+                    <Table.Body>   
+                        <Table.Row> 
+                            <Table.Cell>nvbsdfoen12345648974</Table.Cell> 
+                            <Table.Cell>70</Table.Cell> 
+                        </Table.Row> 
+                        <Table.Row> 
+                            <Table.Cell>sdfoeidhodd345648974</Table.Cell> 
+                            <Table.Cell>17</Table.Cell> 
+                        </Table.Row> 
+                        <Table.Row> 
+                            <Table.Cell>dfoe8974nvbn123456s4</Table.Cell> 
+                            <Table.Cell>13</Table.Cell> 
+                        </Table.Row> 
+                    </Table.Body>
+                </Table>
+                </div>
+                </div>
             </div>
         </div>
     );

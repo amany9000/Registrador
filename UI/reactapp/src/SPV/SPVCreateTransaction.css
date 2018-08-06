@@ -56,3 +56,13 @@
  font-family: "Times New Roman";
   color: white;
 }
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttons2 {
+  display: flex;
+  justify-content: end;
+}

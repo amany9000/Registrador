@@ -1,48 +1,39 @@
 .det{
-
-	margin-top:50px;
-  background-color: saddleBrown;
-
+  padding:30px;
+  margin: 30px;
+  background: white;
+  opacity: 0.8;
 }
 
-
 .Head{
-  
-
   text-align:center;
-  
   height:50px;
   padding :10px;
   font-size :25px;
  font-style:Bold;
  font-family: "Times New Roman";
   color: white;
-  text-decoration: underline;
-
 }
 
 .Des {
-
-	 height:600px;
-	 background-image: url("Land.jpg");
+  background-image: url("../images/light.jpg");
+	 height:500px;
 }
 
 
 .White{
-	color:white;
+	color:white;  padding:5px;
+
 }
 
 .link{
-  
   font-family: "Times New Roman";
   color:white;
-  
   text-align:left;
   padding:5px;
   height:30px;
 }
 
 .both{
-
   background-color:Maroon;
 }

@@ -1,0 +1,19 @@
+{
+    "class": "joinTransaction",
+    "data": {
+        "timestamp": "",
+        "landID1" : "",
+        "landID2" : "",
+        "newLandID" : "",
+        "newLatLong": [{}],
+        "from1": [""],
+        "from2": [""],
+        "to": [""],
+        "amount1": "",
+        "amount2": "",
+        "lockTime": ""
+    },
+    "buyerSignature": [""],
+    "sellerSignature1": [""],
+    "sellerSignature2": [""]
+}

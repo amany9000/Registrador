@@ -1,13 +1,15 @@
 {
-    "class": "transaction",
+    "class": "escrowTransaction",
     "data": {
         "timestamp": "",
         "landID" : "",
         "from": [""],
         "to": [""],
+        "escrow": "",
         "amount": "",
         "lockTime": ""
     },
     "buyerSignature": "",
-    "sellerSignature": ""
+    "sellerSignature": "",
+    "escrowSignature": ""
 }

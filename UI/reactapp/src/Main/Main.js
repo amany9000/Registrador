@@ -1,44 +1,35 @@
 import React, { Component } from 'react';
-
 import './Main.css';
 import {Link} from 'react-router-dom';
 import { Header, Icon ,Card,Menu} from 'semantic-ui-react';
 
-
-
-
 class Main extends Component {
-
-  
-
- 
-
   render() {
 
     return (
       <div>
-     <div className="xy" align="center"  >
-      <Header as='h2'>
-      <Icon name='legal' color="white"  />
-      <Header.Content className="xz">Registrador- A blockchain based land registry application</Header.Content>
-     
-       < /Header>
-       </div>
-         <div align="left"  className="Men"> 
-       <Menu inverted pointing vertical  style={{ marginTop: '20px'}}>
-        <Link to ='/'>
-        <Menu.Item name='Home'  /></Link>
-        <Link to ='/LandDet'>
-        <Menu.Item name='Land Queries '/></Link>
-        <Link to ='/UserDet'>
-        <Menu.Item name='User Queries' /></Link>
-        <Link to ='/Blockchain'>
-        <Menu.Item name='BlockList' /></Link>
-        <Link to ='/TransactionList'>
-        <Menu.Item name='TransactionList' /></Link>
-      </Menu>
-      </div>
-   
+
+      <div class="ui inverted segment">
+        <div class="ui inverted secondary pointing menu">
+          <div class="header item">
+            <div style={{
+              fontSize: 20,
+              
+            }}>
+            <Link to ='/' style={{
+              color: '#2bbbad'
+            }}>Registrador</Link>
+            </div>
+          </div>
+            <Link to ='/LandDet'><a class="item"> Land Queries </a></Link>
+            <Link to ='/UserDet'><a class="item"> User Queries </a></Link>
+            <Link to ='/Blockchain'><a class="item"> Blockchain </a></Link>
+            <Link to ='/TransactionList'><a class="item"> Transaction List </a></Link>
+            <Link to ='/SPVHandleTransaction'><a class="item"> Handle Transaction </a></Link>
+            <Link to ='/SPVCreateTransaction'><a class="item"> Create Transaction </a></Link>
+            <Link to ='/LandIdCreate'><a class="item"> Generate LandID </a></Link>
+          </div>
+        </div>
    </div>
 
     )

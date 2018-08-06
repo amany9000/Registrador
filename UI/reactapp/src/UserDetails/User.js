@@ -4,61 +4,53 @@ import {Form , FormControl,Button} from 'react-bootstrap';
 import UserInfo from './UserInfo';
 import './User.css';
 import {Link} from 'react-router-dom';
-
-
+import Main from '../Main/Main'
 
 class User extends Component{
 
-	
-
 	constructor(){
-
 		super();
-
 		this.state={
 			newKey:'',
 			loading:false,
-			PublicKey:'sdgf8543',
-			
-
+			PublicKey:'sdgf8543'
+		
 		}
-
-
 	}
 
  		handleSub(){
  			this.setState({
  				PublicKey:this.state.newKey,
- 				loading:true
+ 				loading:true,
  				
  			})
  		}
 
 	render(){
-
-
 		return(
-			
-
-			    <div>
-			    <div className="bot">
-                <h3 className="lin"><Link to ='/'> < h3 style={{color:'white'}}><u>Home</u></h3></Link> </h3>
-             	<h2 className ="Hea" >User queries information page</h2>
+			<div>
+				 <Main/>
+			    <div className="bot" style={{
+					background: '#2bbbad'
+				}}>
+             	<h2 className ="Hea" >User Queries Information Page</h2>
              	</div>
 			    
                <div className ="Desi" >
-               <h3>Enter the Public key of the user</h3>
+               <h3 style={{ color: 'white' }} >Enter the Public key of the user</h3>
 
 			<Form inline>
 				
-			<FormControl type ="text" onChange={event => this.setState({newKey:event.target.value})}>
+			<FormControl style={{ color: 'white' }} type ="text" onChange={event => this.setState({newKey:event.target.value})}>
 			</FormControl>
 			{' '}
-			<Button onClick ={()=> this.handleSub()}>
-			submit
+			<Button onClick ={()=> this.handleSub()} style={{ 
+				backgroundColor: '#5d6dfc'
+			},{alignItems:'center'},{justifyContent:'center'},{width:'30px'},{height:'50px'}}>
+			SUBMIT
 			</ Button> 
 			{
-				this.state.loading  ?
+				this.state.loading ?
 				<div>
 				<UserInfo />
 				</div>
