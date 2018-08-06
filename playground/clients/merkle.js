@@ -29,7 +29,7 @@ var getMerkleTree = function(transactionList,callback){
 getMerkleTree([{ class: 'transaction',
     data:
      { timeStamp: '1234345',
-       landID: 'land2345',
+       landID: 'land67',
        from: ["User2"],
        to: ["User1"],
        amount: '12345' },
@@ -37,23 +37,13 @@ getMerkleTree([{ class: 'transaction',
     selerSignature: 'sig2' } ,{ class: 'transaction',
     data:
      { timeStamp: '1234345',
-       landID: 'land67',
-       from: ["User1"],
-       to: ["User2"],
+       landID: 'land2345',
+       from: ["User2"],
+       to: ["User1"],
        amount: '12345' },
     buyerSignature: 'sig1',
-    selerSignature: 'sig2' },{
-      class: "transaction",
-      data: {
-          timeStamp: "1234345",
-          landID : "land2345",
-          from: ["User2"],
-          to: ["User1"],
-          amount: "12345",
-        },
-      buyerSignature: "sig1",
-      selerSignature: "sig2",
-      }], (tree) => {
+    selerSignature: 'sig2' }], (tree) => {
         console.log(tree.root());
-      })*/
+      })
+ */     
 module.exports = {getMerkleTree};

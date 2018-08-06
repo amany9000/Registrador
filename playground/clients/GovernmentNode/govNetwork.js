@@ -128,6 +128,7 @@ await sw.join('rohandhoot')
       )
       if(message.class ==  "block"){
         blockVerify(message, (reply) => {
+          console.log(reply)
           if(reply != "verified"){
             console.log("block not correct");
           }
@@ -144,6 +145,14 @@ await sw.join('rohandhoot')
           haltedList.forEach((trans) =>{
             transactionVerify([trans], (reply) => {
               console.log(reply)
+              
+              var pendingList = (fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString()).split(",");                
+              if(pendingList.indexOf('') != -1){
+                pendingList.splice(pendingList.indexOf(''),1)
+              }
+              pendingList.push(message.data.landID);
+              
+              fs.writeFileSync("./clients/GovernmentNode/pendingList.log", pendingList);
               if(reply[0]){
                 for (let id in peers) {
                   peers[id].conn.write(JSON.stringify(trans,undefined,2))
@@ -152,20 +161,12 @@ await sw.join('rohandhoot')
             })
           });
           fs.writeFileSync("./clients/GovernmentNode/halted.log","");
-          fs.writeFileSync("./clients/GovernmentNode/haltedList.json",[]);          
+          fs.writeFileSync("./clients/GovernmentNode/haltedList.json",JSON.stringify([], undefined, 2));          
         }
         if(new Date().getMinutes() >= 59 && new Date().getSeconds() >= 30){
-          transactionVerify([message], (reply) => {
-          console.log("hmm",reply)
-            if(!reply[0]){
-              console.log("Transaction not correct");
-            }
-            else{
-              var haltedList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/haltedList.json").toString());  
-              haltedList.push(message)
-              fs.writeFileSync("./clients/GovernmentNode/haltedList.json", JSON.stringify(haltedList,undefined,2));              
-            }
-          })
+            var haltedList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/haltedList.json").toString());  
+            haltedList.push(message)
+            fs.writeFileSync("./clients/GovernmentNode/haltedList.json", JSON.stringify(haltedList,undefined,2));              
         }
         else{
           transactionVerify([message], (reply) => {

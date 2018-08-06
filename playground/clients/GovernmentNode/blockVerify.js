@@ -57,39 +57,45 @@ var hash = crypto.createHash('sha256');
 					var calculatedHash = hash.digest('hex');
 					if(calculatedHash != receivedBlock.header.hashPrevBlock)
 						return callback("Hash of Prevoious Block Didn't Match");				
+					else{
+						var transList = [];
+						for(var i in receivedBlock.transactionList){
+							transList.push(JSON.parse(receivedBlock.transactionList[i]))
+						}
+						getMerkleTree(transList,(tree) => {
+							if(receivedBlock.header.hashMerkleRoot != tree.root()){
+								console.log(receivedBlock.header.hashMerkleRoot, tree.root())
+								return callback("Hash of merkel root of transactions, didn't match");
+							}
+							else{
+								var transList = [];
+								for(var i in receivedBlock.transactionList){
+									transList.push(JSON.parse(receivedBlock.transactionList[i]))
+								}
+								transactionVerify(transList, (reply)=>{
+									console.log("trans",reply)
+									var flag = true;
+									for(var i in reply){
+										if(!reply[i]){
+											flag = false;
+											break;
+										}
+										if(flag)
+											return callback("verified")
+										else
+											return callback("Transaction List not correct")
+									}
+								});
+							}	
+						});
+					}
 				}
 			});
 			// hash of merkle root of transactions should be verified
-			var transList = [];
-			for(var i in receivedBlock.transactionList){
-				transList.push(JSON.parse(receivedBlock.transactionList[i]))
-			}
-			getMerkleTree(transList,(tree) => {
-				if(receivedBlock.header.hashMerkleRoot != tree.root()){
-					console.log(receivedBlock.header.hashMerkleRoot, tree.root())
-					return callback("Hash of merkel root of transactions, didn't match");
-				}	
-			});
+
 
 			// Verify each transaction
-			var transList = [];
-			for(var i in receivedBlock.transactionList){
-				transList.push(JSON.parse(receivedBlock.transactionList[i]))
-			}
-			transactionVerify(transList, (reply)=>{
-				console.log("trans",reply)
-				var flag = true;
-				for(var i in reply){
-					if(!reply[i]){
-						flag = false;
-						break;
-					}
-					if(flag)
-						return callback("verified")
-					else
-						return callback("Transaction List not correct")
-				}
-			});
+
 		}
 		}
 	});

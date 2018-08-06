@@ -46,7 +46,7 @@ const askUser = async () => {
       class: "transaction",
       data: {
           timeStamp: "1234345",
-          landID : "land2345",
+          landID : "land67",
           from: ["User2"],
           to: ["User1"],
           amount: "12345",
@@ -62,15 +62,14 @@ const askUser = async () => {
         header: {
           blockHeight: 570,
           hashPrevBlock: "c9e6d5695a81e3eab3573b5d4454ada5deb1272af7fa2e8af555b8a4876d6ff6",
-          hashMerkleRoot: "F6DEF0D30CFE7EEC56550481825B1DAFFE9CBAD58F73AB4A8BB4FB0D185405B6",
+          hashMerkleRoot: "EA39237351E74DE296CA0B4308570D37502EB624805629917AAFA085B04402F8",
           blockTimeStamp: 1532701980760
         },
-        transactionCount: 3,
-        transactionList: [ '{\n  "class": "transaction",\n  "data": {\n    "timeStamp": "1234345",\n    "landID": "land2345",\n    "from": [\n      "User2"\n    ],\n    "to": [\n      "User1"\n    ],\n    "amount": "12345"\n  },\n  "buyerSignature": "sig1",\n  "selerSignature": "sig2"\n}',
-  '{\n  "class": "transaction",\n  "data": {\n    "timeStamp": "1234345",\n    "landID": "land67",\n    "from": [\n      "User1"\n    ],\n    "to": [\n      "User2"\n    ],\n    "amount": "12345"\n  },\n  "buyerSignature": "sig1",\n  "selerSignature": "sig2"\n}',
-  '{\n  "class": "transaction",\n  "data": {\n    "timeStamp": "1234345",\n    "landID": "land2345",\n    "from": [\n      "User2"\n    ],\n    "to": [\n      "User1"\n    ],\n    "amount": "12345"\n  },\n  "buyerSignature": "sig1",\n  "selerSignature": "sig2"\n}' ],
+        transactionCount: 2,
+        transactionList: [ '{\n  "class": "transaction",\n  "data": {\n    "timeStamp": "1234345",\n    "landID": "land67",\n    "from": [\n      "User2"\n    ],\n    "to": [\n      "User1"\n    ],\n    "amount": "12345"\n  },\n  "buyerSignature": "sig1",\n  "selerSignature": "sig2"\n}',
+        '{\n  "class": "transaction",\n  "data": {\n    "timeStamp": "1234345",\n    "landID": "land2345",\n    "from": [\n      "User2"\n    ],\n    "to": [\n      "User1"\n    ],\n    "amount": "12345"\n  },\n  "buyerSignature": "sig1",\n  "selerSignature": "sig2"\n}'],
         blockGenerator: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0gv4+6ExB1KFh6AjTv5N\nVjUirfA39/bikodnmWQdsrBcCclLS2avt262M4DoWPiSgjB78be2AH4qwk2Lz7xe\ny3A+smCPfLaA5hUbwYfW1pfmrgMqXUEmpQ95vTPG21lZ246xk7Ozej4pABKlQeJw\nmZszKF5H5rI7S4XGAfpYK56163hefIQuhXmAz/ncUaLBCzxL0rS8yYyudC5z1OYd\n9Jl/KVWKJn+KvzO/jJ3FWrGA759jhdf+c8j9PJHI7uq5kVbOvCxXAgw7VzrcGOao\nWN3+Yn7ZComWS2NdDG5iTp/sZhPKxuJGc9GhIh7AA5iRQvNOuFYtmnEdQFJey2ds\nQwIDAQAB\n-----END PUBLIC KEY-----\n",
-        signature: "ktHYOufEnlOtqXwUSSiczvLlDz+0THTrK5ZlVNo5Fht3tDRti4jEml0AHH8pyBROqlYX0coYW/ZlV2i2Nq7Hg7I5Z1m7tem3wlU0UcbuKsiWu3tE+aPI3cYW0FRaVzf5OzvzckMbWDupfqKUAdbvuD3YdGNST/pKBNb1OGwEsuVWJciT7XF/F/EV0bGjYnvQ2OwW3Qbhg5HwxIgd3pKN3XKopJOyubjESzY5zprDbWqbTrvUtQzS0PbOypbT2l9fTLZ5LtaXYl37OUqBAVchR+U41+Cz+7IMBmloeh4DCD1hOoijPPcUKCP4uFw2z2qRY54L3vpIBROWcPOG1Z8Ptg=="
+        signature: "PZdQLlHkApTnak5QXtY+iPTiGmKtJaJUOPwuq5pFG90Pcn2hrbzWJiob4mgILxnoziKvUh8m3Jxn/0XVT+3aXx49AloziKzG7wZL+gYb/blrL8Yb2SA8FLAHpVzYnKvubdCmuJcJilZXeTsMqy+skXJ6ZZlG4aLscbL0tQCweS7L+1mcsdXb7RlO4wktZJN6ItAkFeEodVwQAFJ2VrCaxS4aTtHfkyN+2Ba3OnSWcCxWcB2GdfE++3lmPvFgktfg3Q2sDO1okcGgepZhzstf6KBlbtb4h4t9SsDNv+XueR23gP16uO/ffKW6BzrDGBXCT5NtQZ9cXy+EB16EyxHVrg=="
       },undefined,2))}        
     }    
     rl.close()

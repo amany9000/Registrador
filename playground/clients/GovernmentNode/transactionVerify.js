@@ -14,6 +14,10 @@ var transactionVerify = async (transactionList, callback) => {
 	}*/
 	var returnBool = Array(transactionList.length).fill(true);
     var pendingList = (fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString()).split(",");                
+  	if(pendingList.indexOf('') != -1){
+        pendingList.splice(pendingList.indexOf(''),1)
+    }
+
 	for(var i in transactionList){
 		for(j in pendingList){
 			if(transactionList[i].data.landID === pendingList[j]){
