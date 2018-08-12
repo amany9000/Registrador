@@ -1,0 +1,15 @@
+{
+  "class": "block",
+  "header": {
+    "blockHeight": 570,
+    "hashPrevBlock": "c9e6d5695a81e3eab3573b5d4454ada5deb1272af7fa2e8af555b8a4876d6ff6",
+    "hashMerkleRoot": "157F91B1F7E766C6E22C05E77527D3BD00888D45DDD94E2A9F3279FE176F9E8B",
+    "blockTimeStamp": 1534069980849
+  },
+  "transactionCount": 1,
+  "transactionList": [
+    "{\n  \"data\": {\n    \"class\": \"transaction\",\n    \"timeStamp\": 1234563425,\n    \"landID\": \"land23\",\n    \"from\": [\n      \"User2\",\n      \"User4\"\n    ],\n    \"to\": [\n      \"User2\"\n    ],\n    \"amount\": 123213\n  }\n}"
+  ],
+  "blockGenerator": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0gv4+6ExB1KFh6AjTv5N\nVjUirfA39/bikodnmWQdsrBcCclLS2avt262M4DoWPiSgjB78be2AH4qwk2Lz7xe\ny3A+smCPfLaA5hUbwYfW1pfmrgMqXUEmpQ95vTPG21lZ246xk7Ozej4pABKlQeJw\nmZszKF5H5rI7S4XGAfpYK56163hefIQuhXmAz/ncUaLBCzxL0rS8yYyudC5z1OYd\n9Jl/KVWKJn+KvzO/jJ3FWrGA759jhdf+c8j9PJHI7uq5kVbOvCxXAgw7VzrcGOao\nWN3+Yn7ZComWS2NdDG5iTp/sZhPKxuJGc9GhIh7AA5iRQvNOuFYtmnEdQFJey2ds\nQwIDAQAB\n-----END PUBLIC KEY-----\n",
+  "signature": "LF3uOwBOi1TGbdp2p4fHfWje0uyrMYam+wb1aBEujzNpuAUq2kHN1T+uC72RBADcOrfpWDVFbzOJxhMGWvZCUnnfpB26MmNH+nx0Vf6p2KMORjIvhsqz93fR/M9BFuaiwdoCaxGE7hHf4ReMczz1jN4Bb9cIVOebXaZW6IT4Cz9VBtDVCQX21NsS+NJ1Bgqh0I0bmuyDAwkIL4Tqm08+eJ4dWES2OpuKIiNKRViteJQZcT2KFzlLh1qo/2sVDu2PWu/kmiNtiFG8Of5ngyczL2M1IUCbVakY1KV6PMG0pXViJoFxDcY0v01/uXiAi7O4w314GsGKskS7pjR6AiTwiA=="
+}
