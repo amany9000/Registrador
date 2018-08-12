@@ -36,7 +36,9 @@ async.whilst(
 			
 			selectBlock((block, reply)=>{
 				console.log("rep",reply);
-				io.emit('blockSelected', block);
+				var blockChain = JSON.parse(fs.readFileSync("./clients/GovernmentNode/blockChain.json").toString());				 
+				blockChain.push(blockChain);
+				fs.writeFileSync("./clients/GovernmentNode/blockChain.json",JSON.stringify([],undefined,2));					
 				fs.writeFileSync("./clients/GovernmentNode/transactionList.json",JSON.stringify([],undefined,2));					
 				fs.writeFileSync("./clients/GovernmentNode/halted.log","true");
 				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",JSON.stringify([],undefined,2));
