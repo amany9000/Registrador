@@ -121,14 +121,19 @@ await sw.join('rohandhoot')
     conn.on('data', data => {
 
       // Here we handle incomming messages
-      var message = JSON.parse(data);
+      try{
+        var message = JSON.parse(data);
+      } catch(e){
+        console.log("Inbound data not a json");
+      }
+      
       log(
         'Received Message from peerzzz ' + peerId,
         '----> ' + data
       )
-      if(message.class ==  "block"){
+      if(message!= null && message!= undefined && message.class!= null && message.class!= undefined && message.class ==  "block"){
         blockVerify(message, (reply) => {
-          console.log(reply)
+          console.log("rep",reply)
           if(reply != "verified"){
             console.log("block not correct");
           }
@@ -139,7 +144,7 @@ await sw.join('rohandhoot')
         }
         });
       }
-      else if(message.class == "transaction"){ 
+      else if(message!= null && message!= undefined && message.class!= null && message.class!= undefined && message.class == "transaction"){ 
         if(Boolean(fs.readFileSync("./clients/GovernmentNode/halted.log").toString())){
           var haltedList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/haltedList.json").toString());          
           haltedList.forEach((trans) =>{

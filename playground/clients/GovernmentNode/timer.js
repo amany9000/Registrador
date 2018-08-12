@@ -29,7 +29,7 @@ async.whilst(
     		flag1 = false; 
 		}
 
-		else if(new Date().getMinutes() === 57	 /*&& new Date().getSeconds() === 0 */&& flag2){
+		else if(new Date().getMinutes() === 8	 /*&& new Date().getSeconds() === 0 */&& flag2){
 			setTimeout(callback, 1000);
 			console.log("selectBlock");
 			fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
@@ -37,8 +37,8 @@ async.whilst(
 			selectBlock((block, reply)=>{
 				console.log("rep",reply);
 				var blockChain = JSON.parse(fs.readFileSync("./clients/GovernmentNode/blockChain.json").toString());				 
-				blockChain.push(blockChain);
-				fs.writeFileSync("./clients/GovernmentNode/blockChain.json",JSON.stringify([],undefined,2));					
+				blockChain.push(block);
+				fs.writeFileSync("./clients/GovernmentNode/blockChain.json",JSON.stringify(blockChain,undefined,2));					
 				fs.writeFileSync("./clients/GovernmentNode/transactionList.json",JSON.stringify([],undefined,2));					
 				fs.writeFileSync("./clients/GovernmentNode/halted.log","true");
 				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",JSON.stringify([],undefined,2));
