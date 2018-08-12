@@ -21,6 +21,7 @@ import LandIdCreate from './LandIdCreate/LandIdCreate';
 	<BrowserRouter>
  		<Switch>
         <Route  exact path='/' component ={Home}/>
+        <Route  exact path='/App' component ={App}/>
         <Route path ='/LandDet' component ={Land} />
         <Route  path ='/UserDet' component={User}/>
         <Route path ='/Blockchain' component={Blockchain}/>

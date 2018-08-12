@@ -1,0 +1,11 @@
+#container {
+    padding: 5%;
+    padding-bottom: 0%;
+    height: 90%;
+}
+
+#publicKey, #privateKey {
+    height: 30vh;
+    width: 100%;
+    resize: none;
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "priority": 1,
+    "transaction": {
+      "data": {
+        "class": "transaction",
+        "timeStamp": 1234563425,
+        "landID": "land23",
+        "from": [
+          "User2",
+          "User4"
+        ],
+        "to": [
+          "User2"
+        ],
+        "amount": 123213
+      }
+    }
+  }
+]

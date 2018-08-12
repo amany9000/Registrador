@@ -9,7 +9,7 @@ class Blockchain extends Component {
   render() {
 
     // var some = require('./abc.json');
-    var blockList = require('./recievedBlocks.json');
+    var blockList = require('../../../../playground/clients/GovernmentNode/recievedBlocks.json');
 
     return (
         <div>

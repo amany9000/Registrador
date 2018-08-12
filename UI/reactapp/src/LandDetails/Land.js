@@ -49,7 +49,7 @@ class Land extends Component{
 			<FormControl style={{ color: 'white' }} type ="text" onChange={event => this.setState({newId:event.target.value})}>
 			</FormControl>
 			{' '}
-			<Button  style={{{alignItems:'center'},{justifyContent:'center'},{width:'30px'},{height:'50px'}}} onClick ={()=> this.handleSub()}>
+			<Button  style={{alignItems:'center',justifyContent:'center',width:'30px',height:'50px'}} onClick ={()=> this.handleSub()}>
 			SUBMIT
 			</ Button>
 			{
