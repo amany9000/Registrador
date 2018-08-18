@@ -37,3 +37,17 @@
 .both{
   background-color:Maroon;
 }
+.demo{
+  padding-top: 30px;
+  width:700px;
+  margin :auto;
+}
+.lab{
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.inp{
+  height:50px;
+  width:50%;
+}

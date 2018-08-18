@@ -58,6 +58,7 @@
 }
 
 .buttons {
+  margin-top:10px;
   display: flex;
   justify-content: space-between;
 }
@@ -70,6 +71,15 @@
  font-family: "Times New Roman";
  
    background-color: #2bbbad;
-   margin-top: 100px;
+   margin-top: 20px;
 
+}
+.in{
+  height:50%;
+
+
+}
+.inpu{
+  
+  width:50%;
 }
