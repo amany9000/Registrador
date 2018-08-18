@@ -1,36 +1,21 @@
-
 .Hea{
-  
-
   text-align:center;
- 
   height:50px;
   padding :10px;
   font-size :25px;
  font-style:Bold;
  font-family: "Times New Roman";
   color: white;
-  text-decoration:  underline;
-
 }
-
-
 
 .deta{
-
-	margin-top:50px;
-
-
+  margin-top:50px;
+  opacity: 0.8;
 }
 
-
-
-
 .Desi{
-
-
-	background-image: url("User.jpg");
-	height: 600px;
+  height: 500px;
+  background-image: url("../images/light.jpg");
 }
 
 .lin{
@@ -41,7 +26,6 @@
   padding:5px;
   height:20px;
 }
-
 
 .bot{
   background-color: Maroon;

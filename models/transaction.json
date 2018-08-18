@@ -1,10 +1,13 @@
 {
     "class": "transaction",
-    "type" : "",
-    "timestamp": "",
-    "landID" : "",
-    "from": [""],
-    "to": [""],
-    "amount": "",
-    "lockTime": ""
+    "data": {
+        "timestamp": "",
+        "landID" : "",
+        "from": [""],
+        "to": [""],
+        "amount": "",
+        "lockTime": ""
+    },
+    "buyerSignature": "",
+    "sellerSignature": ""
 }

@@ -4,6 +4,7 @@ import {Form , FormControl,Button} from 'react-bootstrap';
 import LandInfo from './LandInfo';
 import {Link } from 'react-router-dom';
 import './Land.css';
+import Main from '../Main/Main'
 
 class Land extends Component{
 
@@ -34,19 +35,22 @@ class Land extends Component{
 			
 
 			<div>
-                  <div className="both">
-                  <h3 className="link"><Link to ='/'> < h3 style={{color:'white'}}><u>Home</u></h3></Link> </h3>
-             	<h2  className ="Head">Land queries information page</h2>
+
+				 <Main/>
+				 <div className="both" style={{
+					 background: '#2bbbad'
+				 }}>
+             	<h2  className ="Head">Land Queries Information Page</h2>
              	</div>
-			   
+
                <div className="Des">
 			<Form inline>
-				<h4>Enter the Land Id</h4>
-			<FormControl type ="text" onChange={event => this.setState({newId:event.target.value})}>
+				<h3 style={{ color: 'white' }}> Enter the Land Id</h3>
+			<FormControl style={{ color: 'white' }} type ="text" onChange={event => this.setState({newId:event.target.value})}>
 			</FormControl>
 			{' '}
-			<Button onClick ={()=> this.handleSub()}>
-			submit
+			<Button  style={{alignItems:'center',justifyContent:'center',width:'30px',height:'50px'}} onClick ={()=> this.handleSub()}>
+			SUBMIT
 			</ Button>
 			{
 				this.state.loading ?
