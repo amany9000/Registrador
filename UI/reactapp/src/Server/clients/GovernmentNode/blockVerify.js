@@ -62,7 +62,8 @@ var hash = crypto.createHash('sha256');
 						for(var i in receivedBlock.transactionList){
 							transList.push(JSON.parse(receivedBlock.transactionList[i]))
 						}
-						getMerkleTree(transList,(tree) => {
+					// hash of merkle root of transactions should be verified
+					getMerkleTree(transList,(tree) => {
 							if(receivedBlock.header.hashMerkleRoot != tree.root()){
 								console.log(receivedBlock.header.hashMerkleRoot, tree.root())
 								return callback("Hash of merkel root of transactions, didn't match");
@@ -72,6 +73,7 @@ var hash = crypto.createHash('sha256');
 								for(var i in receivedBlock.transactionList){
 									transList.push(JSON.parse(receivedBlock.transactionList[i]))
 								}
+								// Verify each transaction
 								transactionVerify(transList, (reply)=>{
 									console.log("trans",reply)
 									var flag = true;
@@ -91,11 +93,6 @@ var hash = crypto.createHash('sha256');
 					}
 				}
 			});
-			// hash of merkle root of transactions should be verified
-
-
-			// Verify each transaction
-
 		}
 		}
 	});

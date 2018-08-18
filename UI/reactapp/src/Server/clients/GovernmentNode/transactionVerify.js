@@ -17,7 +17,7 @@ var transactionVerify = async (transactionList, callback) => {
   	if(pendingList.indexOf('') != -1){
         pendingList.splice(pendingList.indexOf(''),1)
     }
-
+	console.log("heeeeeeeeeeeey", pendingList)
 	for(var i in transactionList){
 		for(j in pendingList){
 			if(transactionList[i].data.landID === pendingList[j]){

@@ -1,0 +1,20 @@
+[
+  {
+    "hash": "463fcedc956a3b380d7bb7e112c4fab9cae7f4093b2065ab9138a224e6e62533",
+    "block": {
+      "class": "block",
+      "header": {
+        "blockHeight": 570,
+        "hashPrevBlock": "c9e6d5695a81e3eab3573b5d4454ada5deb1272af7fa2e8af555b8a4876d6ff6",
+        "hashMerkleRoot": "EA39237351E74DE296CA0B4308570D37502EB624805629917AAFA085B04402F8",
+        "blockTimeStamp": 1532701980760
+      },
+      "transactionCount": 2,
+      "transactionList": [
+        "{\n  \"class\": \"transaction\",\n  \"data\": {\n    \"timeStamp\": \"1234345\",\n    \"landID\": \"land67\",\n    \"from\": [\n      \"User2\"\n    ],\n    \"to\": [\n      \"User1\"\n    ],\n    \"amount\": \"12345\"\n  },\n  \"buyerSignature\": \"sig1\",\n  \"selerSignature\": \"sig2\"\n}",
+        "{\n  \"class\": \"transaction\",\n  \"data\": {\n    \"timeStamp\": \"1234345\",\n    \"landID\": \"land2345\",\n    \"from\": [\n      \"User2\"\n    ],\n    \"to\": [\n      \"User1\"\n    ],\n    \"amount\": \"12345\"\n  },\n  \"buyerSignature\": \"sig1\",\n  \"selerSignature\": \"sig2\"\n}"
+      ]
+    },
+    "freq": 2
+  }
+]

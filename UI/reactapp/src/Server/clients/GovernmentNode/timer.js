@@ -29,7 +29,7 @@ async.whilst(
     		flag1 = false; 
 		}
 
-		else if(new Date().getMinutes() === 8	 /*&& new Date().getSeconds() === 0 */&& flag2){
+		else if(new Date().getMinutes() === 15	 /*&& new Date().getSeconds() === 0 */&& flag2){
 			setTimeout(callback, 1000);
 			console.log("selectBlock");
 			fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
