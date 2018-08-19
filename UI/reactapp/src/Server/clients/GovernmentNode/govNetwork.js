@@ -87,7 +87,7 @@ await sw.join('rohandhoot')
       fs.writeFileSync("./clients/GovernmentNode/boolean.log","");
     }
     else{
-    if(new Date().getMinutes() === 57 && new Date().getSeconds() === 0){
+    if(new Date().getMinutes() === 14 && new Date().getSeconds() === 0){
       if(lastHeight + 1 === block.header.blockHeight){
         console.log("dhun dhun dhun 143", block);
         var count = 0;
@@ -150,14 +150,7 @@ await sw.join('rohandhoot')
           haltedList.forEach((trans) =>{
             transactionVerify([trans], (reply) => {
               console.log(reply)
-              
-              var pendingList = (fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString()).split(",");                
-              if(pendingList.indexOf('') != -1){
-                pendingList.splice(pendingList.indexOf(''),1)
-              }
-              pendingList.push(message.data.landID);
-              
-              fs.writeFileSync("./clients/GovernmentNode/pendingList.log", pendingList);
+
               if(reply[0]){
                 for (let id in peers) {
                   peers[id].conn.write(JSON.stringify(trans,undefined,2))
@@ -168,28 +161,22 @@ await sw.join('rohandhoot')
           fs.writeFileSync("./clients/GovernmentNode/halted.log","");
           fs.writeFileSync("./clients/GovernmentNode/haltedList.json",JSON.stringify([], undefined, 2));          
         }
+        
         if(new Date().getMinutes() >= 59 && new Date().getSeconds() >= 30){
             var haltedList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/haltedList.json").toString());  
             haltedList.push(message)
             fs.writeFileSync("./clients/GovernmentNode/haltedList.json", JSON.stringify(haltedList,undefined,2));              
         }
+        
         else{
           transactionVerify([message], (reply) => {
-            console.log(reply)
+            console.log("rep - ",reply)
             if(!reply[0]){
               console.log("Transaction not correct");
             }
             else{
-              io.emit('getTransaction', JSON.stringify(message, undefined, 2));
-              var transactionList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionList.json").toString());  
-              var pendingList = (fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString()).split(",");                
+              var transactionList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionList.json").toString());               
               transactionList.push(message)
-              if(pendingList.indexOf('') != -1){
-                pendingList.splice(pendingList.indexOf(''),1)
-              }
-              //console.log(pendingList, pendingList.length)
-              pendingList.push(message.data.landID);
-              fs.writeFileSync("./clients/GovernmentNode/pendingList.log", pendingList);              
               fs.writeFileSync("./clients/GovernmentNode/transactionList.json", JSON.stringify(transactionList,undefined,2));
             }
           })
@@ -198,7 +185,7 @@ await sw.join('rohandhoot')
     })
     
     conn.on('close', () => {
-      // Here we handle peer disconnection
+      // Here we handle peerser disconnection
       log(`Connection ${seq} closed, peer id: ${peerId}`)
       // If the closing connection is the last connection with the peer, removes the peer
       if (peers[peerId].seq === seq) {

@@ -24,7 +24,9 @@ var blockMaker = async (callback) => {
  			i--
  		}
  	}
-	await transactionVerify(transactionList,(reply)=>{
+	
+	fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
+	await transactionVerify(transactionList, (reply)=>{
 		var sortedTrans = [];     // sorted list of recieved(valid) transactions 
 
 		for(i in transactionList){
@@ -85,6 +87,7 @@ var blockMaker = async (callback) => {
 			});
 		});
 	});
+	fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
 }
 /*
 blockMaker((reply) =>{

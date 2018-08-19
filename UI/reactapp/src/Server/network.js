@@ -45,11 +45,11 @@ const askUser = async () => {
       peers[id].conn.write(JSON.stringify({
       class: "transaction",
       data: {
-          timeStamp: "1234345",
+          timeStamp: 1234345,
           landID : "land67",
           from: ["User2"],
           to: ["User1"],
-          amount: "12345",
+          amount: 12345,
         },
       buyerSignature: "sig1",
       selerSignature: "sig2",
@@ -140,12 +140,7 @@ await sw.join('rohandhoot')
         log('exception', exception)
       }
     }
-        while(new Date().getMinutes() === 24){
-          if(lastHeight + 1 === JSON.parse(fs.readFileSync("./clients/GovernmentNode/block.json").toString()).header.blockHeight){
-            console.log("dhun dhun dhun");
-            break;
-          }          
-    }
+
     conn.on('data', data => {
 
       // Here we handle incomming messages

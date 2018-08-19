@@ -26,7 +26,7 @@ var selectBlock = async (callback) =>{
 			delete receivedBlocks[i]["signature"];
 			delete receivedBlocks[i]["blockGenerator"];
 		}
-		//console.log("selectBlock", receivedBlocks)
+		//	console.log("selectBlock", receivedBlocks)
 		for(var i = 0; i<len; i++){
 			var hash = crypto.createHash('sha256');
 			hash.update(JSON.stringify(receivedBlocks[i],undefined,2));

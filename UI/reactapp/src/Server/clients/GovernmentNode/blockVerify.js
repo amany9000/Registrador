@@ -1,6 +1,7 @@
 
 var b64u =  require("b64u");
 var crypto = require("crypto")
+var fs = require("fs")
 
 var {getUser} = require("./db/getDoc");
 var {block} = require("./db/dbModels/block");
@@ -63,7 +64,7 @@ var hash = crypto.createHash('sha256');
 							transList.push(JSON.parse(receivedBlock.transactionList[i]))
 						}
 					// hash of merkle root of transactions should be verified
-					getMerkleTree(transList,(tree) => {
+					getMerkleTree(transList,async (tree) => {
 							if(receivedBlock.header.hashMerkleRoot != tree.root()){
 								console.log(receivedBlock.header.hashMerkleRoot, tree.root())
 								return callback("Hash of merkel root of transactions, didn't match");
@@ -74,7 +75,8 @@ var hash = crypto.createHash('sha256');
 									transList.push(JSON.parse(receivedBlock.transactionList[i]))
 								}
 								// Verify each transaction
-								transactionVerify(transList, (reply)=>{
+								await fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
+								await transactionVerify(transList, (reply)=>{
 									console.log("trans",reply)
 									var flag = true;
 									for(var i in reply){
@@ -82,12 +84,14 @@ var hash = crypto.createHash('sha256');
 											flag = false;
 											break;
 										}
-										if(flag)
-											return callback("verified")
-										else
-											return callback("Transaction List not correct")
-									}
+									}	
+									if(flag)
+										return callback("verified");
+									else
+										return callback("Transaction List not correct");
 								});
+								console.log("peeeeeeeeeeeeeeennnnddd");
+								await fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
 							}	
 						});
 					}

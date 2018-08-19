@@ -1,23 +1,23 @@
 
 const fs = require("fs");
 var {getLand, getUser} = require("./db/getDoc");
+var {transSigVerify} = require("./governmentNodeSig.js")
 
-var transactionVerify = async (transactionList, callback) => {
-	
+var transactionVerify = async (transactionList, callback) => {	
 	var landIDs  = [];
 	var trans = [];
 	var owners = [];
 	var buyers = [];
 	//console.log("trans",transactionList)
-	/*for(var i in transactionList){
-		transactionList[i] = JSON.parse(transactionList[i]); 
-	}*/
+	
 	var returnBool = Array(transactionList.length).fill(true);
     var pendingList = (fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString()).split(",");                
   	if(pendingList.indexOf('') != -1){
         pendingList.splice(pendingList.indexOf(''),1)
     }
-	console.log("heeeeeeeeeeeey", pendingList)
+	
+	//console.log("heeeeeeeeeeeey", pendingList)
+
 	for(var i in transactionList){
 		for(j in pendingList){
 			if(transactionList[i].data.landID === pendingList[j]){
@@ -25,7 +25,8 @@ var transactionVerify = async (transactionList, callback) => {
 				break;
 			}
 		}
-	}	
+	}
+
 	if(!Array.isArray(transactionList) || transactionList.length == 0){
 		console.log("Transaction not present");
 		return callback(returnBool.fill(false,0));
@@ -37,31 +38,30 @@ var transactionVerify = async (transactionList, callback) => {
 		var transaction = transactionList[i];
 		// timeStamp is less than the current time
 		var currentTime = new Date().getTime();	
-		if(transaction.data.timeStamp == undefined || transaction.data.timeStamp === null || currentTime < transaction.data.timeStamp ){
+		if(transaction.data.timeStamp == undefined || transaction.data.timeStamp === null || typeof(transaction.data.timeStamp) != "number" ||currentTime < transaction.data.timeStamp ){
 			returnBool[i] = false;
-			console.log("Timestamp isn't correct",transaction.data);
+			console.log("Timestamp isn't correct",typeof(transaction.data.timeStamp));
         }
 		
-		if(transaction.data.landID== undefined || transaction.data.landID == null){
+		if(transaction.data.landID== undefined || transaction.data.landID == null || typeof(transaction.data.landID) != "string"){
 			returnBool[i] = false;			
 		}
-		if(transaction.data.from== undefined || transaction.data.from == null || transaction.data.from.length == 0){
+		if(transaction.data.from== undefined || transaction.data.from == null || transaction.data.from.length == undefined || transaction.data.from.length == 0){
 			returnBool[i] = false;
 		}
-		if(transaction.data.to== undefined || transaction.data.to == null || transaction.data.to.length == 0){
+		if(transaction.data.to == undefined || transaction.data.to == null || transaction.data.to.length == undefined || transaction.data.to.length == 0){
 			returnBool[i] = false;			
 		}
-		if(transaction.class != "transaction" || transaction.data.amount == undefined || transaction.data.amount == null){
+		if(transaction.class == undefined || transaction.class != "transaction" || transaction.data.amount == undefined || transaction.data.amount == null || typeof(transaction.data.amount) != "number"){
 			returnBool[i] = false;
 		}
 		trans.push(transaction);
 		//Signature is correct
-		/*if(!blockSigVerify(receivedBlock)){
+		if(!transSigVerify(receivedBlock)){
 			returnBool[i] = false;			
 			console.log("Signature Not Valid");
-			}*/
+		}
 
-		
 		landIDs.push(transaction.data.landID);
 		
 		for(var j in transaction.data.from){
@@ -168,6 +168,17 @@ var transactionVerify = async (transactionList, callback) => {
 			}
 		}
 	});
+	for(var i in transactionList){
+		if(returnBool[i]){
+			var pendingList = (fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString()).split(",");                
+            if(pendingList.indexOf('') != -1){
+              pendingList.splice(pendingList.indexOf(''),1)
+            }
+            pendingList.push(transactionList[i].data.landID);
+            
+            fs.writeFileSync("./clients/GovernmentNode/pendingList.log", pendingList);	
+		}
+	}
 	return callback(returnBool);
 }
 /*
