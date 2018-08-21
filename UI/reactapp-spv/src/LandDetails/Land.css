@@ -1,0 +1,53 @@
+.det{
+  padding:30px;
+  margin: 30px;
+  background: white;
+  opacity: 0.8;
+}
+
+.Head{
+  text-align:center;
+  height:50px;
+  padding :10px;
+  font-size :25px;
+ font-style:Bold;
+ font-family: "Times New Roman";
+  color: white;
+}
+
+.Des {
+  background-image: url("../images/light.jpg");
+	 height:500px;
+}
+
+
+.White{
+	color:white;  padding:5px;
+
+}
+
+.link{
+  font-family: "Times New Roman";
+  color:white;
+  text-align:left;
+  padding:5px;
+  height:30px;
+}
+
+.both{
+  background-color:Maroon;
+}
+.demo{
+  padding-top: 30px;
+  width:700px;
+  margin :auto;
+}
+.lab{
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.inp{
+  height:50px;
+  width:50%;
+}
