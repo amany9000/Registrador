@@ -1,8 +1,7 @@
 import React ,{Component} from 'react';
 
-// import {Form , FormControl,Button} from 'react-bootstrap';
+import {Form , FormControl,Button} from 'react-bootstrap';
 import LandInfo from './LandInfo';
-import { Button } from 'semantic-ui-react'
 import {Link } from 'react-router-dom';
 import './Land.css';
 import Main from '../Main/Main';
@@ -107,12 +106,12 @@ class Land extends Component{
                onChange={this.handleUserInput}  />
 			     </div>
 			<div align = "center">
-			<Button style={{alignItems:'center',justifyContent:'center',width:'30px',height:'50px'}}className="btn btn-primary" disabled={!this.state.formValid} onClick ={()=> this.handleSub()}>
+			<Button style={{alignItems:'center'},{justifyContent:'center'},{width:'30px'},{height:'50px'}}className="btn btn-primary" disabled={!this.state.formValid} onClick ={()=> this.handleSub()}>
 			SUBMIT
 			</ Button>
 			<div  align="center"style={{color:'white'}} className= "panel panel-default">
 				<LandFormErrors formErrors={this.state.formErrors}/>
-			</div>
+				</div>
 			</div>
 
 			{
