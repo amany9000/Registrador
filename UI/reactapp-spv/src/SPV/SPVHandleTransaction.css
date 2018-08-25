@@ -1,0 +1,68 @@
+#main {
+  width: 100%;
+  height: 100%;
+  background-color: #2bbbad;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#chain {
+  width: 100%;
+  height: 480px;
+  background-image: url("../images/light.jpg");
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.card {
+    background-image: url("../images/light.jpg");
+    min-width: 100%;
+    max-width: 100%;
+    padding: 20px;
+    min-height: 280px;
+    display: flex;
+    overflow-x: auto;
+}
+.card--content {
+    background-color: #78ddd3;
+    min-width: 250px;
+    z-index: 5;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+.card--content2 {
+    background-color: #5a5a5a;
+    min-width: 30px;
+    width: 50px; 
+    height: 20px; 
+    margin-top: 105px;
+    margin-bottom: 20px;
+    z-index: 5;
+    justify-content: center
+}
+.card::-webkit-scrollbar {
+  display: none;
+}
+
+.Head{
+  text-align:center;
+  height:50px;
+  padding :10px;
+  font-size :25px;
+ font-style:Bold;
+ font-family: "Times New Roman";
+  color: white;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttons2 {
+  display: flex;
+  justify-content: end;
+}

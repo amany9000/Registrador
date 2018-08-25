@@ -1,0 +1,40 @@
+body{
+  background-image: url("../images/light.jpg")
+}
+
+.Table{
+  margin-top:40px;
+  border:solid 1px black;
+  opacity: .8;
+}
+
+#hello{
+  height: auto;
+}
+
+.lis{
+ color: white;
+ height:50px;
+ text-align:center;
+ padding:10px;
+ font-family: "Times New Roman";
+}
+
+.li{
+font-family: "Times New Roman";
+  color:white;
+  background-image: url("../images/light.jpg");
+  text-align:left;
+  padding:5px;
+  height:10px;
+
+}
+
+.eve{
+	background-color: #2bbbad;
+}
+
+.Note{
+	font-style:bold;
+	padding-top: 40px;
+}

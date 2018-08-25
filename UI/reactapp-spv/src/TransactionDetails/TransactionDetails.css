@@ -1,0 +1,40 @@
+.Flag{
+text-align : left;
+}
+
+
+.Hea{
+  text-align:center;
+  height:50px;
+  padding :10px;
+  font-size :25px;
+ font-style:Bold;
+ font-family: "Times New Roman";
+  color: white;
+}
+
+
+.Table{
+  border: 1px solid black;
+}
+
+.Tran{
+   text-align:center;
+   font-size: 30px;
+   color: 'white';
+   background-color: #5d6dfc;
+   font-style:normal;
+   font-family: "Times New Roman";
+}
+.Transaction{
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  width:50%;
+  height:100px;
+}
+
+.center{
+  text-align:center;
+  opacity: 0.8;
+}
