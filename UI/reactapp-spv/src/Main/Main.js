@@ -23,6 +23,7 @@ class Main extends Component {
           </div>
             <Link to ='/LandDet'><a class="item"> Land Queries </a></Link>
             <Link to ='/SPVCreateTransaction'><a class="item"> Create Transaction </a></Link>
+            <Link to ='/SPVAddTransaction'><a class="item"> Add Transaction </a></Link>
             <Link to ='/LandIdCreate'><a class="item"> Generate LandID </a></Link>
           </div>
         </div>
