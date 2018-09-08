@@ -74,7 +74,7 @@ console.log('listening on port ', port2);
 
 io.on('connection', (client) => {
   client.on('sendTransaction', (interval) => {
-    console.log('client is subscribing to timer with interval ', interval);
+    console.log(interval);
     for (let id in peers) {
       peers[id].conn.write(JSON.stringify({"text" : interval, "me" : myId.toString("hex")},undefined,2))
     }  
