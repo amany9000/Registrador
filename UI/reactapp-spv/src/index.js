@@ -10,6 +10,7 @@ import Main from'./Main/Main.js';
 import Home from'./Main/Home.js';
 import {BrowserRouter,Switch,Route} from 'react-router-dom';
 import SPVCreateTransaction from './SPV/SPVCreateTransaction';
+import SPVAddTransaction from './SPV/SPVAddTransaction';
 import LandIdCreate from './LandIdCreate/LandIdCreate';
 
 
@@ -20,6 +21,7 @@ import LandIdCreate from './LandIdCreate/LandIdCreate';
         <Route  exact path='/App' component ={App}/>
         <Route path ='/LandDet' component ={Land} />
         <Route path ='/SPVCreateTransaction' component ={SPVCreateTransaction} />
+        <Route path ='/SPVAddTransaction' component ={SPVAddTransaction} />
         <Route path ='/LandIdCreate' component ={LandIdCreate} />
  		</Switch>
 	</BrowserRouter>, document.getElementById('root'));
