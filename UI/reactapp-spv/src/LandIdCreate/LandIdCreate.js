@@ -2,9 +2,28 @@ import React, { Component } from 'react';
 import './LandIdCreate.css';
 import Main from '../Main/Main'
 import { Table,Input,Button,Form } from 'semantic-ui-react'; 
+import Landpoint from './Landpoint.js';
 
 
 class LandIdCreate extends Component {
+
+    state={
+        previousId :""
+        flag:0
+      }
+
+    createId(){
+
+        this.setState({
+            previousId:this.state.previousId
+        });
+    };
+
+    newPoint(){
+        this.setState({
+            flag=flag+1
+        })
+    }
 
   render() {
 
@@ -15,9 +34,9 @@ class LandIdCreate extends Component {
             <Main/>
         <div id="main">
             <div className="both" style={{
-					 background: '#2bbbad'
-				 }}>
-             	<h2  className ="Head"> Generate your new Unique Land Id</h2>
+                     background: '#2bbbad'
+                 }}>
+                <h2  className ="Head"> Generate your new Unique Land Id</h2>
             </div>
         </div>
                 <div className="inpu" style={{
@@ -37,6 +56,7 @@ class LandIdCreate extends Component {
                      id='form-subcomponent-shorthand-input-first-name'
         
                      placeholder='Previous Land Id'
+                     onChange={event => this.setState({previousId:event.target.value})}
                     />
                  </Form.Group>
                  </Form>
@@ -72,12 +92,22 @@ class LandIdCreate extends Component {
                             <Table.Cell><Input size='mini' placeholder='' /></Table.Cell> 
                             
                         </Table.Row> 
+                          {
+                        this.state.flag ?
+                        <Landpoint />
+                        :
+                        <div> </div>
+
+                    }
                     </Table.Body>
                 </Table>
                 </div>
                 <div className="buttons">
-                    <Button>+ New Point</Button>
-                    <Button>Generate Unique Land Id</Button>
+                    <Button onClick={this.newPoint.bind(this)}>+ New Point</Button>
+                  
+              
+                
+                    <Button onClick={this.createId.bind(this)}>Generate Unique Land Id</Button>
                 </div>
             </div>
             <div className="note"  align="center">
