@@ -1,9 +1,12 @@
-const crypto = require('crypto')
-const Swarm = require('discovery-swarm')
-const defaults = require('dat-swarm-defaults')
-const getPort = require('get-port')
-const readline = require('readline')
+
+const crypto = require('crypto');
+const Swarm = require('discovery-swarm');
+const defaults = require('dat-swarm-defaults');
+const getPort = require('get-port');
+const readline = require('readline');
 const io = require('socket.io')();
+
+const {tranSigCreate} = require("./sign.js");
 
 const peers = {}
 // Counter for connections, used to identify connections
@@ -73,10 +76,19 @@ io.listen(port2);
 console.log('listening on port ', port2);
 
 io.on('connection', (client) => {
-  client.on('sendTransaction', (interval) => {
-    console.log(interval);
+  client.on('sendTransaction', (transaction) => {
+    console.log(transaction);
+    
+    var signature = tranSigCreate(transaction);
+    
+    if(transaction.buyerSignature === ""){
+      transaction["buyerSignature"] = signature;
+    }
+    else
+      transaction["sellerSignature"] = signature;
+
     for (let id in peers) {
-      peers[id].conn.write(JSON.stringify({"text" : interval, "me" : myId.toString("hex")},undefined,2))
+      peers[id].conn.write(JSON.stringify(transaction,undefined,2))
     }  
   });
 });
