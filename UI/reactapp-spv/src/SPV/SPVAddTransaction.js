@@ -48,7 +48,7 @@ class SPVAddTransaction extends Component {
             <div className="both" style={{
 					 background: '#2bbbad'
 				 }}>
-             	<h2  className ="Head"> Create Transaction</h2>
+             	<h2  className ="Head"> Add Transaction</h2>
             </div>
         </div>
                 <div style={{
