@@ -3,25 +3,41 @@ import './LandIdCreate.css';
 import Main from '../Main/Main'
 import { Table,Input,Button,Form } from 'semantic-ui-react'; 
 import Landpoint from './Landpoint.js';
+import {landfunc} from '../Server/Landfunctions/landfun.js';
 
 
 class LandIdCreate extends Component {
 
     state={
         previousId :"",
-        flag:0
+        flag:false,
+        point1:"",
+        point2:"",
+        point3:"",
+        point4:""
       }
 
     createId(){
+        
+        //this.setState({
+          //  previousId:this.state.previousId
+       // });
+       const landobj={
+            "point":{
+                "point1":this.state.point1,
+                "point2":this.state.point2,
+                "point3":this.state.point3,
+                "point4":this.state.point4
+            },
+            "previousId":this.state.previousId
+       }
 
-        this.setState({
-            previousId:this.state.previousId
-        });
+       landfunc(landobj);
     };
 
     newPoint(){
         this.setState({
-            flag:this.state.flag+1
+            flag:true
         })
     }
 
@@ -74,22 +90,22 @@ class LandIdCreate extends Component {
                     <Table.Body>   
                         <Table.Row> 
                             <Table.Cell>Point 1</Table.Cell> 
-                            <Table.Cell><Input size='mini' placeholder='' /></Table.Cell> 
+                            <Table.Cell><Input size='mini' placeholder=''  onChange={event => this.setState({point1:event.target.value})}/></Table.Cell> 
                             
                         </Table.Row> 
                         <Table.Row> 
                             <Table.Cell>Point 2</Table.Cell> 
-                            <Table.Cell><Input size='mini' placeholder='' /></Table.Cell> 
+                            <Table.Cell><Input size='mini' placeholder=''onChange={event => this.setState({point2:event.target.value})} /></Table.Cell> 
                             
                         </Table.Row> 
                         <Table.Row> 
                             <Table.Cell>Point 3</Table.Cell> 
-                            <Table.Cell><Input size='mini' placeholder='' /></Table.Cell> 
+                            <Table.Cell><Input size='mini' placeholder=''  onChange={event => this.setState({point3:event.target.value})}/></Table.Cell> 
                            
                         </Table.Row> 
                         <Table.Row> 
                             <Table.Cell>Point 4</Table.Cell> 
-                            <Table.Cell><Input size='mini' placeholder='' /></Table.Cell> 
+                            <Table.Cell><Input size='mini' placeholder='' onChange={event => this.setState({point4:event.target.value})} /></Table.Cell> 
                             
                         </Table.Row> 
                           {

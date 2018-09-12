@@ -1,56 +1,57 @@
 const readline = require('readline');
 var GeoJSON = require('geojson');
 
+  const crypto = require('crypto');
 
 
-try {
-  crypto = require('crypto');
-} catch (err) {
-  console.log('crypto support is disabled!');
-}
+var landfunc= function (landobj){
 
-
-var lanfunc= async(callback)=>{
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Enter the coordinates (lat-long) order wise  : ', (answer) => {
+//const rl = readline.createInterface({
+  //  input: process.stdin,
+    //output: process.stdout
+//});
+//rl.question('Enter the coordinates (lat-long) order wise  : ', (answer) => {
   //please enter the coordinate in the a way eg. 98.1,98.2  90.2,-19.4
-   
-        var previousLandId = "rqwpowhth12344";
-        var chunk = answer.split(" ");
+  //  var point={
+  //   "point1":{
+  //     "pointx":[94,21],
+  //     "pointy":[93,21]
+  // },
+  // "previousId":"1321reu21"
+  //  }
+    var answer=[];
+    //let propSymb = Object.getOwnPropertyNames(point.point1);
+
+    //console.log(propSymb);
   
+    answer.push(Object.values(landobj.point.point1));   
+    var previousLandId = landobj.previousId;
    if(answer =="" || answer == undefined  ){
     
-     return callback("please provide the correct coordinates");
+     return console.log("please provide the correct coordinates");
     process.exit(0);
     
   }
 
-  
-  
-
   else{
-    var x =[];
-    for(var i in chunk){
+    // var x =[];
+    // for(var i in answer){
 
-      x.push(chunk[i]);
-    }
-        // console.log('The given coordinates are:')
-    //for(var j=0;j<x.length;j++){
+    //   x.push(answer[i]);
+    // }
+    //     // console.log('The given coordinates are:')
+    // for(var j=0;j<x.length;j++){
    
-     //console.log(x[j]);
-   // }  
-    var data1 = x;
+    //  console.log(x[j]);
+    // }  
+    console.log(answer);
+    var data1 = answer;
     var data2 = [
     {
     polygon: [
       data1
     ],
-    previousId:previousLandId
+    previousId1:previousLandId
   }];
 
   var output1=   GeoJSON.parse(data2, {'Polygon': 'polygon'});
@@ -59,18 +60,15 @@ rl.question('Enter the coordinates (lat-long) order wise  : ', (answer) => {
   var json = JSON.stringify(output1,undefined,2);
  // console.log(json);
   const hash = crypto.createHash('sha256').update(json).digest('hex');
-  setTimeout(()=>{
-    console.log('your LandID :');
-     console.log(hash);
-  },3000);
+  console.log(hash);
+  // setTimeout(()=>{
+  //   console.log('your LandID :');
+  //    console.log(hash);
+  // },3000);
 
 }
+}
 
-        rl.close();
-    
-});
+ 
 
-};
-
-
-module.exports={landfun};
+module.exports={landfunc};
