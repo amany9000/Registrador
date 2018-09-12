@@ -15,8 +15,8 @@ class SPVCreateTransaction extends Component {
         landID:"",
         from:"",
         to:"",
-        amount:""
-            
+        amount:"",
+        success:""
     }
 
     makeTransaction(today){
@@ -24,7 +24,7 @@ class SPVCreateTransaction extends Component {
         const trans = {
             "class": "transaction",
             "data": {
-                "timestamp": today,
+                "timeStamp": today,
                 "landID" : this.state.landID,
                 "from": [this.state.from],
                 "to": [this.state.to],
@@ -35,7 +35,19 @@ class SPVCreateTransaction extends Component {
         }
         socket.emit('sendTransaction',trans);
     }
-       
+      
+    discard(){
+        // make transactions and send to the network
+        // this.setState({
+        //     timestamp:"",
+        //     landID:"",
+        //     from:"",
+        //     to:"",
+        //     amount:""
+        // });
+    }
+
+
 
   render() {
 
@@ -82,7 +94,6 @@ class SPVCreateTransaction extends Component {
                         <Table.Row> 
                             <Table.Cell>from</Table.Cell> 
                             <Table.Cell><input type ="text" onChange={event => this.setState({from:event.target.value})}/></Table.Cell> 
-                            <Table.Cell>you</Table.Cell> 
                         </Table.Row> 
                         <Table.Row> 
                             <Table.Cell>to</Table.Cell> 
@@ -97,10 +108,7 @@ class SPVCreateTransaction extends Component {
                 <div className="buttons">
                     <button onClick={this.makeTransaction.bind(this, today)}> CREATE </button>
                     {/* <button onClick={()=> { socket.emit('sendTransaction','huhu');}} > CREATE </button> */}
-                    <button> DISCARD </button>
-                </div>
-                <div className="buttons2" style={{marginTop: 30}}>
-                        <button> VERIFY </button>
+                    <button onClick={this.discard.bind(this)} > DISCARD </button>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@ class SPVAddTransaction extends Component {
         const trans = {
             "class": "transaction",
             "data": {
-                "timestamp": today,
+                "timeStamp": today,
                 "landID" : this.state.landID,
                 "from": [this.state.from],
                 "to": [this.state.to],
@@ -34,7 +34,13 @@ class SPVAddTransaction extends Component {
         }
         socket.emit('sendTransaction',trans);
     }
+
        
+
+    verify = async ()=> {
+        console.log("SHiiiit")
+    }
+
 
   render() {
 
@@ -81,7 +87,6 @@ class SPVAddTransaction extends Component {
                         <Table.Row> 
                             <Table.Cell>from</Table.Cell> 
                             <Table.Cell><input type ="text" onChange={event => this.setState({from:event.target.value})}/></Table.Cell> 
-                            <Table.Cell>you</Table.Cell> 
                         </Table.Row> 
                         <Table.Row> 
                             <Table.Cell>to</Table.Cell> 
@@ -103,7 +108,7 @@ class SPVAddTransaction extends Component {
                     <button> DISCARD </button>
                 </div>
                 <div className="buttons2" style={{marginTop: 30}}>
-                        <button> VERIFY </button>
+                        <button onClick={this.verify.bind(this)}> VERIFY </button>
                 </div>
             </div>
         </div>

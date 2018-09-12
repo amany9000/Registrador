@@ -8,7 +8,7 @@ import Landpoint from './Landpoint.js';
 class LandIdCreate extends Component {
 
     state={
-        previousId :""
+        previousId :"",
         flag:0
       }
 
@@ -21,7 +21,7 @@ class LandIdCreate extends Component {
 
     newPoint(){
         this.setState({
-            flag=flag+1
+            flag:this.state.flag+1
         })
     }
 
