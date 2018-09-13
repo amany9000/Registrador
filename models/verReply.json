@@ -1,0 +1,12 @@
+{
+	"class": "verReply",
+	"data": {
+		"blockHeader": {
+    		"blockHeight"   : "",
+    		"hashPrevBlock" : "",
+    		"hashMerkleRoot" : "",
+    		"blockTimeStamp" : ""   
+    		},
+		"branch": [""]
+	} 
+}

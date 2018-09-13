@@ -43,6 +43,11 @@ var transactionVerify = async (transactionList, callback) => {
 			console.log("Timestamp isn't correct",typeof(transaction.data.timeStamp));
         }
 		
+		if(transaction.data.buyerTimeStamp == undefined || transaction.data.buyerTimeStamp === null || typeof(transaction.data.buyerTimeStamp) != "number" ||currentTime < transaction.data.buyerTimeStamp ){
+			returnBool[i] = false;
+			console.log("Timestamp isn't correct",typeof(transaction.data.timeStamp));
+        }
+
 		if(transaction.data.landID== undefined || transaction.data.landID == null || typeof(transaction.data.landID) != "string"){
 			returnBool[i] = false;			
 		}

@@ -5,7 +5,8 @@ const io = require('socket.io')();
 
 const {blockMaker} = require("./blockMaker");
 const {selectBlock} = require("./selectBlock")
-var {transactionVerify} = require("./transactionVerify")
+const {transactionVerify} = require("./transactionVerify")
+const {creatBranch} = = require("./creatBranch") 
 
 var flag1 = true;
 var flag2 = true;
@@ -39,6 +40,9 @@ async.whilst(
 				console.log("rep",reply);
 				var blockChain = JSON.parse(fs.readFileSync("./clients/GovernmentNode/blockChain.json").toString());				 
 				blockChain.push(block);
+				
+				creatBranch(block.transactionList, block.blockHeader.hashMerkleRoot, () => {});
+				
 				fs.writeFileSync("./clients/GovernmentNode/blockChain.json",JSON.stringify(blockChain,undefined,2));					
 				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",JSON.stringify([],undefined,2));
 				
