@@ -1,0 +1,8 @@
+{
+	"class": "verTransaction",
+	"data": {
+		"landId": "",
+		"from": "",
+		"to": ""
+	} 
+}

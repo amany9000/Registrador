@@ -24,7 +24,7 @@ class SPVCreateTransaction extends Component {
         const trans = {
             "class": "transaction",
             "data": {
-                "timeStamp": today,
+                "buyerTimeStamp": today,
                 "landID" : this.state.landID,
                 "from": [this.state.from],
                 "to": [this.state.to],
@@ -106,7 +106,7 @@ class SPVCreateTransaction extends Component {
                     </Table.Body>
                 </Table>
                 <div className="buttons">
-                    <button onClick={this.makeTransaction.bind(this, today)}> CREATE </button>
+                    <button onClick={this.makeTransaction.bind(this, today)}> Download </button>
                     {/* <button onClick={()=> { socket.emit('sendTransaction','huhu');}} > CREATE </button> */}
                     <button onClick={this.discard.bind(this)} > DISCARD </button>
                 </div>

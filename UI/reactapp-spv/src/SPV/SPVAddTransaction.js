@@ -10,7 +10,8 @@ const socket = openSocket('http://localhost:8000');
 class SPVAddTransaction extends Component {
 
     state = {
-        timestamp:"",
+        timeStamp:"",
+        buyerTimeStamp:"",
         landID:"",
         from:"",
         to:"",
@@ -24,6 +25,7 @@ class SPVAddTransaction extends Component {
             "class": "transaction",
             "data": {
                 "timeStamp": today,
+                "buyerTimeStamp" : this.state.buyerTimeStamp,
                 "landID" : this.state.landID,
                 "from": [this.state.from],
                 "to": [this.state.to],
@@ -38,7 +40,7 @@ class SPVAddTransaction extends Component {
        
 
     verify = async ()=> {
-        console.log("SHiiiit")
+        socket.emit('verifyTransaction');
     }
 
 
@@ -79,7 +81,11 @@ class SPVAddTransaction extends Component {
                         <Table.Row> 
                             <Table.Cell>timestamp</Table.Cell> 
                             <Table.Cell>{today}</Table.Cell> 
-                        </Table.Row> 
+                        </Table.Row>
+                        <Table.Row> 
+                            <Table.Cell>buyer timestamp</Table.Cell> 
+                            <Table.Cell><input type ="text" onChange={event => this.setState({buyerTimeStamp:event.target.value})}/></Table.Cell> 
+                        </Table.Row>
                         <Table.Row> 
                             <Table.Cell>landID</Table.Cell> 
                             <Table.Cell><input type ="text" onChange={event => this.setState({landID:event.target.value})}/></Table.Cell> 

@@ -160,12 +160,17 @@ await sw.join('rohandhoot')
           });
           fs.writeFileSync("./clients/GovernmentNode/halted.log","");
           fs.writeFileSync("./clients/GovernmentNode/haltedList.json",JSON.stringify([], undefined, 2));          
+        
+          var branchList = JSON.parse(fs.readFileSync("./branchList.json").toString());               
+          for (let k in branchList){
+              peers[branchList[k].peerId].conn.write(JSON.stringify(branchList[k].branch,undefined,2))            
+          fs.writeFileSync("./clients/GovernmentNode/branchList.json", JSON.stringify(transactionList,undefined,2));          
         }
         
         if(new Date().getMinutes() >= 59 && new Date().getSeconds() >= 30){
             var haltedList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/haltedList.json").toString());  
             haltedList.push(message)
-            fs.writeFileSync("./clients/GovernmentNode/haltedList.json", JSON.stringify(haltedList,undefined,2));              
+            fs.writeFileSync("./clients/GovernmentNode/haltedList.json", JSON.stringify({},undefined,2));              
         }
         
         else{
@@ -181,6 +186,14 @@ await sw.join('rohandhoot')
             }
           })
         }
+      }
+      else if(message!= null && message!= undefined && message.class!= null && message.class!= undefined && message.class == "verTransaction"){
+        var verTransList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/verTransList.json").toString());               
+        verTransList.push({
+          peerId : peerId,
+          message: message
+        })
+        fs.writeFileSync("./clients/GovernmentNode/verTransList.json", JSON.stringify(verTransList,undefined,2));        
       } 
     })
     

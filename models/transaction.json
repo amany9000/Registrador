@@ -1,7 +1,8 @@
 {
     "class": "transaction",
     "data": {
-        "timestamp": "",
+        "timesStamp": "",
+        "buyerTimeStamp": "",
         "landID" : "",
         "from": [""],
         "to": [""],
