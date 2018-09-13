@@ -10,14 +10,14 @@ class Landpoint extends Component{
 	render(){
 
 		return(
-
+			
 			<div className="in">
 
 				<Table celled> 
 
 				<Table.Body>   
                         <Table.Row> 
-                            <Table.Cell>Point 4</Table.Cell> 
+                            <Table.Cell>Point 5</Table.Cell> 
                             <Table.Cell><Input size='mini' placeholder='' /></Table.Cell> 
                             
                         </Table.Row> 
@@ -27,6 +27,7 @@ class Landpoint extends Component{
 
 
 			</div>
+			
 
 
 

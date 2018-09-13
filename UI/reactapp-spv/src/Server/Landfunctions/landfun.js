@@ -60,7 +60,8 @@ var landfunc= function (landobj){
   var json = JSON.stringify(output1,undefined,2);
  // console.log(json);
   const hash = crypto.createHash('sha256').update(json).digest('hex');
-  console.log(hash);
+  return hash;
+
   // setTimeout(()=>{
   //   console.log('your LandID :');
   //    console.log(hash);
