@@ -5,6 +5,7 @@ const defaults = require('dat-swarm-defaults');
 const getPort = require('get-port');
 const readline = require('readline');
 const io = require('socket.io')();
+const fs  = require("fs");
 
 const {transSigCreate} = require("./sign.js");
 
@@ -88,10 +89,22 @@ io.on('connection', (client) => {
       transaction["sellerSignature"] = signature;
 
     console.log(transaction)
+
+    fs.writeFileSync("./pendingTrans.json",JSON.stringify(transaction,undefined,2));    
+    delete pendingTrans;
+
     for (let id in peers) {
       peers[id].conn.write(JSON.stringify(transaction,undefined,2))
     }  
   });
+
+  client.on("verifyTransaction", async () => {
+    var pendingTrans = JSON.parse(fs.readFileSync("./pendingTrans.json").toString(),undefined,2)
+
+    for (let id in peers) {
+      peers[id].conn.write(JSON.stringify(pendingTrans,undefined,2))
+    }            
+  })
 });
 
   /**
@@ -116,13 +129,18 @@ sw.join('rohandhoot')
       }
     }
 
-    conn.on('data', data => {
+    conn.on('data', async (message) => {
       // Here we handle incomming messages
-      log(
-        'Received Message from peer ' + peerId,
-        '----> ' + data.toString()
-      )
-      io.emit('getTransaction', data.toString());
+      var message = JSON.parse(data);      
+      if(message!= null && message!= undefined && message.class!= null && message.class!= undefined && message.class ==  "block"){
+        if(message.class = "verReply"){
+          checkBranch(message).then((flag)=>{
+            if(flag){
+              socket.emit("changeStatus", "Transaction included in Block")
+            }
+          })
+        }
+      }
     })
 
     conn.on('close', () => {

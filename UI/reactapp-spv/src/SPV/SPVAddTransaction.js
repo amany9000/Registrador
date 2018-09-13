@@ -38,7 +38,7 @@ class SPVAddTransaction extends Component {
        
 
     verify = async ()=> {
-        console.log("SHiiiit")
+        socket.emit('verifyTransaction');
     }
 
 
