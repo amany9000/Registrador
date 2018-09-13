@@ -1,10 +1,14 @@
 const {getBranch} = require("./fullNode");
 var crypto = require("crypto")
 
-const checkBranch = async(branch) => {
-			
+const checkBranch = async(reply) => {
+	const branch = reply.data.branch;		
 	return new Promise((resolve, reject) => {
-	var hashTrans = JSON.parse(fs.readFileSync("./pendingTrans.json").toString(),undefined,2); // hash of first transaction(to verify)
+	var hash1 = crypto.createHash('sha256');		
+	var trans = JSON.parse(fs.readFileSync("./pendingTrans.json").toString(),undefined,2);
+	hash1.update(trans); // hash of first transaction(to verify)
+	var hashTrans = hash1.digest("hex");
+
 	var last = hashTrans;
 	var calculatedHash = "";
 	for(var i=0; i< branch.length - 1; i++){
@@ -22,8 +26,11 @@ const checkBranch = async(branch) => {
 	    hash.end();
 	    delete hash;
 	}
-   	if(calculatedHash.toUpperCase() == branch[-1])
+   	if(calculatedHash.toUpperCase() == reply.data.header.hashMerkleRoot)
    		console.log("Merry Chritsmas Transation Verified");
+        var transList = JSON.parse(fs.readFileSync("./transList.json").toString());               
+        transList.push(trans)
+        fs.writeFileSync("./transaList.json", JSON.stringify(transList,undefined,2));   		
    		resolve(true);
    	});
 	else{

@@ -129,14 +129,15 @@ sw.join('rohandhoot')
       }
     }
 
-    conn.on('data', async (message) => {
+    conn.on('data', async (data) => {
       // Here we handle incomming messages
       var message = JSON.parse(data);      
       if(message!= null && message!= undefined && message.class!= null && message.class!= undefined && message.class ==  "block"){
-        if(message.class = "verReply"){
+        if(message.class == "verReply"){
           checkBranch(message).then((flag)=>{
             if(flag){
-              socket.emit("changeStatus", "Transaction included in Block")
+              console.log(`Transaction included in Block No. ${message.data.blockHeader.blockHeight}`);
+              socket.emit("changeStatus", `Transaction included in Block No. ${message.data.blockHeader.blockHeight}`)
             }
           })
         }
