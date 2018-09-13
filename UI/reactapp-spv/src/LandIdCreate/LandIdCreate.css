@@ -66,14 +66,14 @@
 }
 
 .note{
-  height:50px;
-  padding :10px;
+  height:30px;
+  padding :30px;
   font-size :25px;
  font-style:Bold;
  font-family: "Times New Roman";
  
    background-color: #2bbbad;
-   margin-top: 20px;
+   margin-top: 40px;
 
 }
 .in{
@@ -84,4 +84,19 @@
 .inpu{
   
   width:50%;
+}
+
+.landid{
+
+width :60%;
+height :20px;
+margin-left:auto;
+margin-right: auto;
+margin-top: 20px;
+margin-bottom :10px;
+font-style:Bold;
+font-size:25px;
+padding:10px;
+
+
 }

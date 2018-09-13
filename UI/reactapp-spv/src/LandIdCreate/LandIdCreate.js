@@ -4,6 +4,7 @@ import Main from '../Main/Main'
 import { Table,Input,Button,Form } from 'semantic-ui-react'; 
 import Landpoint from './Landpoint.js';
 import {landfunc} from '../Server/Landfunctions/landfun.js';
+import Printlandid from './Printlandid.js';
 
 
 class LandIdCreate extends Component {
@@ -14,14 +15,16 @@ class LandIdCreate extends Component {
         point1:"",
         point2:"",
         point3:"",
-        point4:""
+        point4:"",
+        check:false,
+        hash: ''
       }
 
     createId(){
         
-        //this.setState({
-          //  previousId:this.state.previousId
-       // });
+        this.setState({
+            check:true
+       });
        const landobj={
             "point":{
                 "point1":this.state.point1,
@@ -31,8 +34,8 @@ class LandIdCreate extends Component {
             },
             "previousId":this.state.previousId
        }
-
-       landfunc(landobj);
+       var hash = landfunc(landobj);
+       this.setState({hash});
     };
 
     newPoint(){
@@ -126,6 +129,15 @@ class LandIdCreate extends Component {
                     <Button onClick={this.createId.bind(this)}>Generate Unique Land Id</Button>
                 </div>
             </div>
+            {
+                this.state.check ?
+               <div className ="landid" align="center">
+            <h3 style={{background: '#2bbbad'}}> Congratulations  Landid generated is  : <u>{this.state.hash}</u> </h3>
+            </div>
+                :
+                <div> </div>
+
+            }
             <div className="note"  align="center">
                 <h3> Note :<u>The coordinates must be in clockwise direction starting from north</u> </h3>
             </div>
