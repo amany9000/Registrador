@@ -1,8 +1,8 @@
-const {getMerkleTree} = require("./merkle");
+const {getMerkleTree} = require("./../merkle");
 const math = require("mathjs");
 var createBranch = function (transactionList, root, callback){
     var verTransList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/verTransList.json").toString());               
-	
+	console.log("bbbbbbbbbbbbbbb")
 	var branchList = [];
 	for (let j in verTransList){
 		var count = new Number(0);

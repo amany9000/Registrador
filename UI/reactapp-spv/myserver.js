@@ -84,25 +84,37 @@ io.on('connection', (client) => {
     
     if(transaction.buyerSignature === ""){
       transaction["buyerSignature"] = signature;
+      console.log(transaction)
+
+      fs.writeFileSync("./outputs/draft.json",JSON.stringify(transaction,undefined,2));    
+      delete pendingTrans;
     }
-    else
+    else{
       transaction["sellerSignature"] = signature;
 
-    console.log(transaction)
+      console.log(transaction)
 
-    fs.writeFileSync("./pendingTrans.json",JSON.stringify(transaction,undefined,2));    
-    delete pendingTrans;
+      fs.writeFileSync("./pendingTrans.json",JSON.stringify(transaction,undefined,2));    
+      delete pendingTrans;
 
-    for (let id in peers) {
-      peers[id].conn.write(JSON.stringify(transaction,undefined,2))
-    }  
+      for (let id in peers) {
+       peers[id].conn.write(JSON.stringify(transaction,undefined,2))
+      }
+    }
   });
 
   client.on("verifyTransaction", async () => {
     var pendingTrans = JSON.parse(fs.readFileSync("./pendingTrans.json").toString(),undefined,2)
-
+    console.log("pend")
     for (let id in peers) {
-      peers[id].conn.write(JSON.stringify(pendingTrans,undefined,2))
+      peers[id].conn.write(JSON.stringify({
+  class: "verTransaction",
+  data: {
+    landId: pendingTrans.data.landId,
+    from: pendingTrans.data.from,
+    to: pendingTrans.data.to
+  } 
+},undefined,2))
     }            
   })
 });

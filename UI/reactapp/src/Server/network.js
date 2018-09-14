@@ -46,8 +46,9 @@ const askUser = async () => {
       class: "transaction",
       data: {
           timeStamp: 1234345,
-          landID : "land67",
-          from: ["User2"],
+          buyerTimeStamp: '1234',
+          landID : "land45",
+          from: ["User3"],
           to: ["User1"],
           amount: 12345,
         },

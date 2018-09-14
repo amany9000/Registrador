@@ -6,7 +6,7 @@ const io = require('socket.io')();
 const {blockMaker} = require("./blockMaker");
 const {selectBlock} = require("./selectBlock")
 const {transactionVerify} = require("./transactionVerify")
-const {creatBranch} = = require("./creatBranch") 
+const {creatBranch} = require("./createBranch") 
 
 var flag1 = true;
 var flag2 = true;
@@ -20,7 +20,7 @@ async.whilst(
 			flag2 = true;
 		}
 		
-		if(new Date().getMinutes() === 44 && new Date().getSeconds() === 0 && flag1){
+		if(new Date().getMinutes() === 22 && new Date().getSeconds() === 0 && flag1){
 			setTimeout(callback, 1000);
 			blockMaker((reply)=>{
 				console.log(reply);

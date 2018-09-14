@@ -41,7 +41,8 @@ var data = b64u.encode(JSON.stringify(trans.data));
 
 const verifySeller = crypto.createVerify('SHA256');
 verifySeller.update(data);
-const sellerMatch = verifySeller.verify(trans.data.from, sellerSignatureRecieved, 'base64');
+console.log(trans.data.from)
+const sellerMatch = verifySeller.verify(trans.data.from[0], sellerSignatureRecieved, 'base64');
 
 var trasaction = JSON.parse(JSON.stringify(trans));
 delete transaction.data["timeStamp"];
@@ -49,7 +50,7 @@ delete transaction.data["timeStamp"];
 data = b64u.encode(JSON.stringify(transaction.data));
 const verifyBuyer = crypto.createVerify('SHA256');
 verifyBuyer.update(data);
-const buyerMatch = verifyBuyer.verify(trans.data.to, buyerSignatureRecieved, 'base64');
+const buyerMatch = verifyBuyer.verify(trans.data.to[0], buyerSignatureRecieved, 'base64');
 
 return sellerMatch && buyerMatch;
 }
