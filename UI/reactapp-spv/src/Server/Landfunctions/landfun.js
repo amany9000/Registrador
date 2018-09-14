@@ -19,13 +19,23 @@ var landfunc= function (landobj){
   // },
   // "previousId":"1321reu21"
   //  }
+
     var answer=[];
     //let propSymb = Object.getOwnPropertyNames(point.point1);
 
     //console.log(propSymb);
+
   
-    answer.push(Object.values(landobj.point.point1));   
+    answer.push(Object.values(landobj.point)); 
+    console.log(answer[0]);  
     var previousLandId = landobj.previousId;
+    if(previousLandId.length <32){
+      return "Invalid previousLandId";
+    }
+    if(landobj.point.point1.length<4 || landobj.point.point2.length<4 || landobj.point.point3.length<4 ||landobj.point.point4.length<4){
+
+      return "Please enter the correct coordinates";
+    }
    if(answer =="" || answer == undefined  ){
     
      return console.log("please provide the correct coordinates");
@@ -44,7 +54,7 @@ var landfunc= function (landobj){
    
     //  console.log(x[j]);
     // }  
-    console.log(answer);
+    
     var data1 = answer;
     var data2 = [
     {

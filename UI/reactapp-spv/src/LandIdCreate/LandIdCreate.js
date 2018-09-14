@@ -132,7 +132,7 @@ class LandIdCreate extends Component {
             {
                 this.state.check ?
                <div className ="landid" align="center">
-            <h3 style={{background: '#2bbbad'}}> Congratulations  Landid generated is  : <u>{this.state.hash}</u> </h3>
+            <h3 style={{background: '#2bbbad'}}> <u>{this.state.hash}</u> </h3>
             </div>
                 :
                 <div> </div>

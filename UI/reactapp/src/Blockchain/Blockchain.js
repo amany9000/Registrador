@@ -35,15 +35,11 @@ class Blockchain extends Component {
  
                 } 
                 </section>
-                <div style={{
-                    opacity: 0.8,
-                    marginRight: 50,
-                    marginLeft: 50
-                }}>
+                <div >
                 <Table celled> 
                     <Table.Header> 
                         <Table.Row> 
-                        <Table.HeaderCell> Block Hash </Table.HeaderCell> 
+                        <Table.HeaderCell > Block Hash </Table.HeaderCell> 
                         <Table.HeaderCell> Percentage </Table.HeaderCell> 
                         </Table.Row> 
                     </Table.Header> 
