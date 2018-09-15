@@ -6,7 +6,7 @@ const io = require('socket.io')();
 const {blockMaker} = require("./blockMaker");
 const {selectBlock} = require("./selectBlock")
 const {transactionVerify} = require("./transactionVerify")
-const {creatBranch} = require("./createBranch") 
+const {createBranch} = require("./createBranch") 
 
 var flag1 = true;
 var flag2 = true;
@@ -20,7 +20,7 @@ async.whilst(
 			flag2 = true;
 		}
 		
-		if(new Date().getMinutes() === 22 && new Date().getSeconds() === 0 && flag1){
+		if(new Date().getMinutes() === 10 && new Date().getSeconds() === 0 && flag1){
 			setTimeout(callback, 1000);
 			blockMaker((reply)=>{
 				console.log(reply);
@@ -32,16 +32,19 @@ async.whilst(
     		flag1 = false; 
 		}
 
-		else if(new Date().getMinutes() === 15	/*&& new Date().getSeconds() === 0 */&& flag2){
+		else if(new Date().getMinutes() === 5	/*&& new Date().getSeconds() === 0 */&& flag2){
 			setTimeout(callback, 1000);
 			console.log("selectBlock");
 			
 			selectBlock((block, reply)=>{
-				console.log("rep",reply);
+				console.log("rep",reply,block);
 				var blockChain = JSON.parse(fs.readFileSync("./clients/GovernmentNode/blockChain.json").toString());				 
 				blockChain.push(block);
-				
-				creatBranch(block.transactionList, block.blockHeader.hashMerkleRoot, () => {});
+				var transList = [];
+				for(var i in block.transactionList){
+					transList.push(JSON.parse(block.transactionList[i]))
+				}				
+				createBranch(transList, block.header.hashMerkleRoot);
 				
 				fs.writeFileSync("./clients/GovernmentNode/blockChain.json",JSON.stringify(blockChain,undefined,2));					
 				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",JSON.stringify([],undefined,2));

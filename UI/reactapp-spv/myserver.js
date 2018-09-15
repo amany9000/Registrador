@@ -105,14 +105,12 @@ io.on('connection', (client) => {
 
   client.on("verifyTransaction", async () => {
     var pendingTrans = JSON.parse(fs.readFileSync("./pendingTrans.json").toString(),undefined,2)
-    console.log("pend")
+    console.log("pend", pendingTrans.data.landID, pendingTrans.data)
     for (let id in peers) {
       peers[id].conn.write(JSON.stringify({
   class: "verTransaction",
   data: {
-    landId: pendingTrans.data.landId,
-    from: pendingTrans.data.from,
-    to: pendingTrans.data.to
+    landId: pendingTrans.data.landID
   } 
 },undefined,2))
     }            

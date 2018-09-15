@@ -1,20 +1,21 @@
 const {getMerkleTree} = require("./../merkle");
+const fs  = require("fs");
 const math = require("mathjs");
-var createBranch = function (transactionList, root, callback){
+var createBranch = function (transactionList, root){
     var verTransList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/verTransList.json").toString());               
-	console.log("bbbbbbbbbbbbbbb")
+	//console.log("bbbbbbbbbbbbbbb",verTransList,transactionList[1].data.from)
 	var branchList = [];
 	for (let j in verTransList){
 		var count = new Number(0);
 		//console.log(transactionList, buyer, root);
 		for (var trans of transactionList){
-			if(trans.data.landId == verTransList.data.landId){
+			if(trans.data.landID == verTransList[j].message.data.landId){
 				var branch = [];
 				getMerkleTree(transactionList, (tree)=>{
 					returnedRoot = tree.root()
 					
 					if(returnedRoot != root){
-						return callback("Transaction List in wrong order");
+						console.log("Transaction List in wrong order", returnedRoot, root);
 					}
 					
 					var levelCount = tree.depth()

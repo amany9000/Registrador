@@ -63,11 +63,12 @@ var transactionVerify = async (transactionList, callback) => {
 
 		trans.push(transaction);
 		//Signature is correct
+		/*
 		if(!transSigVerify(transaction)){
 			returnBool[i] = false;			
 			console.log("Signature Not Valid");
 		}
-		
+		*/
 		if(returnBool[i] === true){
 			console.log("yesss")
 		}

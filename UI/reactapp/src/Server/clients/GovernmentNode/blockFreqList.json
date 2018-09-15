@@ -1,20 +1,21 @@
 [
   {
-    "hash": "463fcedc956a3b380d7bb7e112c4fab9cae7f4093b2065ab9138a224e6e62533",
+    "hash": "8cae1e0508eb2f5c3cf4990b79c8f40f366716dc0139c6a7ee5981a46a122340",
     "block": {
       "class": "block",
       "header": {
         "blockHeight": 570,
         "hashPrevBlock": "c9e6d5695a81e3eab3573b5d4454ada5deb1272af7fa2e8af555b8a4876d6ff6",
-        "hashMerkleRoot": "EA39237351E74DE296CA0B4308570D37502EB624805629917AAFA085B04402F8",
-        "blockTimeStamp": 1532701980760
+        "hashMerkleRoot": "FE969F673487AD41CF7591ADFEA2CC64CFE25C3CE2B06DE750675DF593850E30",
+        "blockTimeStamp": 1536897120426
       },
-      "transactionCount": 2,
+      "transactionCount": 3,
       "transactionList": [
-        "{\n  \"class\": \"transaction\",\n  \"data\": {\n    \"timeStamp\": \"1234345\",\n    \"landID\": \"land67\",\n    \"from\": [\n      \"User2\"\n    ],\n    \"to\": [\n      \"User1\"\n    ],\n    \"amount\": \"12345\"\n  },\n  \"buyerSignature\": \"sig1\",\n  \"selerSignature\": \"sig2\"\n}",
-        "{\n  \"class\": \"transaction\",\n  \"data\": {\n    \"timeStamp\": \"1234345\",\n    \"landID\": \"land2345\",\n    \"from\": [\n      \"User2\"\n    ],\n    \"to\": [\n      \"User1\"\n    ],\n    \"amount\": \"12345\"\n  },\n  \"buyerSignature\": \"sig1\",\n  \"selerSignature\": \"sig2\"\n}"
+        "{\n  \"data\": {\n    \"class\": \"transaction\",\n    \"timeStamp\": 1234563425,\n    \"landID\": \"land23\",\n    \"from\": [\n      \"User3\"\n    ],\n    \"to\": [\n      \"User1\"\n    ],\n    \"amount\": 123213\n  }\n}",
+        "{\n  \"class\": \"transaction\",\n  \"data\": {\n    \"timeStamp\": 1536863791378,\n    \"buyerTimeStamp\": \"1536862295279\",\n    \"landID\": \"land67\",\n    \"from\": [\n      \"-----BEGIN PUBLIC KEY----- MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn2NG/V8gegcS5nQEALEU x20MILWUOkKmSvd43zCfO2WWUlb+q8Si/C7adHg2+35KhcpuB+t8WtVu5KmaCEtf 3HfBordD4GuG13LSa2RbVNCuEtMAs9kFGWwRhaaiA3kaIxl8Ip0csAxBuxzK+zFb JNlJ4wE8btRrFjW5iA6Qw/JTAa8fx3YK887qfDHvPuAkwTCFaCyj92UW+2Dh9n4l jnKcUuoFrjjg+xZwceGS1mXKg7xt9+yOciPX7it6EMVzvMoBEbPjdgB4YWB1Qjyt irjtr+GZ0VfmimKTnfDXFHnc4GD3n7W76+l4H4Pi6RUZSM5I5ehV5ztWvvpQ/iKx FwIDAQAB -----END PUBLIC KEY-----\"\n    ],\n    \"to\": [\n      \"-----BEGIN PUBLIC KEY----- MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwH06hkpiKwiahkxFtNad OPjTtrueIz+/WIhQfwt4er34MT6b9DUv84CJULJNRQG64FYyqy9CGG/SNrAF43GX AuIRyPknSYPnOPWp8hfp+oYER3WCdshm5knWJBkEe8QWB6cEv9cgwtmfaONiJw4L hVw+fKRS3Sd+l7uT4q3W/4f4y0MQfRZB5CKerUHcGN3nXuH2Ld9UQ+1vsgFqmFkv E5yuSXYe8vQXwvuBn+YFIIHAtJEBcI8PBXLjGq/42O1jGCJBaKbRtGFYUehmoQvc q4vph8hTTLvU6Dv/AygjxJVshyVoBmGv7F+gY3dAdEM1R/MbNxs4bx/N5WB01LBn 7wIDAQAB -----END PUBLIC KEY-----\"\n    ],\n    \"amount\": \"1234\"\n  },\n  \"buyerSignature\": \"ao67AS8iqOt8aBApq5agna3idJL4D+8D+VUeUEw8FwnhFWEeQYNk1NAp4zYTKUaEdsmeZpgZuOpd3Vx3tQo1/3h2Yz2UkkwZqKSm0DJKn/aECY+gExyN/DdxIpfkHumIQ3gzr5MrpbeiOGJBZ761xmP5yvgd65PPncpEXGugrJS3knhz9nA7vgnaJj9s4aDx8T5tddpE2skeIikHy4vphbYiBorkkp7C3CSrQcXpbB/Gqe2msnvmaHPipmmoOJJQ8FEXl0V6RKH5+fPQmhDg5+DkIU/XofnoeM5xA9JeL7LT7E0y5uRoeqnlUcVYddsaL6Ua6fJBauMF7Ge4hLPGFg==\",\n  \"sellerSignature\": \"fLWVZLy1Z9iCXohKBFW2RAei9u0fWnANBcB8rZQxA+eyyg7g++lRzE0haAzQ039YMQlxy+H136W84KMJXtoz7fdAvxbtUCpilqUuixzzLj6H3TdPe/ySigHQUF6h6wLWHHnTERcgVxkBEOs7ionF8GfFGEGwSEpNI+MQugpD+hFYZY6M0kNvMe55TzJ/oSXEoaFhb32PXGbBMpn0BBSdbjnnZo0KnqyUMTHl1EXGUjIs9Svc1MgaArOMBN8T2zM3T/PodhRIj69OUkXtLrWFJNVXjngl4wh+YQm7D5P2e9F68hlPm3VsbMU0jSr+KDTXBmFYgsG5AUt+/krhlXLuNw==\"\n}",
+        "{\n  \"class\": \"transaction\",\n  \"data\": {\n    \"timeStamp\": 1234345,\n    \"buyerTimeStamp\": \"1234\",\n    \"landID\": \"land45\",\n    \"from\": [\n      \"User3\"\n    ],\n    \"to\": [\n      \"User1\"\n    ],\n    \"amount\": 12345\n  },\n  \"buyerSignature\": \"sig1\",\n  \"selerSignature\": \"sig2\"\n}"
       ]
     },
-    "freq": 1
+    "freq": 2
   }
 ]
