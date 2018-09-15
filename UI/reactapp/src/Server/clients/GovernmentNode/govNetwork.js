@@ -131,6 +131,7 @@ await sw.join('rohandhoot')
         'Received Message from peerzzz ' + peerId,
         '----> ' + data
       )
+      //console.log("message", message)
       if(message!= null && message!= undefined && message.class!= null && message.class!= undefined && message.class ==  "block"){
         blockVerify(message, (reply) => {
           console.log("rep",reply)
@@ -165,6 +166,7 @@ await sw.join('rohandhoot')
           for (let k in branchList){
               peers[branchList[k].peerId].conn.write(JSON.stringify(branchList[k].branch,undefined,2))            
           fs.writeFileSync("./clients/GovernmentNode/branchList.json", JSON.stringify(transactionList,undefined,2));          
+          }
         }
         
         if(new Date().getMinutes() >= 59 && new Date().getSeconds() >= 30){
@@ -172,8 +174,9 @@ await sw.join('rohandhoot')
             haltedList.push(message)
             fs.writeFileSync("./clients/GovernmentNode/haltedList.json", JSON.stringify({},undefined,2));              
         }
-        
+                
         else{
+          console.log("here")
           transactionVerify([message], (reply) => {
             console.log("rep - ",reply)
             if(!reply[0]){
@@ -194,7 +197,7 @@ await sw.join('rohandhoot')
           message: message
         })
         fs.writeFileSync("./clients/GovernmentNode/verTransList.json", JSON.stringify(verTransList,undefined,2));        
-      } 
+      }       
     })
     
     conn.on('close', () => {

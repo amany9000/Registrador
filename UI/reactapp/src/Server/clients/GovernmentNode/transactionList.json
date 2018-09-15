@@ -3,9 +3,78 @@
     "class": "transaction",
     "data": {
       "timeStamp": 1234345,
-      "landID": "land67",
+      "buyerTimeStamp": "1234",
+      "landID": "land45",
       "from": [
-        "User2"
+        "User3"
+      ],
+      "to": [
+        "User1"
+      ],
+      "amount": 12345
+    },
+    "buyerSignature": "sig1",
+    "selerSignature": "sig2"
+  },
+  {
+    "class": "transaction",
+    "data": {
+      "timeStamp": 1234345,
+      "buyerTimeStamp": "1234",
+      "landID": "land45",
+      "from": [
+        "User3"
+      ],
+      "to": [
+        "User1"
+      ],
+      "amount": 12345
+    },
+    "buyerSignature": "sig1",
+    "selerSignature": "sig2"
+  },
+  {
+    "class": "transaction",
+    "data": {
+      "timeStamp": 1234345,
+      "buyerTimeStamp": "1234",
+      "landID": "land45",
+      "from": [
+        "User3"
+      ],
+      "to": [
+        "User1"
+      ],
+      "amount": 12345
+    },
+    "buyerSignature": "sig1",
+    "selerSignature": "sig2"
+  },
+  {
+    "class": "transaction",
+    "data": {
+      "timeStamp": 1234345,
+      "buyerTimeStamp": "1234",
+      "landID": "land45",
+      "from": [
+        "User3"
+      ],
+      "to": [
+        "User1"
+      ],
+      "amount": 12345
+    },
+    "buyerSignature": "sig1",
+    "selerSignature": "sig2"
+  },
+  {
+    "class": "transaction",
+    "data": {
+      "timeStamp": 1234345,
+      "buyerTimeStamp": "1234",
+      "landID": "land45",
+      "from": [
+        "User3"
       ],
       "to": [
         "User1"

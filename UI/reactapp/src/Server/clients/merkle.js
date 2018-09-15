@@ -5,7 +5,7 @@ var getMerkleTree = function(transactionList,callback){
     for(var i in transactionList){
         x.push(JSON.stringify(transactionList[i],undefined,2));
     } 
-    
+    console.log(x);
     merkle("sha256").async(x, (err,tree) => {
     if(err){
         return callback(null);

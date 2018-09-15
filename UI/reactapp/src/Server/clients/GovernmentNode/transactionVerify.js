@@ -43,9 +43,9 @@ var transactionVerify = async (transactionList, callback) => {
 			console.log("Timestamp isn't correct",typeof(transaction.data.timeStamp));
         }
 		
-		if(transaction.data.buyerTimeStamp == undefined || transaction.data.buyerTimeStamp === null || typeof(transaction.data.buyerTimeStamp) != "number" ||currentTime < transaction.data.buyerTimeStamp ){
+		if(transaction.data.buyerTimeStamp == undefined || transaction.data.buyerTimeStamp === null || typeof(transaction.data.buyerTimeStamp) != "string" ||currentTime < parseInt(transaction.data.buyerTimeStamp, 10) ){
 			returnBool[i] = false;
-			console.log("Timestamp isn't correct",typeof(transaction.data.timeStamp));
+			console.log("buyer Timestamp isn't correct",typeof(transaction.data.timeStamp));
         }
 
 		if(transaction.data.landID== undefined || transaction.data.landID == null || typeof(transaction.data.landID) != "string"){
@@ -57,16 +57,21 @@ var transactionVerify = async (transactionList, callback) => {
 		if(transaction.data.to == undefined || transaction.data.to == null || transaction.data.to.length == undefined || transaction.data.to.length == 0){
 			returnBool[i] = false;			
 		}
-		if(transaction.class == undefined || transaction.class != "transaction" || transaction.data.amount == undefined || transaction.data.amount == null || typeof(transaction.data.amount) != "number"){
+		if(transaction.class == undefined || transaction.class != "transaction" || transaction.data.amount == undefined || transaction.data.amount == null){
 			returnBool[i] = false;
 		}
+
 		trans.push(transaction);
 		//Signature is correct
-		if(!transSigVerify(receivedBlock)){
+		/*
+		if(!transSigVerify(transaction)){
 			returnBool[i] = false;			
 			console.log("Signature Not Valid");
 		}
-
+		*/
+		if(returnBool[i] === true){
+			console.log("yesss")
+		}
 		landIDs.push(transaction.data.landID);
 		
 		for(var j in transaction.data.from){
@@ -105,6 +110,7 @@ var transactionVerify = async (transactionList, callback) => {
 		}
 	});
 	
+
 	// "from" users exist and (jointly) own the land
 	await getUser(owners, (userList) => {
 		
@@ -128,6 +134,7 @@ var transactionVerify = async (transactionList, callback) => {
 				}
 				if(!validseller){
 					validTrans = false;
+					console.log("Land Owner doesn't exist")
 					break;
 				}
 			}
@@ -137,7 +144,6 @@ var transactionVerify = async (transactionList, callback) => {
 			}
 		}		
 	});
-
 	// "to" users exist
 	await getUser(buyers, (userList) => {
 
@@ -173,6 +179,7 @@ var transactionVerify = async (transactionList, callback) => {
 			}
 		}
 	});
+
 	for(var i in transactionList){
 		if(returnBool[i]){
 			var pendingList = (fs.readFileSync("./clients/GovernmentNode/pendingList.log").toString()).split(",");                

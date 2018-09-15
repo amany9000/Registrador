@@ -7,11 +7,10 @@
         "timeStamp": 1234563425,
         "landID": "land23",
         "from": [
-          "User2",
-          "User4"
+          "User3"
         ],
         "to": [
-          "User2"
+          "User1"
         ],
         "amount": 123213
       }
