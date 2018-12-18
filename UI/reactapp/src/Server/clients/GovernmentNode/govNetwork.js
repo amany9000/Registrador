@@ -1,4 +1,4 @@
-
+  
 const crypto = require('crypto');
 const Swarm = require('discovery-swarm');
 const defaults = require('dat-swarm-defaults');
@@ -21,6 +21,7 @@ console.log('Your identity: ' + myId.toString('hex'))
 // reference to redline interface
 let rl
 var a =5;
+i=0;
 function log () {
   if (rl) {
     rl.clearLine()
@@ -57,7 +58,7 @@ const sw = Swarm(config)
   sw.listen(port)
   console.log('Listening to port: ' + port)
   
-  var lastHeight = 569;
+  var lastHeight = -1;
   const port2 = await getPort();
 io.listen(port2);
 console.log('listening on port ', port2);
@@ -87,7 +88,7 @@ await sw.join('rohandhoot')
       fs.writeFileSync("./clients/GovernmentNode/boolean.log","");
     }
     else{
-    if(new Date().getMinutes() === 14 && new Date().getSeconds() === 0){
+    if(new Date().getMinutes() === 11 ){
       if(lastHeight + 1 === block.header.blockHeight){
         console.log("dhun dhun dhun 143", block);
         var count = 0;
@@ -117,7 +118,6 @@ await sw.join('rohandhoot')
         log('exception', exception)
       }
     }
-    console.log("dont")
     conn.on('data', data => {
 
       // Here we handle incomming messages
@@ -131,7 +131,6 @@ await sw.join('rohandhoot')
         'Received Message from peerzzz ' + peerId,
         '----> ' + data
       )
-      //console.log("message", message)
       if(message!= null && message!= undefined && message.class!= null && message.class!= undefined && message.class ==  "block"){
         blockVerify(message, (reply) => {
           console.log("rep",reply)
@@ -176,9 +175,8 @@ await sw.join('rohandhoot')
         }
                 
         else{
-          console.log("here")
           transactionVerify([message], (reply) => {
-            console.log("rep - ",reply)
+            console.log("rep - ",reply,i++)
             if(!reply[0]){
               console.log("Transaction not correct");
             }

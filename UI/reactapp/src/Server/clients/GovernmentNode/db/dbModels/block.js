@@ -9,8 +9,6 @@ var blockHeader = new mongoose.Schema({
     },
         hashPrevBlock : {
         type: String,
-        minlength : 1,
-        unique : true
     },
         hashMerkleRoot : {
         type: String,
@@ -42,7 +40,7 @@ var Block = new mongoose.Schema({
         type: [String],
         required :true,
         minlength : 1,
-        unique : true
+        //unique : true
     },
     blockGenerator  : {
         type: String,

@@ -1,4 +1,4 @@
-
+ 
 const crypto = require('crypto');
 const Swarm = require('discovery-swarm');
 const defaults = require('dat-swarm-defaults');
@@ -36,20 +36,32 @@ const askUser = async () => {
     input: process.stdin,
     output: process.stdout
   })
-    console.log("saap")
 
   rl.question('Send message: ', message => {
     // Broadcast to peers
     if(message == 't'){
+      console.log("Transaction Sent - ", {
+      class: "transaction",
+      data: {
+          timeStamp: 1234345,
+          buyerTimeStamp: '1234',
+          landID : "land23",
+          from: ["User99"],
+          to: ["User6"],
+          amount: 12345,
+        },
+      buyerSignature: "sig1",
+      selerSignature: "sig2",
+      })
       for (let id in peers) {
       peers[id].conn.write(JSON.stringify({
       class: "transaction",
       data: {
           timeStamp: 1234345,
           buyerTimeStamp: '1234',
-          landID : "land45",
-          from: ["User3"],
-          to: ["User1"],
+          landID : "land23",
+          from: ["User99"],
+          to: ["User6"],
           amount: 12345,
         },
       buyerSignature: "sig1",

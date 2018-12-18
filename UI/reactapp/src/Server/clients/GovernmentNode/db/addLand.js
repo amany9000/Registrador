@@ -6,7 +6,7 @@ var {mongoose} = require("./mongoose.js");
 
 var testLand = {
     class : "land",
-    id : "land2345",
+    id : "land23",
     latLong :[
         {
             latitude : "123132312.23",
@@ -17,10 +17,10 @@ var testLand = {
         }
     ],
     address : "IIIT LKO", 
-    owner : ["User69"],
-    previousOwners : [ ["User6"],["User9"] ],
+    owner : ["User99"],
+    previousOwners : [["User9"] ],
     lastSellingPrice : 1234567.8,
-    previousLandID : ["landID2"]  
+    previousLandID : ["landID3"]  
 }
 
 var testLandString = JSON.stringify(testLand);

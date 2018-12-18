@@ -4,57 +4,53 @@ var {buyLand, sellLand} = require("./db/updateUser");
 var {addBlock} = require("./db/addBlock");
 
 var updateDB = async (recievedBlock, callback) =>{
-	await addBlock(recievedBlock, (err,doc) => {
+	await addBlock(recievedBlock, async (err,doc) => {
 		//console.log(doc,err);
 		if(err){
+			console.log(err)
 			return callback("Block Not Included");
 		}
 		else{
-			callback("Block Added to the Database");
+			var landData = [];
+			var sellerData = []; 
+			var buyerData = []; 
+			for (var i in recievedBlock.transactionList){
+				var trans = JSON.parse(recievedBlock.transactionList[i]);
+				console.log(trans)
+				landData.push({buyer: trans.data.to, landID: trans.data.landID, amount: trans.data.amount});
+				sellerData.push({seller: trans.data.from,landID: trans.data.landID});
+				buyerData.push({buyer: trans.data.to,landID:trans.data.landID});
+				//console.log("main", sellerData[i],buyerData[i]);			
+			}
+			console.log("landData", landData)
+			for(var i in landData){
+				await sold(landData[i], async (err, doc) =>{
+					if(err){
+						return callback("Can't update land collection");
+					}
+					else{
+						for(var i in sellerData){
+							await sellLand(sellerData[i], async (err, doc) =>{
+								if(err){
+									return callback("Can't update user collection");
+								}
+								else{
+									await buyLand(buyerData[i], async (err, doc) =>{
+										if(err){
+											return callback("Can't update user collection");
+										}
+										else{
+											return callback("Blockchain Database Updated")		
+										}	
+									});				 
+								}
+							});
+						}
+					}				
+				});				 
+			}
 		}
 	});
-
-	var landData = [];
-	var sellerData = []; 
-	var buyerData = []; 
-	for (var i in recievedBlock.transactionList){
-		var trans = JSON.parse(recievedBlock.transactionList[i]);
-		console.log(trans)
-		landData.push({buyer: trans.data.to, landID: trans.data.landID, amount: trans.data.amount});
-		sellerData.push({seller: trans.data.from,landID: trans.data.landID});
-		buyerData.push({buyer: trans.data.to,landID:trans.data.landID});
-		//console.log("main", sellerData[i],buyerData[i]);			
-	}
-	console.log("landData", landData)
-	for(var i in landData){
-		await sold(landData[i], (err, doc) =>{
-			if(err){
-				return callback("Can't update land collection");
-			}
-			else{
-				callback("Land Collection Updated.");
-			}				
-		});				 
-	}
-	for(var i in sellerData){
-		await sellLand(sellerData[i], (err, doc) =>{
-			if(err){
-				return callback("Can't update user collection");
-			}
-			else{
-				callback("Seller's info updated");
-			}
-	});
-		
-		await buyLand(buyerData[i], (err, doc) =>{
-			if(err){
-				return callback("Can't update user collection");
-			}
-			else{
-				callback("buyer's info updated");
-			}	
-		});				 
-	}		
 }
 /*
 updateDB({ class: 'block',

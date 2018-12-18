@@ -2,18 +2,21 @@
   {
     "priority": 1,
     "transaction": {
+      "class": "transaction",
       "data": {
-        "class": "transaction",
-        "timeStamp": 1234563425,
-        "landID": "land23",
+        "buyerTimeStamp": "1234",
+        "timeStamp": 123456,
+        "landID": "land2345",
         "from": [
-          "User3"
+          "User89"
         ],
         "to": [
-          "User1"
+          "User6"
         ],
         "amount": 123213
-      }
+      },
+      "buyerSignature": "sig1",
+      "selerSignature": "sig2"
     }
   }
 ]

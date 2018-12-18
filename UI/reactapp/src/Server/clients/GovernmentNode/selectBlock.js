@@ -14,7 +14,7 @@ function compare(a,b){
 var selectBlock = async (callback) =>{
 	var receivedBlocks = JSON.parse(fs.readFileSync("./clients/GovernmentNode/recievedBlocks.json").toString());  
 	if(receivedBlocks.length == 0 ){
-		return  callback("No correct blocks recieved");
+		return  callback({},"No correct blocks recieved");
 	}
 	else{	
 		//console.log(receivedBlocks);
@@ -22,7 +22,9 @@ var selectBlock = async (callback) =>{
 		var blockFreqList = [];
 		var len = receivedBlocks.length
 		var selectedBlockElement = {};
+		let temp = [];
 		for(var i in receivedBlocks){
+			temp.push({"generator": receivedBlocks[i]["blockGenerator"], "sig": receivedBlocks[i]["signature"] });
 			delete receivedBlocks[i]["signature"];
 			delete receivedBlocks[i]["blockGenerator"];
 		}
@@ -49,15 +51,19 @@ var selectBlock = async (callback) =>{
 		//console.log(blockFreqList);
 		fs.writeFileSync("./clients/GovernmentNode/blockFreqList.json",JSON.stringify(blockFreqList,undefined,2));						
 		selectedBlockElement = blockFreqList[0]; 
+		selectedBlockElement.block["signature"] = temp[0]["sig"]
+		selectedBlockElement.block["blockGenerator"] = temp[0]["generator"]
 		for(i = 1; i<blockFreqList.length; i++){
 			if(blockFreqList[i].freq > selectedBlockElement.freq){
 				selectedBlockElement = blockFreqList[i];
+				selectedBlockElement.block["signature"] = temp[i]["sig"]
+				selectedBlockElement.block["blockGenerator"] = temp[i]["generator"]
 			}
 		}
-		return callback(selectedBlockElement.block, "done")
-		/*await updateDB(selectedBlockElement.block, (reply) => {
+		//return callback(selectedBlockElement.block, "done")
+		await updateDB(selectedBlockElement.block, (reply) => {
 			return callback(selectedBlockElement.block, reply)
-		})	*/
+		})
 	}	
 }
 /*

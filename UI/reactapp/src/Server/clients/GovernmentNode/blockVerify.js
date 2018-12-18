@@ -41,62 +41,101 @@ var hash = crypto.createHash('sha256');
 		else {
 
 			// current block's height shouldn't be in the db or higher
-			block.find().sort("-header.blockHeight").exec( (err,Block) => {
-
-				if(!Block){
-					return callback("No blocks found");
+			if(receivedBlock.header.blockHeight == 0){		
+			var transList = [];
+			for(var i in receivedBlock.transactionList){
+					transList.push(JSON.parse(receivedBlock.transactionList[i],undefined,2))
 				}
-				else if( (Block.length>0)  && ((receivedBlock.header.blockHeight) != (Block[0].header.blockHeight + 1))){
-					return callback("Block Height is incorrect");
-				}
-				else if((Block.Length == 0) && (receivedBlock.header.height != 0))
-					return callback("Genesis Block Must have a height of 0");
-				
-				else{
-		            // previous block's hash should be equal to prevhash 
-					hash.update(JSON.stringify(Block[0],undefined,2));
-					var calculatedHash = hash.digest('hex');
-					if(calculatedHash != receivedBlock.header.hashPrevBlock)
-						return callback("Hash of Prevoious Block Didn't Match");				
+			// hash of merkle root of transactions should be verified
+			getMerkleTree(transList,async (tree) => {
+					if(receivedBlock.header.hashMerkleRoot != tree.root()){
+						console.log(receivedBlock.header.hashMerkleRoot, tree.root())
+						return callback("Hash of merkel root of transactions, didn't match");
+					}
 					else{
 						var transList = [];
 						for(var i in receivedBlock.transactionList){
 							transList.push(JSON.parse(receivedBlock.transactionList[i]))
 						}
-					// hash of merkle root of transactions should be verified
-					getMerkleTree(transList,async (tree) => {
-							if(receivedBlock.header.hashMerkleRoot != tree.root()){
-								console.log(receivedBlock.header.hashMerkleRoot, tree.root())
-								return callback("Hash of merkel root of transactions, didn't match");
-							}
-							else{
-								var transList = [];
-								for(var i in receivedBlock.transactionList){
-									transList.push(JSON.parse(receivedBlock.transactionList[i]))
+						// Verify each transaction
+						await fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
+						await transactionVerify(transList, (reply)=>{
+							console.log("trans",reply)
+							var flag = true;
+							for(var i in reply){
+								if(!reply[i]){
+									flag = false;
+									break;
 								}
-								// Verify each transaction
-								await fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
-								await transactionVerify(transList, (reply)=>{
-									console.log("trans",reply)
-									var flag = true;
-									for(var i in reply){
-										if(!reply[i]){
-											flag = false;
-											break;
-										}
-									}	
-									if(flag)
-										return callback("verified");
-									else
-										return callback("Transaction List not correct");
-								});
-								console.log("peeeeeeeeeeeeeeennnnddd");
-								await fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
 							}	
+							if(flag)
+								return callback("verified");
+							else
+								return callback("Transaction List not correct");
 						});
+						console.log("peeeeeeeeeeeeeeennnnddd");
+						await fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
+					}	
+				});				
+			}
+			else{
+				block.find().sort("-header.blockHeight").exec( (err,Block) => {
+	
+					if(!Block){
+						return callback("No blocks found");
 					}
-				}
-			});
+					else if( (Block.length>0)  && ((receivedBlock.header.blockHeight) != (Block[0].header.blockHeight + 1))){
+						return callback("Block Height is incorrect");
+					}
+					else if((Block.Length == 0) && (receivedBlock.header.height != 0))
+						return callback("Genesis Block Must have a height of 0");
+					
+					else{
+		    	        // previous block's hash should be equal to prevhash 
+						hash.update(JSON.stringify(Block[0],undefined,2));
+						var calculatedHash = hash.digest('hex');
+						if(calculatedHash != receivedBlock.header.hashPrevBlock)
+							return callback("Hash of Previous Block Didn't Match");				
+						else{
+							var transList = [];
+							for(var i in receivedBlock.transactionList){
+								transList.push(JSON.parse(receivedBlock.transactionList[i]))
+							}
+						// hash of merkle root of transactions should be verified
+						getMerkleTree(transList,async (tree) => {
+								if(receivedBlock.header.hashMerkleRoot != tree.root()){
+									console.log(receivedBlock.header.hashMerkleRoot, tree.root())
+									return callback("Hash of merkel root of transactions, didn't match");
+								}
+								else{
+									var transList = [];
+									for(var i in receivedBlock.transactionList){
+										transList.push(JSON.parse(receivedBlock.transactionList[i]))
+									}
+									// Verify each transaction
+									await fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
+									await transactionVerify(transList, (reply)=>{
+										console.log("trans",reply)
+										var flag = true;
+										for(var i in reply){
+											if(!reply[i]){
+												flag = false;
+												break;
+											}
+										}	
+										if(flag)
+											return callback("verified");
+										else
+											return callback("Transaction List not correct");
+									});
+									console.log("peeeeeeeeeeeeeeennnnddd");
+									await fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
+								}	
+							});
+						}
+					}
+				})
+			};
 		}
 		}
 	});

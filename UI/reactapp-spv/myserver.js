@@ -77,7 +77,7 @@ io.listen(port2);
 console.log('listening on port ', port2);
 
 io.on('connection', (client) => {
-  client.on('sendTransaction', async (transaction) => {
+  client.on('sendTransaction', async(transaction) => {
     console.log(transaction);
     
     var signature = await transSigCreate(transaction);

@@ -13,6 +13,7 @@
     "b64u": "^2.0.0",
     "dat-swarm-defaults": "^1.0.1",
     "discovery-swarm": "^5.1.1",
+    "geojson": "^0.5.0",
     "get-port": "^3.2.0",
     "mathjs": "^5.0.0",
     "merkel": "^0.1.1",

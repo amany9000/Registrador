@@ -1,4 +1,4 @@
-
+ 
 const b64u =  require("b64u");
 const crypto = require("crypto")
 const fs = require('fs')  
@@ -12,14 +12,13 @@ const myPublicKey = fs.readFileSync('publicSeller.pem').toString();
 var signature   = "blockGenerator's_Signature"; 
 
 var blockMaker = async (callback) => {
- 		 	console.log("suup");
  	var transElementList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionElement.json").toString());
  	var transactionList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionList.json").toString()); 	
  	var blockElementList = [];    //list of transactions going in the block
  	for(var i=0;i<transElementList.length;i++){
  		transElementList[i].priority++;
  		if(blockElementList.length < 3){
- 			blockElementList.push(JSON.stringify(transElementList[i].transaction,undefined,2));
+ 			blockElementList.push(transElementList[i].transaction);
  			transElementList.splice(i,i+1);
  			i--
  		}
@@ -29,6 +28,7 @@ var blockMaker = async (callback) => {
 	await transactionVerify(transactionList, (reply)=>{
 		var sortedTrans = [];     // sorted list of recieved(valid) transactions 
 
+		console.log("trans rep",reply)
 		for(i in transactionList){
 			if(reply[i]){
 				var hash = crypto.createHash('sha256');
@@ -39,7 +39,7 @@ var blockMaker = async (callback) => {
 		sortedTrans.sort((a,b) => {return (a.hash > b.hash) ? 1 : ((a.hash < b.hash) ? -1 : 0);})
 		for(i in sortedTrans){
 			if(blockElementList.length < 3 ){
- 			blockElementList.push(JSON.stringify(sortedTrans[i].transaction,undefined,2));
+ 			blockElementList.push(sortedTrans[i].transaction);
 			}
 			else{
 				transElementList.push({priority: 0,transaction: sortedTrans[i].transaction});
@@ -66,6 +66,9 @@ var blockMaker = async (callback) => {
 						hashPrevBlock =  hash.digest('hex');						
 					}
 					
+					for(i in blockElementList){
+						blockElementList[i] = JSON.stringify(blockElementList[i],undefined,2)
+					}
 					blockCreated = {
 						class : "block", 
 						header : {

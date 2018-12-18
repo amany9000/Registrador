@@ -1,4 +1,4 @@
-
+  
 const async = require("async");
 const fs  = require("fs");
 const io = require('socket.io')();
@@ -20,7 +20,7 @@ async.whilst(
 			flag2 = true;
 		}
 		
-		if(new Date().getMinutes() === 10 && new Date().getSeconds() === 0 && flag1){
+		if(new Date().getMinutes() === 3 && new Date().getSeconds() === 0 && flag1){
 			setTimeout(callback, 1000);
 			blockMaker((reply)=>{
 				console.log(reply);
@@ -32,7 +32,7 @@ async.whilst(
     		flag1 = false; 
 		}
 
-		else if(new Date().getMinutes() === 5	/*&& new Date().getSeconds() === 0 */&& flag2){
+		else if(new Date().getMinutes() === 32	&& new Date().getSeconds() === 0 && flag2){
 			setTimeout(callback, 1000);
 			console.log("selectBlock");
 			
@@ -44,7 +44,7 @@ async.whilst(
 				for(var i in block.transactionList){
 					transList.push(JSON.parse(block.transactionList[i]))
 				}				
-				createBranch(transList, block.header.hashMerkleRoot);
+				//createBranch(transList, block.header.hashMerkleRoot);
 				
 				fs.writeFileSync("./clients/GovernmentNode/blockChain.json",JSON.stringify(blockChain,undefined,2));					
 				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",JSON.stringify([],undefined,2));

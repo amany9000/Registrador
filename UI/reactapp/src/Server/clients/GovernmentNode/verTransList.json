@@ -1,11 +1,1 @@
-[
-  {
-    "peerId": "226d055d8f99d8fca0611ac2369c3e9e02f2186d8abe9c87ffbe8240cb40a1e3",
-    "message": {
-      "class": "verTransaction",
-      "data": {
-        "landId": "land67"
-      }
-    }
-  }
-]
+[]
