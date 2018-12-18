@@ -13,7 +13,7 @@ var signature   = "blockGenerator's_Signature";
 
 var blockMaker = async (callback) => {
  	var transElementList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionElement.json").toString());
- 	var transactionList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionList.json").toString()); 	
+ 	var transactionList = JSON.parse(fs.readFileSync("../TransactionList/transList.json").toString()); 	
  	var blockElementList = [];    //list of transactions going in the block
  	for(var i=0;i<transElementList.length;i++){
  		transElementList[i].priority++;

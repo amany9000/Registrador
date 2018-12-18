@@ -20,14 +20,14 @@ async.whilst(
 			flag2 = true;
 		}
 		
-		if(new Date().getMinutes() === 3 && new Date().getSeconds() === 0 && flag1){
+		if(new Date().getMinutes() === 7 && new Date().getSeconds() === 0 && flag1){
 			setTimeout(callback, 1000);
 			blockMaker((reply)=>{
 				console.log(reply);
 				if(reply.class === "block"){
 					fs.writeFileSync("./clients/GovernmentNode/block.json",JSON.stringify(reply,undefined,2));
 				}
-				fs.writeFileSync("./clients/GovernmentNode/transactionList.json",JSON.stringify([],undefined,2));								
+				fs.writeFileSync("../TransactionList/transList.json",JSON.stringify([],undefined,2));								
 			});
     		flag1 = false; 
 		}

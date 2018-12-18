@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { Icon, Label, Menu, Table } from 'semantic-ui-react'; 
 import {Link } from 'react-router-dom';
  
+
 export default class Trans extends Component { 
  
   render(){ 
@@ -10,22 +11,23 @@ export default class Trans extends Component {
       <Table celled> 
       <Table.Header> 
         <Table.Row> 
-          <Table.HeaderCell> Transaction Hash</Table.HeaderCell> 
           <Table.HeaderCell> Seller Address</Table.HeaderCell> 
           <Table.HeaderCell> Buyer Address</Table.HeaderCell> 
-          <Table.HeaderCell>Transaction size(in bytes)</Table.HeaderCell> 
+          <Table.HeaderCell> LandId</Table.HeaderCell>
+          <Table.HeaderCell> Amount</Table.HeaderCell>            
         </Table.Row> 
       </Table.Header> 
    
       <Table.Body>   
       {
-        this.props.allTransactions.map((item, index)=>{ 
+        this.props.allTransactions.map((transaction)=>{ 
+            console.log("t",transaction)
             return( 
               <Table.Row> 
-              <Table.Cell><Link to='/TransactionDetails'><u>sdfoenvbn12345648974</u></Link></Table.Cell> 
-                <Table.Cell>wqfsegngnb987</Table.Cell> 
-                <Table.Cell>edfgjffg03u4</Table.Cell> 
-                <Table.Cell>70</Table.Cell> 
+              <Table.Cell><Link to='/TransactionDetails'><u>{transaction.data.from}</u></Link></Table.Cell> 
+                <Table.Cell>{transaction.data.to}</Table.Cell> 
+                <Table.Cell>{transaction.data.landID}</Table.Cell> 
+                <Table.Cell>{transaction.data.amount}</Table.Cell> 
               </Table.Row> 
             ); 
           })   

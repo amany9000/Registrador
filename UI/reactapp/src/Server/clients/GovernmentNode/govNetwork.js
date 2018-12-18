@@ -181,9 +181,9 @@ await sw.join('rohandhoot')
               console.log("Transaction not correct");
             }
             else{
-              var transactionList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionList.json").toString());               
+              var transactionList = JSON.parse(fs.readFileSync("../TransactionList/transList.json").toString());               
               transactionList.push(message)
-              fs.writeFileSync("./clients/GovernmentNode/transactionList.json", JSON.stringify(transactionList,undefined,2));
+              fs.writeFileSync("../TransactionList/transList.json", JSON.stringify(transactionList,undefined,2));
             }
           })
         }

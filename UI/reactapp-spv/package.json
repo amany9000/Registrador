@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "b64u": "^2.0.0",
-    "concurrently": "^4.1.0",
     "dat-swarm-defaults": "^1.0.1",
     "discovery-swarm": "^5.1.2",
     "geojson": "^0.5.0",
@@ -23,7 +22,7 @@
     "socket.io-client": "^2.1.1"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"node myserver.js\"",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

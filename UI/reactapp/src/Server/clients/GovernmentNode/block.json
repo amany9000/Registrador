@@ -3,13 +3,14 @@
   "header": {
     "blockHeight": 1,
     "hashPrevBlock": "0c08417ba4b17b5c730942279f446d275ea8b47a357cd9eb6e87c4637639ac96",
-    "hashMerkleRoot": "1EF1B5C2632AFA8B439D945898C2863BFBBA610A03976D068C6CD353B5673442",
-    "blockTimeStamp": 1545122761907
+    "hashMerkleRoot": "C4E0CFB5FF9B8BAD86CCCF90038D5B8DB9819CFD00256713487D15176F5DE8EE",
+    "blockTimeStamp": 1545158220443
   },
-  "transactionCount": 1,
+  "transactionCount": 2,
   "transactionList": [
-    "\"{\\n  \\\"class\\\": \\\"transaction\\\",\\n  \\\"data\\\": {\\n    \\\"buyerTimeStamp\\\": \\\"1234\\\",\\n    \\\"timeStamp\\\": 123456,\\n    \\\"landID\\\": \\\"land2345\\\",\\n    \\\"from\\\": [\\n      \\\"User89\\\"\\n    ],\\n    \\\"to\\\": [\\n      \\\"User6\\\"\\n    ],\\n    \\\"amount\\\": 123213\\n  },\\n  \\\"buyerSignature\\\": \\\"sig1\\\",\\n  \\\"selerSignature\\\": \\\"sig2\\\"\\n}\""
+    "{\n  \"class\": \"transaction\",\n  \"data\": {\n    \"buyerTimeStamp\": \"1234\",\n    \"timeStamp\": 123456,\n    \"landID\": \"land2345\",\n    \"from\": [\n      \"User89\"\n    ],\n    \"to\": [\n      \"User6\"\n    ],\n    \"amount\": 123213\n  },\n  \"buyerSignature\": \"sig1\",\n  \"selerSignature\": \"sig2\"\n}",
+    "{\n  \"class\": \"transaction\",\n  \"data\": {\n    \"timeStamp\": 1545157894101,\n    \"buyerTimeStamp\": \"132\",\n    \"landID\": \"land23\",\n    \"from\": [\n      \"User6\"\n    ],\n    \"to\": [\n      \"User89\"\n    ],\n    \"amount\": \"132432\"\n  },\n  \"buyerSignature\": \"sig\",\n  \"sellerSignature\": \"aOKXyvtRqqpd6O0tSsGab1X0V9DWY/ixfcyMqRg/LuyzZ5T9geE8696FV8XjOoC1aQXiXoxQbECSooGB07XtYsz3vWBYk+CYqmynz/JljnuTVCXQZdaJqbnZeN+CauYwdw5psHPvWnYepAnRlBVEKmPaqYxm8AgDLS7ogXbdfuoPKAgJqMGMSBvU4/+oFPHIiPPA26rZIs3DxXN/WFRnR3ndM10q1E6/Z5qi53ERsVzwPOYCQh+XFyH4SeX6MPdihIRNAxSYeXeCuYW5dW4dID+8Etql6daMYBtnfVGr61148lre/hIKwJxIfAWJhmrwD99Uy3KMLhlHxFaRhgqFDQ==\"\n}"
   ],
   "blockGenerator": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0gv4+6ExB1KFh6AjTv5N\nVjUirfA39/bikodnmWQdsrBcCclLS2avt262M4DoWPiSgjB78be2AH4qwk2Lz7xe\ny3A+smCPfLaA5hUbwYfW1pfmrgMqXUEmpQ95vTPG21lZ246xk7Ozej4pABKlQeJw\nmZszKF5H5rI7S4XGAfpYK56163hefIQuhXmAz/ncUaLBCzxL0rS8yYyudC5z1OYd\n9Jl/KVWKJn+KvzO/jJ3FWrGA759jhdf+c8j9PJHI7uq5kVbOvCxXAgw7VzrcGOao\nWN3+Yn7ZComWS2NdDG5iTp/sZhPKxuJGc9GhIh7AA5iRQvNOuFYtmnEdQFJey2ds\nQwIDAQAB\n-----END PUBLIC KEY-----\n",
-  "signature": "qkk4qcnJEu8lHzhMf/AVUbjjf+6f7hjo2yVqJiwqnj8PseCKUYbyoN+wF8nUp0k+atUfKK3t+5b41oZEwKk0XydmQveXlAJY4pWuMgnv9gPguUCi9iNWqiUu2PXv4efU1rTfVfLVrQsMKS2gPa1GIjlNY/2pZBsF3FS5vwu3uptBrAYIzm4/L6fXbxWl52p6XjaxTN/dd5tFT8/mEs9aN/xCDaP5O7ODv7iXYbt6UGBi+MvJCMxnrJ7QacZNvqh5Zahx2QUINeyCwiwed6lZtHcbwu1NU3/3T2nmaoPFRwMz5tCRr/TxCUqrGZLQMB7ac7M4uEAKplrtjzcXfoBfkg=="
+  "signature": "uuF5FVjKYW/ocLODFfHOM0ixW+eozlsCaX3dXLlyi6i7zCu+69krBR6FeHo9baY60v4WDIE9zrJ2QMVlRtbpt5EPrDi5nVse1BVuTn0QUlVDr/DjoNbHNbKqPjiCG2nN6vNlpNf+NiCfxXFdyLUXxGc6qomjYsaUYVbCD6Y20DpzhBm9cOSvrTUbPNDUxZozYsHb9ngxDAvaSZC8GdQW45TPWgT5f7ZCOADH5loKP7ObChA713Ryu7oJ6j9GhLjJtjvjmk3nDt8H0DbqReNnIhGhTH+yrahanQApGf34coamTeReC2KIh4GroYHznyR200pGKbD1MDutBj4SzsDHLQ=="
 }
