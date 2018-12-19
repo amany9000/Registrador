@@ -58,7 +58,7 @@ const sw = Swarm(config)
   sw.listen(port)
   console.log('Listening to port: ' + port)
   
-  var lastHeight = -1;
+  var lastHeight = 2;
   const port2 = await getPort();
 io.listen(port2);
 console.log('listening on port ', port2);
@@ -88,9 +88,10 @@ await sw.join('rohandhoot')
       fs.writeFileSync("./clients/GovernmentNode/boolean.log","");
     }
     else{
-    if(new Date().getMinutes() === 11 ){
+    if(new Date().getMinutes() === 45){
       if(lastHeight + 1 === block.header.blockHeight){
         console.log("dhun dhun dhun 143", block);
+        lastHeight++;
         var count = 0;
         for (let id in peers) {
           peers[id].conn.write(JSON.stringify(block,undefined,2))

@@ -5,13 +5,14 @@ import Main from '../Main/Main'
 import { Table } from 'semantic-ui-react'; 
 import Blockfreq from './Blockfreq.js';
 
+
+var blockList = require('./Blockchain.json');
+var freqList = require('../Server/clients/GovernmentNode/blockFreqList.json');
 class Blockchain extends Component {
 
   render() {
 
     // var some = require('./abc.json');
-    var blockList = require('../Server/clients/GovernmentNode/recievedBlocks.json');
-    var freqList = require('../Server/clients/GovernmentNode/blockFreqList.json');
 
     return (
         <div>
@@ -25,7 +26,7 @@ class Blockchain extends Component {
             <div id="chain">
                 <section className="card">
                 {
-                    blockList.map((item, index) => { 
+                    blockList.map((item) => { 
                         return( 
                             <Block 
                                 block={item} 

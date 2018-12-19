@@ -61,9 +61,10 @@ var selectBlock = async (callback) =>{
 			}
 		}
 		//return callback(selectedBlockElement.block, "done")
+		let rep;
 		await updateDB(selectedBlockElement.block, (reply) => {
-			return callback(selectedBlockElement.block, reply)
 		})
+		return callback(selectedBlockElement.block, "Database Updated")		
 	}	
 }
 /*

@@ -3,6 +3,7 @@ import './Blockchain.css';
 import {Link}  from 'react-router-dom';
 
 export default class Block extends Component {
+    //console.log(this.props)
     render() {
         return (
             <div style={{

@@ -15,8 +15,8 @@
         ],
         "amount": 123213
       },
-      "buyerSignature": "sig1",
-      "selerSignature": "sig2"
+      "buyerSignature": "Sig1",
+      "selerSignature": "Sig2"
     }
   }
 ]

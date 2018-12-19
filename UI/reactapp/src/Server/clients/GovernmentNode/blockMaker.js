@@ -23,7 +23,7 @@ var blockMaker = async (callback) => {
  			i--
  		}
  	}
-	
+	console.log("list", transactionList)
 	fs.writeFileSync("./clients/GovernmentNode/pendingList.log","");              
 	await transactionVerify(transactionList, (reply)=>{
 		var sortedTrans = [];     // sorted list of recieved(valid) transactions 

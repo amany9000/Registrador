@@ -1,16 +1,15 @@
 {
   "class": "block",
   "header": {
-    "blockHeight": 1,
-    "hashPrevBlock": "0c08417ba4b17b5c730942279f446d275ea8b47a357cd9eb6e87c4637639ac96",
-    "hashMerkleRoot": "C4E0CFB5FF9B8BAD86CCCF90038D5B8DB9819CFD00256713487D15176F5DE8EE",
-    "blockTimeStamp": 1545158220443
+    "blockHeight": 3,
+    "hashPrevBlock": "13194a7f03c80d9bc64813b2815f436cd59db41676dde0694610e9ff3bc3bdf6",
+    "hashMerkleRoot": "0C0DB28C0025C1A5CB217CD16A79B27A849F6EF3BF1C78A4C26007EEA80854B2",
+    "blockTimeStamp": 1545219965388
   },
-  "transactionCount": 2,
+  "transactionCount": 1,
   "transactionList": [
-    "{\n  \"class\": \"transaction\",\n  \"data\": {\n    \"buyerTimeStamp\": \"1234\",\n    \"timeStamp\": 123456,\n    \"landID\": \"land2345\",\n    \"from\": [\n      \"User89\"\n    ],\n    \"to\": [\n      \"User6\"\n    ],\n    \"amount\": 123213\n  },\n  \"buyerSignature\": \"sig1\",\n  \"selerSignature\": \"sig2\"\n}",
-    "{\n  \"class\": \"transaction\",\n  \"data\": {\n    \"timeStamp\": 1545157894101,\n    \"buyerTimeStamp\": \"132\",\n    \"landID\": \"land23\",\n    \"from\": [\n      \"User6\"\n    ],\n    \"to\": [\n      \"User89\"\n    ],\n    \"amount\": \"132432\"\n  },\n  \"buyerSignature\": \"sig\",\n  \"sellerSignature\": \"aOKXyvtRqqpd6O0tSsGab1X0V9DWY/ixfcyMqRg/LuyzZ5T9geE8696FV8XjOoC1aQXiXoxQbECSooGB07XtYsz3vWBYk+CYqmynz/JljnuTVCXQZdaJqbnZeN+CauYwdw5psHPvWnYepAnRlBVEKmPaqYxm8AgDLS7ogXbdfuoPKAgJqMGMSBvU4/+oFPHIiPPA26rZIs3DxXN/WFRnR3ndM10q1E6/Z5qi53ERsVzwPOYCQh+XFyH4SeX6MPdihIRNAxSYeXeCuYW5dW4dID+8Etql6daMYBtnfVGr61148lre/hIKwJxIfAWJhmrwD99Uy3KMLhlHxFaRhgqFDQ==\"\n}"
+    "\"{\\n  \\\"class\\\": \\\"transaction\\\",\\n  \\\"data\\\": {\\n    \\\"buyerTimeStamp\\\": \\\"1234\\\",\\n    \\\"timeStamp\\\": 123456,\\n    \\\"landID\\\": \\\"land2345\\\",\\n    \\\"from\\\": [\\n      \\\"User89\\\"\\n    ],\\n    \\\"to\\\": [\\n      \\\"User6\\\"\\n    ],\\n    \\\"amount\\\": 123213\\n  },\\n  \\\"buyerSignature\\\": \\\"Sig1\\\",\\n  \\\"selerSignature\\\": \\\"Sig2\\\"\\n}\""
   ],
   "blockGenerator": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0gv4+6ExB1KFh6AjTv5N\nVjUirfA39/bikodnmWQdsrBcCclLS2avt262M4DoWPiSgjB78be2AH4qwk2Lz7xe\ny3A+smCPfLaA5hUbwYfW1pfmrgMqXUEmpQ95vTPG21lZ246xk7Ozej4pABKlQeJw\nmZszKF5H5rI7S4XGAfpYK56163hefIQuhXmAz/ncUaLBCzxL0rS8yYyudC5z1OYd\n9Jl/KVWKJn+KvzO/jJ3FWrGA759jhdf+c8j9PJHI7uq5kVbOvCxXAgw7VzrcGOao\nWN3+Yn7ZComWS2NdDG5iTp/sZhPKxuJGc9GhIh7AA5iRQvNOuFYtmnEdQFJey2ds\nQwIDAQAB\n-----END PUBLIC KEY-----\n",
-  "signature": "uuF5FVjKYW/ocLODFfHOM0ixW+eozlsCaX3dXLlyi6i7zCu+69krBR6FeHo9baY60v4WDIE9zrJ2QMVlRtbpt5EPrDi5nVse1BVuTn0QUlVDr/DjoNbHNbKqPjiCG2nN6vNlpNf+NiCfxXFdyLUXxGc6qomjYsaUYVbCD6Y20DpzhBm9cOSvrTUbPNDUxZozYsHb9ngxDAvaSZC8GdQW45TPWgT5f7ZCOADH5loKP7ObChA713Ryu7oJ6j9GhLjJtjvjmk3nDt8H0DbqReNnIhGhTH+yrahanQApGf34coamTeReC2KIh4GroYHznyR200pGKbD1MDutBj4SzsDHLQ=="
+  "signature": "WbEC7p9T2OOfz62s2nKAtfX7ey/afL59gKPdiarmiaVyvGUHZ9ncmXhmFTPdlPTgZIOtb5RNvjvjeu94j/FITleW241ahkLoF7GmsQd8lCsj3mwMenFoqe6i8DdO44dGID1NPhfmA3AGhGOGAKHluiPd/Yu7XrbM0tIDBGkq6jyCwXte7d5X1+0lAASXnSZSFAUIXprxHiUrI6jb7DdR80VrJz0Dg9NnbzEfo+tMM7n/HS4AqQ9rmsxzp2S1t2iurelEuE7MHfX6b4LR1II5Zw7/W3M/29Q9UcOV/hQXgHaRlkHth4iBytN36N8DZIcVl4CnStPFkzc/5xNgCBwTyg=="
 }

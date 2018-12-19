@@ -20,7 +20,7 @@ async.whilst(
 			flag2 = true;
 		}
 		
-		if(new Date().getMinutes() === 7 && new Date().getSeconds() === 0 && flag1){
+		if(new Date().getMinutes() === 44 && new Date().getSeconds() === 0 && flag1){
 			setTimeout(callback, 1000);
 			blockMaker((reply)=>{
 				console.log(reply);
@@ -32,13 +32,13 @@ async.whilst(
     		flag1 = false; 
 		}
 
-		else if(new Date().getMinutes() === 32	&& new Date().getSeconds() === 0 && flag2){
+		else if(new Date().getMinutes() === 46	&& new Date().getSeconds() === 0 && flag2){
 			setTimeout(callback, 1000);
 			console.log("selectBlock");
 			
 			selectBlock((block, reply)=>{
 				console.log("rep",reply,block);
-				var blockChain = JSON.parse(fs.readFileSync("./clients/GovernmentNode/blockChain.json").toString());				 
+				var blockChain = JSON.parse(fs.readFileSync("../Blockchain/Blockchain.json").toString());				 
 				blockChain.push(block);
 				var transList = [];
 				for(var i in block.transactionList){
@@ -46,7 +46,7 @@ async.whilst(
 				}				
 				//createBranch(transList, block.header.hashMerkleRoot);
 				
-				fs.writeFileSync("./clients/GovernmentNode/blockChain.json",JSON.stringify(blockChain,undefined,2));					
+				fs.writeFileSync("../Blockchain/Blockchain.json",JSON.stringify(blockChain,undefined,2));					
 				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",JSON.stringify([],undefined,2));
 				
 				// transaction element and pending list
