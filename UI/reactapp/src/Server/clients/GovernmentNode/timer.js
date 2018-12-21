@@ -20,7 +20,7 @@ async.whilst(
 			flag2 = true;
 		}
 		
-		if(new Date().getMinutes() === 44 && new Date().getSeconds() === 0 && flag1){
+		if(new Date().getMinutes() === 18 && new Date().getSeconds() === 0 && flag1){
 			setTimeout(callback, 1000);
 			blockMaker((reply)=>{
 				console.log(reply);
@@ -32,7 +32,7 @@ async.whilst(
     		flag1 = false; 
 		}
 
-		else if(new Date().getMinutes() === 46	&& new Date().getSeconds() === 0 && flag2){
+		else if(new Date().getMinutes() === 20	&& new Date().getSeconds() === 0 && flag2){
 			setTimeout(callback, 1000);
 			console.log("selectBlock");
 			

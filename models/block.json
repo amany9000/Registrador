@@ -9,5 +9,6 @@
     "blockSize" : "",
     "transactionCount" : "",
     "transactionList" : [""],
-    "blockGenerator"  : ""
+    "blockGenerator"  : "",
+    "signature": "",
 }

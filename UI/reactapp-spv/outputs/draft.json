@@ -1,16 +1,16 @@
 {
   "class": "transaction",
   "data": {
-    "buyerTimeStamp": 1545142473112,
-    "landID": "a",
+    "buyerTimeStamp": 1545276238305,
+    "landID": "land23",
     "from": [
-      "b"
+      "User6"
     ],
     "to": [
-      "c"
+      "User99"
     ],
-    "amount": "e"
+    "amount": "1234"
   },
-  "buyerSignature": "YC/YpvptD4s+Ac4zoMBUQB07xtzWoMrNPGXqrAfYH1qZXNHGN8H7t/rHEgFRDgfUqewy+BTXgTQr05aU5ejUBNJRrql+4q+6V/rt2wQ6FGvflw2xUOiT69C8vU0S0IvGvhPV0kUViRaQW8GOxMPNIbUUdZHE00z0EIAzNTp8PC19UMYuDJyDWFPC3evBjHuiLL4UFZloKgUgHpWyVKXgury2QyjzOJiIQmiXyg/vyorqWoHHAfbKA9thVnFXtOGJXySCJO3dEMst/J2niT7AdLEixaeWKvhWWpHIysQM7gp3KwUioGM+ZFdEGJ1lY37KBSTsq8JC3REJ5EyfHd/jCg==",
+  "buyerSignature": "ejaixN+6CcUOPiACey2U/vYTODjI/ysWmlwqKuA6pvJB1Y8nwOGX07I6A5kpeSounh0j8se1GK69O8gHwLORsmipwb86q39swlZEgWv/TRvcKXG4ndc7MKB1AaIjkNI7/gckRgfoGZ+Z2U3drbVzua1GGWM1E/y3gyeJ6r9NMHfLekqwJIYZilI95yUESC6tGTbf6U2PajWheq1ravneU+tYM/upzsFkD6bZztfki4Uz/j5bE5TDtsbYJ5YS0vLmgKtE21bI+adYhzPLQlVQ/30eIG3aSHu1YQG2Uhdm/xR8Rv2LMoD6o98dWeMOTfqcAsz3DWALDUO7X2e9ontCSg==",
   "sellerSignature": ""
 }

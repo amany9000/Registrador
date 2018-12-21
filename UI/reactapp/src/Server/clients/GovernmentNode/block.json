@@ -1,15 +1,12 @@
 {
   "class": "block",
   "header": {
-    "blockHeight": 3,
-    "hashPrevBlock": "13194a7f03c80d9bc64813b2815f436cd59db41676dde0694610e9ff3bc3bdf6",
-    "hashMerkleRoot": "0C0DB28C0025C1A5CB217CD16A79B27A849F6EF3BF1C78A4C26007EEA80854B2",
-    "blockTimeStamp": 1545219965388
+    "blockHeight": 4,
+    "hashPrevBlock": "8eb00701874c6b72444ec35debb92180ddd8f6458e34b2770e357a21928952a0",
+    "blockTimeStamp": 1545292081368
   },
-  "transactionCount": 1,
-  "transactionList": [
-    "\"{\\n  \\\"class\\\": \\\"transaction\\\",\\n  \\\"data\\\": {\\n    \\\"buyerTimeStamp\\\": \\\"1234\\\",\\n    \\\"timeStamp\\\": 123456,\\n    \\\"landID\\\": \\\"land2345\\\",\\n    \\\"from\\\": [\\n      \\\"User89\\\"\\n    ],\\n    \\\"to\\\": [\\n      \\\"User6\\\"\\n    ],\\n    \\\"amount\\\": 123213\\n  },\\n  \\\"buyerSignature\\\": \\\"Sig1\\\",\\n  \\\"selerSignature\\\": \\\"Sig2\\\"\\n}\""
-  ],
+  "transactionCount": 0,
+  "transactionList": [],
   "blockGenerator": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0gv4+6ExB1KFh6AjTv5N\nVjUirfA39/bikodnmWQdsrBcCclLS2avt262M4DoWPiSgjB78be2AH4qwk2Lz7xe\ny3A+smCPfLaA5hUbwYfW1pfmrgMqXUEmpQ95vTPG21lZ246xk7Ozej4pABKlQeJw\nmZszKF5H5rI7S4XGAfpYK56163hefIQuhXmAz/ncUaLBCzxL0rS8yYyudC5z1OYd\n9Jl/KVWKJn+KvzO/jJ3FWrGA759jhdf+c8j9PJHI7uq5kVbOvCxXAgw7VzrcGOao\nWN3+Yn7ZComWS2NdDG5iTp/sZhPKxuJGc9GhIh7AA5iRQvNOuFYtmnEdQFJey2ds\nQwIDAQAB\n-----END PUBLIC KEY-----\n",
-  "signature": "WbEC7p9T2OOfz62s2nKAtfX7ey/afL59gKPdiarmiaVyvGUHZ9ncmXhmFTPdlPTgZIOtb5RNvjvjeu94j/FITleW241ahkLoF7GmsQd8lCsj3mwMenFoqe6i8DdO44dGID1NPhfmA3AGhGOGAKHluiPd/Yu7XrbM0tIDBGkq6jyCwXte7d5X1+0lAASXnSZSFAUIXprxHiUrI6jb7DdR80VrJz0Dg9NnbzEfo+tMM7n/HS4AqQ9rmsxzp2S1t2iurelEuE7MHfX6b4LR1II5Zw7/W3M/29Q9UcOV/hQXgHaRlkHth4iBytN36N8DZIcVl4CnStPFkzc/5xNgCBwTyg=="
+  "signature": "oRbGJ5aZl7+x9YoZs/ObauV1vFM6of0eIf6k+ASRK7oABxP6tdJULD/prsnQ0Jf6gGaNVZbvAbNV18+uf70uiWtSsxC5UfKztY7q3ZeHwR7vShEp3wsHfoQHQHDNfJwdejxndsXoTaczHg2sVEpuY/9PR68wK81iY2nmVrYsBPSV+q6k1TE//OMtwhiVcTu0mSGc3U/5IBN70KgoQP7bXrJcjuXmyH6kvZ2bN3oCZuEFr2nJU9jC1oOj5G7UPat8mGDctIw63KaxxN521wWfh7fhXKZ7QuVtLT35Y7/rK60ZdSXL8bgPxbbdmpY64T/8G7H0CGUmoSkRK8AqJKGCSw=="
 }

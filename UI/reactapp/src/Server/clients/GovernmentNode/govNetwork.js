@@ -88,7 +88,7 @@ await sw.join('rohandhoot')
       fs.writeFileSync("./clients/GovernmentNode/boolean.log","");
     }
     else{
-    if(new Date().getMinutes() === 45){
+    if(new Date().getMinutes() === 19){
       if(lastHeight + 1 === block.header.blockHeight){
         console.log("dhun dhun dhun 143", block);
         lastHeight++;
