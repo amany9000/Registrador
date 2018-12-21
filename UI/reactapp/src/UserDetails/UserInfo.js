@@ -2,11 +2,10 @@ import React,{Component} from 'react';
 import { Message } from 'semantic-ui-react';
 import './User.css';
 
+import getUser from './getDoc.js';
 
 
 class UserInfo extends Component{
-
-
 
 
 	render(){

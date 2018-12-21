@@ -38,15 +38,19 @@ async.whilst(
 			
 			selectBlock((block, reply)=>{
 				console.log("rep",reply,block);
+
+				if(block.class){	
 				var blockChain = JSON.parse(fs.readFileSync("../Blockchain/Blockchain.json").toString());				 
 				blockChain.push(block);
+				fs.writeFileSync("../Blockchain/Blockchain.json",JSON.stringify(blockChain,undefined,2));					
+				}
+				
 				var transList = [];
 				for(var i in block.transactionList){
 					transList.push(JSON.parse(block.transactionList[i]))
 				}				
 				//createBranch(transList, block.header.hashMerkleRoot);
 				
-				fs.writeFileSync("../Blockchain/Blockchain.json",JSON.stringify(blockChain,undefined,2));					
 				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",JSON.stringify([],undefined,2));
 				
 				// transaction element and pending list

@@ -94,7 +94,7 @@ io.on('connection', (client) => {
 
       console.log(transaction)
 
-      fs.writeFileSync("./pendingTrans.json",JSON.stringify(transaction,undefined,2));    
+      fs.writeFileSync("./src/pendingTrans.json",JSON.stringify(transaction,undefined,2));    
       delete pendingTrans;
 
       for (let id in peers) {

@@ -21,7 +21,6 @@ export default class Trans extends Component {
       <Table.Body>   
       {
         this.props.allTransactions.map((transaction)=>{ 
-            console.log("t",transaction)
             return( 
               <Table.Row> 
               <Table.Cell><Link to='/TransactionDetails'><u>{transaction.data.from}</u></Link></Table.Cell> 

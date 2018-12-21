@@ -5,18 +5,7 @@ import {Link}  from 'react-router-dom';
 import Trans from './Trans';
 import Main from '../Main/Main'
 
-/*
-var oReq = new XMLHttpRequest();
-oReq.onload = reqListener;
-oReq.open("get", "../Server/clients/GovernmentNode/TransactionList.json", true);
-oReq.responseType = "json"
-oReq.send();
-var list;
-function reqListener(e) {
-    console.log("response",this.response)
-    //list = JSON.parse(this.responseText);
-    //console.log(list);
-}*/
+
 var list = require("./transList.json")
  class TransactionList extends Component{
 

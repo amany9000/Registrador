@@ -50,7 +50,7 @@ class User extends Component{
 			SUBMIT
 			</ Button> 
 			{
-				this.state.loading ?	
+				this.state.loading ?
 				<div>
 				<UserInfo />
 				</div>

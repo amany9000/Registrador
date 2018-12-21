@@ -1,14 +1,16 @@
 import React ,{Component} from 'react';
 
-import {Form , FormControl,Button} from 'react-bootstrap';
-import LandInfo from './LandInfo';
+import {Button} from 'react-bootstrap';
+import TransactionInfo from './TransactionInfo';
 import {Link } from 'react-router-dom';
-import './Land.css';
+import './Transaction.css';
 import Main from '../Main/Main';
 import PropTypes from 'prop-types';
 import { LandFormErrors } from './LandFormErrors';
 
-class Land extends Component{
+let transactions = require("../transList.json")
+
+class Transaction extends Component{
 
 	constructor(props){
 
@@ -19,10 +21,9 @@ class Land extends Component{
 			loading:false,
 			formErrors: {LandId:''},
 			idValid:false,
-			formValid:false
+			formValid:false,
+			transactions:[]
 		}
-
-
 	}
 
 
@@ -34,12 +35,15 @@ class Land extends Component{
                   () => { this.validateField(name, value) });
   }
 
- 		//handleSub(){
- 		//	this.setState({
- 				//LandId:this.state.LandId,
- 				//loading:true
- 		//	})
- 		//}
+ 	handleSub(){
+ 		let tempList = [];
+ 		transactions.map((trans) => {
+ 			if(trans.data.landID === this.state.LandId){
+ 				this.state.transactions.push(trans);
+ 			}	
+ 		});
+ 		this.setState({loading:true});
+ 	}
 
   validateField(fieldName, value){
   	let fieldValidationErrors = this.state.formErrors;
@@ -72,11 +76,11 @@ class Land extends Component{
     return(error.length === 0 ? '' : 'There is some error');
   }
 
-  handleSub(){
-    	this.setState({loading:true});
-
-			
-  }
+  //handleSub(){
+  //  	this.setState({loading:true});
+//
+//			
+  //}
 
 	render(){
 
@@ -90,18 +94,18 @@ class Land extends Component{
 				 <div className="both" style={{
 					 background: '#2bbbad'
 				 }}>
-             	<h2  className ="Head">Land Queries Information Page</h2>
+             	<h2  className ="Head">Transaction Queries</h2>
              	</div>
 
                <div className="Des">
 			<form className="demo" >
-				<h3 className="lab" style={{ color: 'white'}}><u> Enter the Land Id</u></h3>
+				<h3 className="lab" style={{ color: 'white'}}><u> Enter the LandID of the Transaction</u></h3>
 				
 			   
 			   <div className ={`form-group ${this.errorClass(this.state.formErrors.LandId)}`}>
 			   
                 <input style={{marginLeft:'170px',marginBottom:'20px'}}type="LandId" required className="form-control inp" name="LandId"
-                placeholder="LandId"
+                placeholder="Enter"
                  value={this.state.LandId}
                onChange={this.handleUserInput}  />
 			     </div>
@@ -118,7 +122,7 @@ class Land extends Component{
 
 				this.state.loading ?
 				<div>
-				<LandInfo />
+				<TransactionInfo transList = {this.state.transactions}/>
 				</div>
 				:
 				<div>  </div>
@@ -134,9 +138,9 @@ class Land extends Component{
 	}
 }
 
-Land.propTypes ={
+Transaction.propTypes ={
 	LandId:PropTypes.string.isRequired
 };
 
 
-export default Land;
+export default Transaction;
