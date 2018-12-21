@@ -133,7 +133,7 @@ io.on('connection', (client) => {
    * Peers should discover other peers in this channel
    */
   var a =5; 
-await sw.join('rohandhoot')
+await sw.join('catalyst')
      
   sw.on('connection', (conn, info) => {
     // Connection id

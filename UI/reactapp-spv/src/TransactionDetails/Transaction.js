@@ -122,7 +122,9 @@ class Transaction extends Component{
 
 				this.state.loading ?
 				<div>
-				<TransactionInfo transList = {this.state.transactions}/>
+				{this.state.transactions.map((trans)=> {
+					return(<TransactionInfo trans = {trans}/>)
+				})}
 				</div>
 				:
 				<div>  </div>

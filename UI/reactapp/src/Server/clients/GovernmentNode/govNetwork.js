@@ -74,7 +74,7 @@ io.on('connection', (client) => {
    * The channel we are connecting to.
    * Peers should discover other peers in this channel
    */
-await sw.join('rohandhoot')
+await sw.join('catalyst')
 
   sw.on('connection', (conn, info) => {
     // Connection id
