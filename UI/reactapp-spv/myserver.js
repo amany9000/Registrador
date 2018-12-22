@@ -8,7 +8,7 @@ const io = require('socket.io')();
 const fs  = require("fs");
 
 const {transSigCreate} = require("./sign.js");
-
+const {checkBranch}  =require("./spv.js")
 const peers = {}
 // Counter for connections, used to identify connections
 let connSeq = 0
@@ -85,35 +85,39 @@ io.on('connection', (client) => {
     if(transaction.buyerSignature === ""){
       transaction["buyerSignature"] = signature;
       console.log(transaction)
-
       fs.writeFileSync("./outputs/draft.json",JSON.stringify(transaction,undefined,2));    
-      delete pendingTrans;
     }
     else{
       transaction["sellerSignature"] = signature;
 
       console.log(transaction)
-
-      fs.writeFileSync("./src/pendingTrans.json",JSON.stringify(transaction,undefined,2));    
+      
+      var pendingTrans = JSON.parse(fs.readFileSync("./src/pendingTrans.json").toString(),undefined,2)    
+      pendingTrans.push(transaction)
+      fs.writeFileSync("./src/pendingTrans.json",JSON.stringify(pendingTrans,undefined,2));    
       delete pendingTrans;
-
-      for (let id in peers) {
-       peers[id].conn.write(JSON.stringify(transaction,undefined,2))
-      }
     }
+    
+
+    for (let id in peers) {
+      peers[id].conn.write(JSON.stringify(transaction,undefined,2))
+    }
+
+    setTimeout(() => {
+      for (let id in peers) {
+        peers[id].conn.write(JSON.stringify({
+        class: "verTransaction",
+        data: {
+          landId: transaction.data.landID
+          } 
+        },undefined,2))
+      }
+    },2000);
   });
 
   client.on("verifyTransaction", async () => {
-    var pendingTrans = JSON.parse(fs.readFileSync("./pendingTrans.json").toString(),undefined,2)
-    console.log("pend", pendingTrans.data.landID, pendingTrans.data)
-    for (let id in peers) {
-      peers[id].conn.write(JSON.stringify({
-  class: "verTransaction",
-  data: {
-    landId: pendingTrans.data.landID
-  } 
-},undefined,2))
-    }            
+    var pendingTrans = JSON.parse(fs.readFileSync("./src/pendingTrans.json").toString(),undefined,2)
+    console.log("pend", pendingTrans.data.landID, pendingTrans.data)            
   })
 });
 
@@ -141,13 +145,17 @@ sw.join('catalyst')
 
     conn.on('data', async (data) => {
       // Here we handle incomming messages
+      console.log("message recieved - ", data.toString());      
       var message = JSON.parse(data);      
-      if(message!= null && message!= undefined && message.class!= null && message.class!= undefined && message.class ==  "block"){
+      if(message!= null && message!= undefined && message.class!= null && message.class!= undefined && message.class == "verReply"){
         if(message.class == "verReply"){
           checkBranch(message).then((flag)=>{
             if(flag){
               console.log(`Transaction included in Block No. ${message.data.blockHeader.blockHeight}`);
               socket.emit("changeStatus", `Transaction included in Block No. ${message.data.blockHeader.blockHeight}`)
+            }
+            else{
+              console.log("Branch not correct")
             }
           })
         }

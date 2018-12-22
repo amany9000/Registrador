@@ -162,10 +162,20 @@ await sw.join('catalyst')
           fs.writeFileSync("./clients/GovernmentNode/halted.log","");
           fs.writeFileSync("./clients/GovernmentNode/haltedList.json",JSON.stringify([], undefined, 2));          
         
-          var branchList = JSON.parse(fs.readFileSync("./branchList.json").toString());               
-          for (let k in branchList){
-              peers[branchList[k].peerId].conn.write(JSON.stringify(branchList[k].branch,undefined,2))            
-          fs.writeFileSync("./clients/GovernmentNode/branchList.json", JSON.stringify(transactionList,undefined,2));          
+          var branchList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/branchList.json").toString());               
+          if(branchList.length != 0){
+            for (let k in branchList){
+                if(peers[branchList[k].peerId].conn){
+                  peers[branchList[k].peerId].conn.write(JSON.stringify({
+                    "class": "verReply",
+                    "data": {
+                     "branch": branchList[k].branch,
+                     "header": branchList[k].header,
+                      "landID": branchList[k].landID
+                    }},undefined,2))            
+                }
+            }
+            fs.writeFileSync("./clients/GovernmentNode/branchList.json",JSON.stringify([], undefined, 2));          
           }
         }
         
@@ -193,7 +203,7 @@ await sw.join('catalyst')
         var verTransList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/verTransList.json").toString());               
         verTransList.push({
           peerId : peerId,
-          message: message
+          transaction: message
         })
         fs.writeFileSync("./clients/GovernmentNode/verTransList.json", JSON.stringify(verTransList,undefined,2));        
       }       

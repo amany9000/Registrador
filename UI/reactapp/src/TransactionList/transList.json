@@ -1,17 +1,19 @@
-[{
-  "class": "transaction",
-  "data": {
-    "timeStamp": 1545286524001,
-    "buyerTimeStamp": "1234455",
-    "landID": "land23",
-    "from": [
-      "User89"
-    ],
-    "to": [
-      "User99"
-    ],
-    "amount": "123123"
-  },
-  "buyerSignature": "asdf",
-  "sellerSignature": "YxeXS4rN5i/DOwM/dSb8n87f+a4q0ThyX27gCe0pg56lh+/6x4r4wEkGJ9ayea+X7koaLOjgLp06I8f/7G3kPr+nSv1PkFZazyywoFowj7mDMcgFh4et6p4qpruImDznZ7JCF4GstJzeE3g+yMidd72EiBo0eRJq6RhJgd0HyxmV5N0VANr2OUc4KwSWlAoR0soE0MXTvXftgHM9rAXaX707iHAWIRovamNnQ0YzB1SwvaRKGRZVezBqj7Nwwaz5mvNYN+PezDDUjfpy4aWQrg1SqlNzDhUIsx35+nMyCy9XFJj7fuGMd5iu6sGJ2Wbv4PQfu6XGY68cRkQWbkr4xQ=="
-}]
+[
+  {
+    "class": "transaction",
+    "data": {
+      "timeStamp": 1234345,
+      "buyerTimeStamp": "1234",
+      "landID": "land23",
+      "from": [
+        "User99"
+      ],
+      "to": [
+        "User6"
+      ],
+      "amount": 12345
+    },
+    "buyerSignature": "sig1",
+    "selerSignature": "sig2"
+  }
+]

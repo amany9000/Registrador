@@ -32,7 +32,7 @@ async.whilst(
     		flag1 = false; 
 		}
 
-		else if(new Date().getMinutes() === 20	&& new Date().getSeconds() === 0 && flag2){
+		else if(new Date().getMinutes() === 21	&& new Date().getSeconds() === 0 && flag2){
 			setTimeout(callback, 1000);
 			console.log("selectBlock");
 			
@@ -40,46 +40,49 @@ async.whilst(
 				console.log("rep",reply,block);
 
 				if(block.class){	
-				var blockChain = JSON.parse(fs.readFileSync("../Blockchain/Blockchain.json").toString());				 
-				blockChain.push(block);
-				fs.writeFileSync("../Blockchain/Blockchain.json",JSON.stringify(blockChain,undefined,2));					
-				}
+					var blockChain = JSON.parse(fs.readFileSync("../Blockchain/Blockchain.json").toString());				 
+					blockChain.push(block);
+					fs.writeFileSync("../Blockchain/Blockchain.json",JSON.stringify(blockChain,undefined,2));					
+					
+					
+					var transList = [];
+					for(var i in block.transactionList){
+						transList.push(JSON.parse(block.transactionList[i]))
+					}				
 				
-				var transList = [];
-				for(var i in block.transactionList){
-					transList.push(JSON.parse(block.transactionList[i]))
-				}				
-				//createBranch(transList, block.header.hashMerkleRoot);
-				
-				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",JSON.stringify([],undefined,2));
-				
-				// transaction element and pending list
- 				var transElementList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionElement.json").toString());				 
- 				
- 				var blockTransList = [];
- 				for(var i in block.transactionList){
- 					blockTransList.push(JSON.parse(block.transactionList[i]));
- 				} 				
- 				for(var i in transElementList){
- 					var flag3 = false;
- 					for(var j in blockTransList){
- 						if(transElementList[i].transaction.data.landID === blockTransList[j].data.landID){
- 							console.log("transactionElements");
- 							flag3 = true;
+					// transaction element and pending list
+ 					var transElementList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionElement.json").toString());				 
+ 					
+ 					var blockTransList = [];
+ 					for(var i in block.transactionList){
+ 						blockTransList.push(JSON.parse(block.transactionList[i]));
+ 					} 				
+ 					for(var i in transElementList){
+ 						var flag3 = false;
+ 						for(var j in blockTransList){
+ 							if(transElementList[i].transaction.data.landID === blockTransList[j].data.landID){
+ 								console.log("transactionElements");
+ 								flag3 = true;
+ 							}
+ 						}
+ 						if(flag3){
+ 							transElementList.pop(transElementList[i]);
  						}
  					}
- 					if(flag3){
- 						transElementList.pop(transElementList[i]);
- 					}
+ 					fs.writeFileSync("./clients/GovernmentNode/transactionElement.json", JSON.stringify(transElementList,undefined,2)); 				
+            		var pendingList = [];                
+					for(var i in transElementList){
+						pendingList.push(transElementList[i].transaction.data.landID);
+					ed7813a5ad8954dfd4abbf3bae3a9af872cd2f77250266068a267b89abc1fe88}
+					fs.writeFileSync("./clients/GovernmentNode/pendingList.log", pendingList);              
+
+					createBranch(blockTransList, block.header, block.landID);
+	    	        
+	    	        delete blockTransList,transElementList,blockChain,transList;
  				}
- 				console.log("transactionElement - ", transElementList)
-				fs.writeFileSync("./clients/GovernmentNode/transactionElement.json", JSON.stringify(transElementList,undefined,2)); 				
-            	var pendingList = [];                
-				for(var i in transElementList){
-					pendingList.push(transElementList[i].transaction.data.landID);
-				}
-				fs.writeFileSync("./clients/GovernmentNode/pendingList.log", pendingList);              
-				fs.writeFileSync("./clients/GovernmentNode/halted.log","true");			
+
+				fs.writeFileSync("./clients/GovernmentNode/halted.log","true");
+				fs.writeFileSync("./clients/GovernmentNode/recievedBlocks.json",JSON.stringify([],undefined,2));				
 			});
     		flag2 = false;
 		}

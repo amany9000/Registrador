@@ -1,19 +1,20 @@
 [
   {
-    "hash": "99b439f794c627a2fcc94de9fed5edba137685dfa9e50605c1de03dab279c736",
+    "hash": "2b02cf348acb5c79715ebe981754d3b9d653d001e2a8a4d55ff34cfa2dc655c3",
     "block": {
       "class": "block",
       "header": {
-        "blockHeight": 3,
-        "hashPrevBlock": "13194a7f03c80d9bc64813b2815f436cd59db41676dde0694610e9ff3bc3bdf6",
-        "hashMerkleRoot": "D95CE7EF5AD98EBA9B0F23EB4E77FA3C9DA3023B681FF3083478FF65ACDB6E06",
-        "blockTimeStamp": 1545275640518
+        "blockHeight": 4,
+        "hashPrevBlock": "8eb00701874c6b72444ec35debb92180ddd8f6458e34b2770e357a21928952a0",
+        "hashMerkleRoot": "C10A2B13B8C650F146A4314898189A6042E5A3627808973D103F318D944CD7BA",
+        "blockTimeStamp": 1545421680722
       },
-      "transactionCount": 1,
+      "transactionCount": 2,
       "transactionList": [
-        "{\n  \"class\": \"transaction\",\n  \"data\": {\n    \"buyerTimeStamp\": \"1234\",\n    \"timeStamp\": 123456,\n    \"landID\": \"land2345\",\n    \"from\": [\n      \"User89\"\n    ],\n    \"to\": [\n      \"User6\"\n    ],\n    \"amount\": 123213\n  },\n  \"buyerSignature\": \"Sig1\",\n  \"selerSignature\": \"Sig2\"\n}"
+        "{\n  \"class\": \"transaction\",\n  \"data\": {\n    \"timeStamp\": 1545286524001,\n    \"buyerTimeStamp\": \"1234455\",\n    \"landID\": \"land23\",\n    \"from\": [\n      \"User89\"\n    ],\n    \"to\": [\n      \"User99\"\n    ],\n    \"amount\": \"123123\"\n  },\n  \"buyerSignature\": \"asdf\",\n  \"sellerSignature\": \"YxeXS4rN5i/DOwM/dSb8n87f+a4q0ThyX27gCe0pg56lh+/6x4r4wEkGJ9ayea+X7koaLOjgLp06I8f/7G3kPr+nSv1PkFZazyywoFowj7mDMcgFh4et6p4qpruImDznZ7JCF4GstJzeE3g+yMidd72EiBo0eRJq6RhJgd0HyxmV5N0VANr2OUc4KwSWlAoR0soE0MXTvXftgHM9rAXaX707iHAWIRovamNnQ0YzB1SwvaRKGRZVezBqj7Nwwaz5mvNYN+PezDDUjfpy4aWQrg1SqlNzDhUIsx35+nMyCy9XFJj7fuGMd5iu6sGJ2Wbv4PQfu6XGY68cRkQWbkr4xQ==\"\n}",
+        "{\n  \"class\": \"transaction\",\n  \"data\": {\n    \"timeStamp\": 1545418899378,\n    \"buyerTimeStamp\": \"123312\",\n    \"landID\": \"land23\",\n    \"from\": [\n      \"User89\"\n    ],\n    \"to\": [\n      \"User99\"\n    ],\n    \"amount\": \"123456789\"\n  },\n  \"buyerSignature\": \"wertyuasdfghjadskfrastdy\",\n  \"sellerSignature\": \"T9Lx6cmkCCHTjs37az5n+9wT/SeYKTge+tMaO5k5T0WnW9a32U9F+cTLjHCe1WLx3c/3kP1490CB0mougGmVeQFONajZqP+J5zgaMF2FyNvrPNIZfBpnkMqJ7fuk6hSwMEqsPPUt2WTgSVJqm/Ly1M68Rp+K3+gE5k6TxfVUh8WTLD3CI4VOJkBP3LCFqiOPjzPYdZqQUpyAzB9SZJF+Livl+9kyaSJRs1SBO291QqJcrAOPj3oUb08azr1QdDz5G2+dDbzScJ4gkVOJWH0fbp2RthdmQfXmZlSwAbOrI/n2WLWricwBBJxJnHP2yaSsvtFSrHGQW4MAqCc3nosbWA==\"\n}"
       ]
     },
-    "freq": 1
+    "freq": 2
   }
 ]
