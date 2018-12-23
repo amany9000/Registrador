@@ -5,7 +5,9 @@ import { Table } from 'semantic-ui-react';
 
 import { subscribeToTimer } from '../Api/Api';
 import openSocket from 'socket.io-client';
+
 const socket = openSocket('http://localhost:8000');
+const verSocket = openSocket(`http://localhost:9000`);
 
 class SPVAddTransaction extends Component {
 
@@ -16,7 +18,22 @@ class SPVAddTransaction extends Component {
         from:"",
         to:"",
         amount:"",
-        buyerSignature:""
+        buyerSignature:"",
+        reply: "Transaction not verified Yet",
+        flag1:false
+    }
+    discard(){
+      this.setState({
+        timeStamp:"",
+        buyerTimeStamp:"",
+        landID:"",
+        from:"",
+        to:"",
+        amount:"",
+        buyerSignature:"",
+        reply: "Transaction not verified Yet",
+        flag1:false
+     });
     }
 
     makeTransaction(today){
@@ -35,13 +52,26 @@ class SPVAddTransaction extends Component {
             "sellerSignature": ""
         }
         socket.emit('sendTransaction',trans);
+
+
+        verSocket.on('verifyTransaction', (rep) => {
+            this.setState({
+                reply: rep
+            })            
+        });
+
     }
 
        
 
     verify = async ()=> {
-        socket.emit('verifyTransaction');
+        console.log(this.state.reply)
+        this.setState({
+            flag1:true
+        })    
     }
+
+  
 
 
   render() {
@@ -54,9 +84,9 @@ class SPVAddTransaction extends Component {
             <Main/>
         <div id="main">
             <div className="both" style={{
-					 background: '#2bbbad'
-				 }}>
-             	<h2  className ="Head"> Add Transaction</h2>
+                    background: '#2bbbad'
+                }}>
+                <h2  className ="Head"> Add Transaction</h2>
             </div>
         </div>
                 <div style={{
@@ -111,11 +141,25 @@ class SPVAddTransaction extends Component {
                 <div className="buttons">
                     <button onClick={this.makeTransaction.bind(this, today)}> CREATE </button>
                     {/* <button onClick={()=> { socket.emit('sendTransaction','huhu');}} > CREATE </button> */}
-                    <button> DISCARD </button>
+                    <button onClick={this.discard.bind(this)} > DISCARD </button>
                 </div>
                 <div className="buttons2" style={{marginTop: 30}}>
                         <button onClick={this.verify.bind(this)}> VERIFY </button>
-                </div>
+                         </div>
+
+                         {
+                            this.state.flag1?
+                        <div className="note1" align="center" >
+                        {
+                            <div>
+                            {this.state.reply}
+                            </div>
+                        }
+                        </div>
+                        :
+                        <div> </div>
+                        }
+               
             </div>
         </div>
     );

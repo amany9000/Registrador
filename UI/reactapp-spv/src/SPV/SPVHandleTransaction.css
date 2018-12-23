@@ -66,3 +66,19 @@
   display: flex;
   justify-content: end;
 }
+
+
+.note1{
+  height:30px;
+  padding :30px;
+  font-size :25px;
+ font-style:Bold;
+ font-family: "Times New Roman";
+ margin-bottom: 20px;
+   background-color: #2bbbad;
+   margin-top: 40px;
+   width: 40%;
+   margin-left: 400px;
+
+
+}

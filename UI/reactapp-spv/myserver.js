@@ -1,12 +1,13 @@
- 
+
 const crypto = require('crypto');
 const Swarm = require('discovery-swarm');
 const defaults = require('dat-swarm-defaults');
 const getPort = require('get-port');
 const readline = require('readline');
 const io = require('socket.io')();
+const io2 = require('socket.io')();
 const fs  = require("fs");
-
+const openSocket = require("socket.io-client")
 const {transSigCreate} = require("./sign.js");
 const {checkBranch}  =require("./spv.js")
 const peers = {}
@@ -71,14 +72,13 @@ const sw = Swarm(config)
   sw.listen(port)
   console.log('Listening to port: ' + port)
 
-
-  const port2 = 8000;
+const port2 = 8000;
 io.listen(port2);
-console.log('listening on port ', port2);
+io2.listen(9000);              
 
 io.on('connection', (client) => {
   client.on('sendTransaction', async(transaction) => {
-    console.log(transaction);
+    console.log("t",transaction);
     
     var signature = await transSigCreate(transaction);
     
@@ -88,37 +88,41 @@ io.on('connection', (client) => {
       fs.writeFileSync("./outputs/draft.json",JSON.stringify(transaction,undefined,2));    
     }
     else{
-      transaction["sellerSignature"] = signature;
-
-      console.log(transaction)
+      var pendingTrans = JSON.parse(fs.readFileSync("./src/pendingTrans.json").toString(),undefined,2)
       
-      var pendingTrans = JSON.parse(fs.readFileSync("./src/pendingTrans.json").toString(),undefined,2)    
-      pendingTrans.push(transaction)
-      fs.writeFileSync("./src/pendingTrans.json",JSON.stringify(pendingTrans,undefined,2));    
-      delete pendingTrans;
-    }
-    
-
-    for (let id in peers) {
-      peers[id].conn.write(JSON.stringify(transaction,undefined,2))
-    }
-
-    setTimeout(() => {
-      for (let id in peers) {
-        peers[id].conn.write(JSON.stringify({
-        class: "verTransaction",
-        data: {
-          landId: transaction.data.landID
-          } 
-        },undefined,2))
+      if(pendingTrans.find((trans) => {return (trans.data.landID === transaction.data.landID)})){
+        console.log("pppppp")
+        io2.on('connection', (client) => {
+          client.emit('verifyTransaction', `A transaction of the landID ${transaction.data.landID} is already pending.`);
+        });        
+      }          
+      else{
+        transaction["sellerSignature"] = signature;
+        pendingTrans.push(transaction)
+        fs.writeFileSync("./src/pendingTrans.json",JSON.stringify(pendingTrans,undefined,2));    
+        delete pendingTrans;
+        for (let id in peers) {
+        peers[id].conn.write(JSON.stringify(transaction,undefined,2))
+        }
+        setTimeout(() => {
+          for (let id in peers) {
+            peers[id].conn.write(JSON.stringify({
+            class: "verTransaction",
+            data: {
+              landId: transaction.data.landID
+              } 
+            },undefined,2))
+          }
+        },2000);
       }
-    },2000);
+    }
+    //client.emit("verifyTransaction","testing")
   });
-
+  /*
   client.on("verifyTransaction", async () => {
     var pendingTrans = JSON.parse(fs.readFileSync("./src/pendingTrans.json").toString(),undefined,2)
     console.log("pend", pendingTrans.data.landID, pendingTrans.data)            
-  })
+  })*/  
 });
 
   /**
@@ -151,11 +155,24 @@ sw.join('catalyst')
         if(message.class == "verReply"){
           checkBranch(message).then((flag)=>{
             if(flag){
-              console.log(`Transaction included in Block No. ${message.data.blockHeader.blockHeight}`);
-              socket.emit("changeStatus", `Transaction included in Block No. ${message.data.blockHeader.blockHeight}`)
+              console.log(`Transaction included in Block No. ${message.data.header.blockHeight}`);
+              io2.on('connection', (client) => {
+                client.emit('verifyTransaction', `Transaction included in Block No. ${message.data.header.blockHeight}`);
+              });
+              
+              var pendingTrans = JSON.parse(fs.readFileSync("./src/pendingTrans.json").toString(),undefined,2)    
+
+              pendingTrans =  pendingTrans.filter((trans) => trans.data.landID !== message.data.landID)
+              //console.log("pending",trans.data.landID,message.data.landID)
+              fs.writeFileSync("./src/pendingTrans.json",JSON.stringify(pendingTrans,undefined,2));              
+
+              delete pendingTrans
             }
             else{
               console.log("Branch not correct")
+              io2.on('connection', (client) => {
+                client.emit('verifyTransaction', `Transaction not included`);
+              });
             }
           })
         }

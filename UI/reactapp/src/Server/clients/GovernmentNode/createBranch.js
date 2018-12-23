@@ -6,10 +6,21 @@ var createBranch = function (transactionList, header){
 	//console.log("bbbbbbbbbbbbbbb",verTransList,transactionList[1].data.from)
 	var branchList = [];
 	for (let j in verTransList){
-		var count = new Number(0);
 		//console.log(transactionList, buyer, root);
-		for (var trans of transactionList){
-			if(trans.data.landID == verTransList[j].transaction.data.landId){
+		for (var i in transactionList){
+			if(transactionList[i].data.landID == verTransList[j].transaction.data.landId){
+					
+				if(transactionList.length == 1){
+					branchList.push({
+						peerId: verTransList[j].peerId,
+						branch: "Single Transaction",
+						header: header,
+						landID: verTransList[j].transaction.data.landId
+					});
+					break;
+				}	
+				
+				var count = new Number(i);
 				var branch = [];
 				getMerkleTree(transactionList, (tree)=>{
 					returnedRoot = tree.root()
@@ -31,7 +42,7 @@ var createBranch = function (transactionList, header){
 								else
 									branch.push({hash : tree.level(levelCount  - i)[count - 1], position: "left"});
 							}
-						//console.log("count :", count)
+						console.log("count :", count, i, levelCount,tree.level(0), tree.level(1))
 						count = Math.floor(count/2);	
 					}  	
 				});
@@ -41,11 +52,9 @@ var createBranch = function (transactionList, header){
 					header: header,
 					landID: verTransList[j].transaction.data.landId
 				});
-				verTransList.splice(j,1)
 				console.log("branch",branch);
 				break;			
 			}
-			count++;
 		}
 	}
 	fs.writeFileSync("./clients/GovernmentNode/branchList.json", JSON.stringify(branchList,undefined,2));						
