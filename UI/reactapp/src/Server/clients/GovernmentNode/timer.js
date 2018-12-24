@@ -7,6 +7,7 @@ const {blockMaker} = require("./blockMaker");
 const {selectBlock} = require("./selectBlock")
 const {transactionVerify} = require("./transactionVerify")
 const {createBranch} = require("./createBranch") 
+var base64Img = require('base64-img');
 
 var flag1 = true;
 var flag2 = true;
@@ -20,7 +21,7 @@ async.whilst(
 			flag2 = true;
 		}
 		
-		if(new Date().getMinutes() === 42 && new Date().getSeconds() === 0 && flag1){
+		if(new Date().getMinutes() === 51 && new Date().getSeconds() === 0 && flag1){
 			setTimeout(callback, 1000);
 			blockMaker((reply)=>{
 				console.log(reply);
@@ -32,7 +33,7 @@ async.whilst(
     		flag1 = false; 
 		}
 
-		else if(new Date().getMinutes() === 22	&& new Date().getSeconds() === 0 && flag2){
+		else if(new Date().getMinutes() === 16	&& new Date().getSeconds() === 0 && flag2){
 			setTimeout(callback, 1000);
 			console.log("selectBlock");
 			
@@ -44,12 +45,12 @@ async.whilst(
 					blockChain.push(block);
 					fs.writeFileSync("../Blockchain/Blockchain.json",JSON.stringify(blockChain,undefined,2));					
 					
-					
-					var transList = [];
+					var trans
 					for(var i in block.transactionList){
-						transList.push(JSON.parse(block.transactionList[i]))
+						trans = JSON.parse(block.transactionList[i]);
+						base64Img.imgSync( trans.data.picture, `../pictures`, `${block.header.blockHeight}_${trans.data.landID}`)
 					}				
-				
+					delete trans;				
 					// transaction element and pending list
  					var transElementList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/transactionElement.json").toString());				 
  					
@@ -78,7 +79,7 @@ async.whilst(
 
 					createBranch(blockTransList, block.header, block.landID);
 	    	        
-	    	        delete blockTransList,transElementList,blockChain,transList;
+	    	        delete blockTransList,transElementList,blockChain;
  				}
 
 				fs.writeFileSync("./clients/GovernmentNode/halted.log","true");

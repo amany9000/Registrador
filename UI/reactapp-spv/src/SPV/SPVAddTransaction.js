@@ -13,12 +13,7 @@ class SPVAddTransaction extends Component {
 
     state = {
         timeStamp:"",
-        buyerTimeStamp:"",
-        landID:"",
-        from:"",
-        to:"",
-        amount:"",
-        buyerSignature:"",
+        path: "",
         reply: "Transaction not verified Yet",
         flag1:false
     }
@@ -38,20 +33,7 @@ class SPVAddTransaction extends Component {
 
     makeTransaction(today){
         // make transactions and send to the network
-        const trans = {
-            "class": "transaction",
-            "data": {
-                "timeStamp": today,
-                "buyerTimeStamp" : this.state.buyerTimeStamp,
-                "landID" : this.state.landID,
-                "from": [this.state.from],
-                "to": [this.state.to],
-                "amount": this.state.amount,
-            },
-            "buyerSignature": this.state.buyerSignature,
-            "sellerSignature": ""
-        }
-        socket.emit('sendTransaction',trans);
+         socket.emit('sendTransaction',{path:this.state.path, timeStamp: today});
 
         socket.on('verifyTransaction', async(rep) => {
             this.setState({
@@ -119,29 +101,9 @@ class SPVAddTransaction extends Component {
                             <Table.Cell>{today}</Table.Cell> 
                         </Table.Row>
                         <Table.Row> 
-                            <Table.Cell>buyer timestamp</Table.Cell> 
-                            <Table.Cell><input type ="text" onChange={event => this.setState({buyerTimeStamp:event.target.value})}/></Table.Cell> 
+                            <Table.Cell>Path of Transaction</Table.Cell> 
+                            <Table.Cell><input type ="text" onChange={event => this.setState({path:event.target.value})}/></Table.Cell> 
                         </Table.Row>
-                        <Table.Row> 
-                            <Table.Cell>landID</Table.Cell> 
-                            <Table.Cell><input type ="text" onChange={event => this.setState({landID:event.target.value})}/></Table.Cell> 
-                        </Table.Row> 
-                        <Table.Row> 
-                            <Table.Cell>from</Table.Cell> 
-                            <Table.Cell><input type ="text" onChange={event => this.setState({from:event.target.value})}/></Table.Cell> 
-                        </Table.Row> 
-                        <Table.Row> 
-                            <Table.Cell>to</Table.Cell> 
-                            <Table.Cell><input type="text" onChange={event => this.setState({to:event.target.value})}/></Table.Cell> 
-                        </Table.Row> 
-                        <Table.Row> 
-                            <Table.Cell>amount</Table.Cell> 
-                            <Table.Cell> <input type = "text" onChange={event => this.setState({amount:event.target.value})}/></Table.Cell>
-                        </Table.Row>
-                        <Table.Row> 
-                            <Table.Cell>buyerSignature</Table.Cell> 
-                            <Table.Cell> <input type = "text" onChange={event => this.setState({buyerSignature:event.target.value})}/></Table.Cell>
-                        </Table.Row> 
                     </Table.Body>
                 </Table>
                 <div className="buttons">

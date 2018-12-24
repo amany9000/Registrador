@@ -46,7 +46,7 @@ var transactionVerify = async (transactionList, callback) => {
 				console.log("Timestamp isn't correct",typeof(transaction.data.timeStamp));
         	}
 			
-			if(transaction.data.buyerTimeStamp == undefined || transaction.data.buyerTimeStamp === null || typeof(transaction.data.buyerTimeStamp) != "string" ||currentTime < parseInt(transaction.data.buyerTimeStamp, 10) ){
+			if(transaction.data.buyerTimeStamp == undefined || transaction.data.buyerTimeStamp === null || typeof(transaction.data.buyerTimeStamp) != "number" ||currentTime < parseInt(transaction.data.buyerTimeStamp, 10) ){
 				returnBool[i] = false;
 				console.log("buyer Timestamp isn't correct",typeof(transaction.data.timeStamp));
         	}
@@ -60,6 +60,9 @@ var transactionVerify = async (transactionList, callback) => {
 			if(transaction.data.to == undefined || transaction.data.to == null || transaction.data.to.length == undefined || transaction.data.to.length == 0){
 				returnBool[i] = false;			
 			}
+			if(transaction.data.picture == undefined || transaction.data.picture == null || transaction.data.picture.length == undefined || transaction.data.picture.length == 0){
+				returnBool[i] = false;			
+			}			
 			if(transaction.class == undefined || transaction.class != "transaction" || transaction.data.amount == undefined || transaction.data.amount == null){
 				returnBool[i] = false;
 			}
@@ -71,12 +74,12 @@ var transactionVerify = async (transactionList, callback) => {
 
 		trans.push(transaction);
 		//Signature is correct
-		/*
+		
 		if(!transSigVerify(transaction)){
 			returnBool[i] = false;			
 			console.log("Signature Not Valid");
 		}
-		*/
+		
 		if(returnBool[i] === true){
 			console.log("yesss 1")
 		}

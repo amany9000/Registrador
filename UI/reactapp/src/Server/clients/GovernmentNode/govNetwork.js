@@ -58,7 +58,7 @@ const sw = Swarm(config)
   sw.listen(port)
   console.log('Listening to port: ' + port)
   
-  var lastHeight = 3;
+  var lastHeight = 4;
   const port2 = await getPort();
 io.listen(port2);
 console.log('listening on port ', port2);
@@ -88,7 +88,7 @@ await sw.join('catalyst')
       fs.writeFileSync("./clients/GovernmentNode/boolean.log","");
     }
     else{
-    if(new Date().getMinutes() === 43){
+    if(new Date().getMinutes() === 52){
       if(lastHeight + 1 === block.header.blockHeight){
         console.log("dhun dhun dhun 143", block);
         lastHeight++;

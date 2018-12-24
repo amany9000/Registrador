@@ -11,6 +11,7 @@ const openSocket = require("socket.io-client")
 const {transSigCreate} = require("./sign.js");
 const {checkBranch}  =require("./spv.js")
 var base64Img = require('base64-img');
+
 const peers = {}
 // Counter for connections, used to identify connections
 let connSeq = 0
@@ -115,17 +116,29 @@ function  receive(message) {
 const port2 = 8000;
 io.listen(port2);
 io.on('connection', (client) => {
-  client.on('sendTransaction', async(transaction) => {
-    console.log("t",transaction);
-    
-    var signature = await transSigCreate(transaction);
-    
-    if(transaction.buyerSignature === ""){
-      transaction["buyerSignature"] = signature;
-      console.log(transaction)
-      fs.writeFileSync("./outputs/draft.json",JSON.stringify(transaction,undefined,2));    
+  client.on('sendTransaction', async(reply) => {
+
+    if(reply.buyerSignature === "") {
+      var signature = await transSigCreate(reply);
+      reply["buyerSignature"] = signature;
+
+      let data = base64Img.base64Sync(`./inputPic/${reply.data.landID}.png`);
+      reply.data["picture"] = data;
+
+      console.log(reply)
+      fs.writeFileSync("./outputs/draft.json",JSON.stringify(reply,undefined,2)); 
+      delete reply,data, signature
     }
     else{
+      console.log(reply)
+      var transaction = JSON.parse(fs.readFileSync(`${reply.path}`).toString(),undefined,2)
+
+      if(transaction.class != "transaction"){
+        client.emit('verifyTransaction', "File Not Found");      
+      }
+      console.log("t",transaction);
+    
+    
       var pendingTrans = JSON.parse(fs.readFileSync("./src/pendingTrans.json").toString(),undefined,2)
       
       if(pendingTrans.find((trans) => {return (trans.data.landID === transaction.data.landID)})){
@@ -133,10 +146,15 @@ io.on('connection', (client) => {
         client.emit('verifyTransaction', `A transaction of the landID ${transaction.data.landID} is already pending.`);
       }          
       else{
+        transaction.data["timeStamp"] = reply.timeStamp;
+        var signature = await transSigCreate(transaction);        
         transaction["sellerSignature"] = signature;
+        
         pendingTrans.push(transaction)
         fs.writeFileSync("./src/pendingTrans.json",JSON.stringify(pendingTrans,undefined,2));    
         delete pendingTrans;
+        base64Img.imgSync( transaction.data.picture, `./outputPic`, `${transaction.data.landID}`)
+
         for (let id in peers) {
         peers[id].conn.write(JSON.stringify(transaction,undefined,2))
         }
@@ -155,9 +173,8 @@ io.on('connection', (client) => {
     //client.emit("verifyTransaction","testing")
   });
   /*
-  client.on("verifyTransaction", async () => {
-    var pendingTrans = JSON.parse(fs.readFileSync("./src/pendingTrans.json").toString(),undefined,2)
-    console.log("pend", pendingTrans.data.landID, pendingTrans.data)            
+  client.on("loadTransaction", async (path) => {
+    console.log(path);
   })*/  
 });
 //io.disconnect();
