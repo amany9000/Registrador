@@ -10,6 +10,7 @@ const fs  = require("fs");
 const openSocket = require("socket.io-client")
 const {transSigCreate} = require("./sign.js");
 const {checkBranch}  =require("./spv.js")
+var base64Img = require('base64-img');
 const peers = {}
 // Counter for connections, used to identify connections
 let connSeq = 0
@@ -20,7 +21,7 @@ console.log('Your identity: ' + myId.toString('hex'))
 
 // reference to redline interface
 let rl
-
+let flag2  = false
 function log () {
   if (rl) {
     rl.clearLine()
@@ -72,10 +73,47 @@ const sw = Swarm(config)
   sw.listen(port)
   console.log('Listening to port: ' + port)
 
+//io2.listen(9000);
+
+function  receive(message) {
+        if(message.class == "verReply"){
+          checkBranch(message).then((flag)=>{
+            if(flag){
+              console.log(`Transaction included in Block No. ${message.data.header.blockHeight}`);
+              //if(!flag2){
+                io2.listen(9000);                
+              //  flag2 = true;
+              //}
+              io2.on('connection', (client) => {
+                client.emit('verifyTransaction', `Transaction included in Block No. ${message.data.header.blockHeight}`);
+                //client.disconnect()
+              });
+              var pendingTrans = JSON.parse(fs.readFileSync("./src/pendingTrans.json").toString(),undefined,2)    
+
+              pendingTrans =  pendingTrans.filter((trans) => trans.data.landID !== message.data.landID)
+              //console.log("pending",trans.data.landID,message.data.landID)
+              fs.writeFileSync("./src/pendingTrans.json",JSON.stringify(pendingTrans,undefined,2));              
+
+              delete pendingTrans
+            }
+            else{
+              console.log("Branch not correct")
+              //if(!flag2){
+              //  console.log("I dont know")
+                io2.listen(9000);                
+              //  flag2 = true;
+              //}
+                io2.on('connection', (client) => {
+                console.log("heyyyyy")
+                client.emit('verifyTransaction', `Transaction not Included`);
+                //client.disconnect()
+              });
+            }
+          })
+        }  
+}
 const port2 = 8000;
 io.listen(port2);
-io2.listen(9000);              
-
 io.on('connection', (client) => {
   client.on('sendTransaction', async(transaction) => {
     console.log("t",transaction);
@@ -92,9 +130,7 @@ io.on('connection', (client) => {
       
       if(pendingTrans.find((trans) => {return (trans.data.landID === transaction.data.landID)})){
         console.log("pppppp")
-        io2.on('connection', (client) => {
-          client.emit('verifyTransaction', `A transaction of the landID ${transaction.data.landID} is already pending.`);
-        });        
+        client.emit('verifyTransaction', `A transaction of the landID ${transaction.data.landID} is already pending.`);
       }          
       else{
         transaction["sellerSignature"] = signature;
@@ -124,7 +160,7 @@ io.on('connection', (client) => {
     console.log("pend", pendingTrans.data.landID, pendingTrans.data)            
   })*/  
 });
-
+//io.disconnect();
   /**
    * The channel we are connecting to.
    * Peers should discover other peers in this channel
@@ -147,35 +183,12 @@ sw.join('catalyst')
       }
     }
 
-    conn.on('data', async (data) => {
+    conn.on('data',  (data) => {
       // Here we handle incomming messages
       console.log("message recieved - ", data.toString());      
       var message = JSON.parse(data);      
       if(message!= null && message!= undefined && message.class!= null && message.class!= undefined && message.class == "verReply"){
-        if(message.class == "verReply"){
-          checkBranch(message).then((flag)=>{
-            if(flag){
-              console.log(`Transaction included in Block No. ${message.data.header.blockHeight}`);
-              io2.on('connection', (client) => {
-                client.emit('verifyTransaction', `Transaction included in Block No. ${message.data.header.blockHeight}`);
-              });
-              
-              var pendingTrans = JSON.parse(fs.readFileSync("./src/pendingTrans.json").toString(),undefined,2)    
-
-              pendingTrans =  pendingTrans.filter((trans) => trans.data.landID !== message.data.landID)
-              //console.log("pending",trans.data.landID,message.data.landID)
-              fs.writeFileSync("./src/pendingTrans.json",JSON.stringify(pendingTrans,undefined,2));              
-
-              delete pendingTrans
-            }
-            else{
-              console.log("Branch not correct")
-              io2.on('connection', (client) => {
-                client.emit('verifyTransaction', `Transaction not included`);
-              });
-            }
-          })
-        }
+          receive(message)
       }
     })
 

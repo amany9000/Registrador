@@ -15,22 +15,5 @@
     },
     "buyerSignature": "asdf",
     "sellerSignature": "YxeXS4rN5i/DOwM/dSb8n87f+a4q0ThyX27gCe0pg56lh+/6x4r4wEkGJ9ayea+X7koaLOjgLp06I8f/7G3kPr+nSv1PkFZazyywoFowj7mDMcgFh4et6p4qpruImDznZ7JCF4GstJzeE3g+yMidd72EiBo0eRJq6RhJgd0HyxmV5N0VANr2OUc4KwSWlAoR0soE0MXTvXftgHM9rAXaX707iHAWIRovamNnQ0YzB1SwvaRKGRZVezBqj7Nwwaz5mvNYN+PezDDUjfpy4aWQrg1SqlNzDhUIsx35+nMyCy9XFJj7fuGMd5iu6sGJ2Wbv4PQfu6XGY68cRkQWbkr4xQ=="
-  },
-  {
-    "class": "transaction",
-    "data": {
-      "timeStamp": 1545498472478,
-      "buyerTimeStamp": "12312",
-      "landID": "land2345",
-      "from": [
-        "User99"
-      ],
-      "to": [
-        "User89"
-      ],
-      "amount": "21344321"
-    },
-    "buyerSignature": "===arestdyfugahsildug==",
-    "sellerSignature": "RDo2TtacjzxBFqjxszh6ILq65PR/toL+Fd7L/jjK7CaCSLQ1aRobJat8H8e0dA7GkS+2vpNJIEvkAIbHMmM8ZsBg3hgBs4jVPidHmAW7YTdb07hFxG80LaUT0OD6KHlUgSCZGPxAFxKkXatFWvC2kdogY7EkwvaNAPua34YYWhWF95xmeYg43C/yLv1e72MPYnJG1n2lF7xHwrKeLD7tTREeAPpmrwC6+mKeR6nwq2iNFOskUYxMeojeLaOVgmmw1nZIlWZ6+s9NznAKNczM8ucHM/CDaWO0bAXJ8TLwFeg/NGnkwJL5+TtDzyb2jtJvQZM2vHkJAyVFUovA0+Dr0g=="
   }
 ]

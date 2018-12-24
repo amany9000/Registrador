@@ -7,7 +7,7 @@ import { subscribeToTimer } from '../Api/Api';
 import openSocket from 'socket.io-client';
 
 const socket = openSocket('http://localhost:8000');
-const verSocket = openSocket(`http://localhost:9000`);
+let verSocket = openSocket(`http://localhost:9000`);
 
 class SPVAddTransaction extends Component {
 
@@ -53,8 +53,13 @@ class SPVAddTransaction extends Component {
         }
         socket.emit('sendTransaction',trans);
 
+        socket.on('verifyTransaction', async(rep) => {
+            this.setState({
+                reply: rep
+            })            
+        });
 
-        verSocket.on('verifyTransaction', (rep) => {
+        verSocket.on('verifyTransaction', async(rep) => {
             this.setState({
                 reply: rep
             })            
@@ -65,6 +70,7 @@ class SPVAddTransaction extends Component {
        
 
     verify = async ()=> {
+    //verSocket = openSocket(`http://localhost:9000`);    
         console.log(this.state.reply)
         this.setState({
             flag1:true
