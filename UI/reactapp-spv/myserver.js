@@ -77,41 +77,40 @@ const sw = Swarm(config)
 //io2.listen(9000);
 
 function  receive(message) {
-        if(message.class == "verReply"){
-          checkBranch(message).then((flag)=>{
-            if(flag){
-              console.log(`Transaction included in Block No. ${message.data.header.blockHeight}`);
-              //if(!flag2){
-                io2.listen(9000);                
-              //  flag2 = true;
-              //}
-              io2.on('connection', (client) => {
-                client.emit('verifyTransaction', `Transaction included in Block No. ${message.data.header.blockHeight}`);
-                //client.disconnect()
-              });
-              var pendingTrans = JSON.parse(fs.readFileSync("./src/pendingTrans.json").toString(),undefined,2)    
+  if(message.class == "verReply"){
+    checkBranch(message).then((flag)=>{
+      if(flag){
+        console.log(`Transaction included in Block No. ${message.data.header.blockHeight}`);
+        //if(!flag2){
+          io2.listen(9000);                
+        //  flag2 = true;
+        //}
+        io2.on('connection', (client) => {
+          client.emit('verifyTransaction', `Transaction included in Block No. ${message.data.header.blockHeight}`);
+          //client.disconnect()
+        });
+        var pendingTrans = JSON.parse(fs.readFileSync("./src/pendingTrans.json").toString(),undefined,2)
+            pendingTrans =  pendingTrans.filter((trans) => trans.data.landID !== message.data.landID)
+            //console.log("pending",trans.data.landID,message.data.landID)
+            fs.writeFileSync("./src/pendingTrans.json",JSON.stringify(pendingTrans,undefined,2));              
 
-              pendingTrans =  pendingTrans.filter((trans) => trans.data.landID !== message.data.landID)
-              //console.log("pending",trans.data.landID,message.data.landID)
-              fs.writeFileSync("./src/pendingTrans.json",JSON.stringify(pendingTrans,undefined,2));              
-
-              delete pendingTrans
-            }
-            else{
-              console.log("Branch not correct")
-              //if(!flag2){
-              //  console.log("I dont know")
-                io2.listen(9000);                
-              //  flag2 = true;
-              //}
-                io2.on('connection', (client) => {
-                console.log("heyyyyy")
-                client.emit('verifyTransaction', `Transaction not Included`);
-                //client.disconnect()
-              });
-            }
-          })
-        }  
+          delete pendingTrans
+        }
+        else{
+          console.log("Branch not correct")
+          //if(!flag2){
+          //  console.log("I dont know")
+            io2.listen(9000);                
+          //  flag2 = true;
+          //}
+            io2.on('connection', (client) => {
+            console.log("heyyyyy")
+            client.emit('verifyTransaction', `Transaction not Included`);
+            //client.disconnect()
+          });
+        }
+      })
+    }  
 }
 const port2 = 8000;
 io.listen(port2);
@@ -119,15 +118,50 @@ io.on('connection', (client) => {
   client.on('sendTransaction', async(reply) => {
 
     if(reply.buyerSignature === "") {
+      let data1 = base64Img.base64Sync(`./inputPic/${reply.data.landID}.png`);
+      reply.data["picture"] = data1;
+      
+      var n = reply.data.from[0].split(" ")
+      var ans  = n[0];
+      for(var i = 0;i <n.length; i++){
+      
+        if((i == 1) || (i == (n.length - 3)) || (i == (n.length - 2)) || (i == 0)){
+          ans = `${ans} ${n[i+1]}`
+        }
+        else if(i != (n.length - 1)){
+          ans = `${ans}\n${n[i+1]}`   
+        } 
+      
+      }
+      
+      ans = ans + "\n";
+      console.log("pem",ans)
+      reply.data.from[0] = ans;  
+
+      n = reply.data.to[0].split(" ")
+      ans  = n[0];
+      
+      for(var i = 0;i <n.length; i++){
+      
+        if((i == 1) || (i == (n.length - 3)) || (i == (n.length - 2)) || (i == 0)){
+          ans = `${ans} ${n[i+1]}`
+        }
+        else if(i != (n.length - 1)){
+          ans = `${ans}\n${n[i+1]}`   
+        } 
+      
+      }
+      
+      ans = ans + "\n";
+      reply.data.to[0] = ans;
       var signature = await transSigCreate(reply);
       reply["buyerSignature"] = signature;
 
-      let data = base64Img.base64Sync(`./inputPic/${reply.data.landID}.png`);
-      reply.data["picture"] = data;
+      console.log("pem",ans)
 
       console.log(reply)
       fs.writeFileSync("./outputs/draft.json",JSON.stringify(reply,undefined,2)); 
-      delete reply,data, signature
+      delete reply,data1, signature
     }
     else{
       console.log(reply)
