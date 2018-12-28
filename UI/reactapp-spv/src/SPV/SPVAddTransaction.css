@@ -67,3 +67,14 @@
     justify-content: end;
   }
   
+  .note1{
+  height:30px;
+  padding :30px;
+  font-size :25px;
+  width: 350px; 
+ font-style:Bold;
+ font-family: "Times New Roman";
+   background-color: #2bbbad;
+   margin-top: 40px;
+
+}

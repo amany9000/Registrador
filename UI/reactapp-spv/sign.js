@@ -11,7 +11,7 @@ const transSigCreate = async (trans) => {
     const signatureUser = await signUser.sign(privateKeyUser, 'base64');
     return signatureUser;
 } 
-
+/*
 const read = async ()=>{
 console.log(await transSigCreate({ class: 'transaction',
   data:
@@ -28,4 +28,5 @@ console.log(await transSigCreate({ class: 'transaction',
 ))	
 }
 //read();
+*/
 module.exports = {transSigCreate};

@@ -37,14 +37,13 @@ class SPVCreateTransaction extends Component {
     }
       
     discard(){
-        // make transactions and send to the network
-        // this.setState({
-        //     timestamp:"",
-        //     landID:"",
-        //     from:"",
-        //     to:"",
-        //     amount:""
-        // });
+         this.setState({
+             timestamp:"",
+             landID:"",
+             from:"",
+             to:"",
+             amount:""
+         });
     }
 
 

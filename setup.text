@@ -1,0 +1,2 @@
+In your mongo shell, run this - 
+db.getSiblingDB('admin').runCommand( { setParameter: 1, failIndexKeyTooLong: false } )

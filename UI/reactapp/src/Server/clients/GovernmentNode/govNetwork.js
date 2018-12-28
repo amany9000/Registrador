@@ -58,7 +58,7 @@ const sw = Swarm(config)
   sw.listen(port)
   console.log('Listening to port: ' + port)
   
-  var lastHeight = 2;
+  var lastHeight = 4;
   const port2 = await getPort();
 io.listen(port2);
 console.log('listening on port ', port2);
@@ -88,7 +88,7 @@ await sw.join('catalyst')
       fs.writeFileSync("./clients/GovernmentNode/boolean.log","");
     }
     else{
-    if(new Date().getMinutes() === 19){
+    if(new Date().getMinutes() === 52){
       if(lastHeight + 1 === block.header.blockHeight){
         console.log("dhun dhun dhun 143", block);
         lastHeight++;
@@ -165,17 +165,18 @@ await sw.join('catalyst')
           var branchList = JSON.parse(fs.readFileSync("./clients/GovernmentNode/branchList.json").toString());               
           if(branchList.length != 0){
             for (let k in branchList){
-                if(peers[branchList[k].peerId].conn){
+                if(peers[branchList[k].peerId]){
                   peers[branchList[k].peerId].conn.write(JSON.stringify({
                     "class": "verReply",
                     "data": {
                      "branch": branchList[k].branch,
                      "header": branchList[k].header,
                       "landID": branchList[k].landID
-                    }},undefined,2))            
+                    }},undefined,2))         
+                    branchList.filter((element) => element.landID != branchList[k].landID)  
                 }
             }
-            fs.writeFileSync("./clients/GovernmentNode/branchList.json",JSON.stringify([], undefined, 2));          
+            fs.writeFileSync("./clients/GovernmentNode/branchList.json",JSON.stringify(branchList, undefined, 2));          
           }
         }
         
