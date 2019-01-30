@@ -17,8 +17,8 @@ var testLand = {
         }
     ],
     address : "IIIT LKO", 
-    owner : ["User99"],
-    previousOwners : [["User9"] ],
+    owner : ["User109"],
+    previousOwners : [],
     lastSellingPrice : 1234567.8,
     previousLandID : ["landID3"]  
 }
@@ -33,8 +33,10 @@ var land64 =  b64u.encode(testLandString);
 	var newland = new land(receivedLand);
 	
 	newland.save().then((doc) => {
-		return doc;
+		console.log(doc)
+        return doc;
 	}, (e) => {
+        console.log(e)
 		return e;
 	});
 //}

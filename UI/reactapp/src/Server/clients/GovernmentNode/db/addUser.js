@@ -6,7 +6,7 @@ var {mongoose} = require("./mongoose.js");
 
 var testUser = {
     class : "user",
-    publicKey : "User99",
+    publicKey : "User109",
     type  : "GovNode",
     currentAssets : ["land23"],
     previousAssets : []
@@ -22,7 +22,8 @@ var user64 =  b64u.encode(testUserString);
     var newUser = new user(receivedUser);
     
     newUser.save().then((doc) => {
-    	return doc;
+    	console.log(doc)
+        return doc;
     }, (e) => {
     	return e;
     });
