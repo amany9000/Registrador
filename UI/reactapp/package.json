@@ -9,6 +9,7 @@
     "get-port": "^3.2.0",
     "mdbootstrap": "^4.5.6",
     "mdbreact": "^4.5.1",
+    "mongoose": "^5.9.15",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",

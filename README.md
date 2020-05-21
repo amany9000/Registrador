@@ -1,23 +1,75 @@
-# Registrador
 
+# Registrador
 A blockchain based land registry application. 
 
+## About
+The Blockchain network is created through the discovery-swarm module. The blockchain is private. Block appending authority is only given to Authorised Nodes aka Government Nodes. 
 
-## The Network
+## Types of Blockchain Nodes - 
 
-It is a publically readable ledger on a peer to peer network of authorized government nodes who collectively add the verified blocks in consensus. 
+### Government Nodes
+
+The Block Makers, which are run/maintained by the government officials. In the Bitcoin Blockchain, they are called “Miners”. As the blockchain is a public ledger, the government officials running the authorised nodes are held accountable.
+
+### The FullNode
+
+Just like the bitcoin blockchain, they are the nodes which store and verify the entire Blockchain but can not append new blocks. They can be run by any individual who wants to keep the corruption of the Government Officials in check.
+
+### SPV/Thin Client
+
+This client is run by a general user wanting to sell/buy land. It is only client-side hence React based.
 
 
-## The Client
+![Home](./img/home.png)
 
-Anyone can run the client to verify the blocks. Any two parties can create and braodcast a land transaction using the client.
+![Create Transaction](./img/create_transaction.png)
+
+![Generate LandID](./img/generate_landID.png)
+
+### Development
+
+-   Install SPV's Dependencies.
+
+```sh
+cd UI/reactapp-spv/
+npm install
+```
+
+-   To run the SPV.
+
+```sh
+cd UI/reactapp-spv/
+npm start
+```
+---
+
+### Technologies Used
+
+##### Back End
+
+-   [Node](https://nodejs.org)
+-   [MongoDB](https://www.mongodb.com/)
 
 
-## What are decentralized apps
+##### Front End
 
-A decentralized application is an application that is run by many users on a decentralized network with trustless protocols. They are designed to avoid any single point of failure. They typically have tokens to reward users for providing computing power.
+-   [React](https://reactjs.org)
 
+---
 
-## What is blockchain
+### Contributing
 
-A blockchain, originally block chain, is a growing list of records, called blocks, which are linked using cryptography. Each block contains a cryptographic hash of the previous block, a timestamp, and transaction data. By design, a blockchain is resistant to modification of the data.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
+
+### Team Members
+
+-   [Aman Singh](https://github.com/aman2210)
+-   [Dipansh Khandelwal](https://github.com/DipanshKhandelwal)
+-   [Rohan Dhoot](https://github.com/rohan2599)
+-   and [Myself](https://github.com/amany9000)
+
+---
+
+Found a bug? Create an [issue](https://github.com/amany9000/Registrador/issues).
