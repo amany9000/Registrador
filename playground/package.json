@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.6.1",
+    "async": "^2.6.4",
     "b64u": "^2.0.0",
     "dat-swarm-defaults": "^1.0.1",
     "discovery-swarm": "^5.1.1",
